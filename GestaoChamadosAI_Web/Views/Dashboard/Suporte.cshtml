@@ -1,0 +1,415 @@
+@{
+    ViewData["Title"] = "Dashboard - Suporte";
+}
+
+<div class="row mb-4">
+        <div class="col-12">
+            <h2 class="fw-bold">
+                <i class="bi bi-headset text-info me-2"></i>
+                Painel de Suporte
+            </h2>
+            <p class="text-muted">Bem-vindo, <strong>@User.Identity?.Name</strong></p>
+        </div>
+    </div>
+
+    <!-- Cards de estatísticas -->
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-2">Chamados Pendentes</h6>
+                            <h3 class="mb-0 fw-bold text-warning">@ViewBag.ChamadosPendentes</h3>
+                        </div>
+                        <div class="bg-warning bg-opacity-10 rounded p-3">
+                            <i class="bi bi-hourglass-split text-warning fs-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-2">Em Atendimento</h6>
+                            <h3 class="mb-0 fw-bold text-info">@ViewBag.ChamadosEmAndamento</h3>
+                        </div>
+                        <div class="bg-info bg-opacity-10 rounded p-3">
+                            <i class="bi bi-arrow-repeat text-info fs-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-2">Concluídos Hoje</h6>
+                            <h3 class="mb-0 fw-bold text-success">@ViewBag.ChamadosConcluidosHoje</h3>
+                        </div>
+                        <div class="bg-success bg-opacity-10 rounded p-3">
+                            <i class="bi bi-check-circle text-success fs-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações rápidas -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-lightning-charge text-warning me-2"></i>
+                        Ações Rápidas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid d-md-flex flex-wrap gap-2">
+                        <a href="@Url.Action("Index", "Chamados")" class="btn btn-primary">
+                            <i class="bi bi-ticket-detailed me-2"></i>Ver Todos os Chamados
+                        </a>
+                        <a href="@Url.Action("Index", "Chamados", new { status = "Aberto" })" class="btn btn-info text-white">
+                            <i class="bi bi-hourglass-split me-2"></i>Chamados Pendentes
+                        </a>
+                        <a href="@Url.Action("Index", "Chamados", new { status = "Em Andamento" })" class="btn btn-warning">
+                            <i class="bi bi-arrow-repeat me-2"></i>Em Atendimento
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chamados prioritários -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-exclamation-triangle text-danger me-2"></i>
+                        Chamados Recentes Aguardando Atendimento
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.ChamadosAlta != null && ViewBag.ChamadosAlta.Count > 0)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Título</th>
+                                        <th>Usuário</th>
+                                        <th>Prioridade</th>
+                                        <th>Status</th>
+                                        <th>Data Abertura</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var chamado in ViewBag.ChamadosAlta)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <i class="bi bi-exclamation-triangle text-danger me-1"></i>
+                                                @chamado.Titulo
+                                            </td>
+                                            <td>
+                                                <i class="bi bi-person-circle me-1"></i>@chamado.Usuario?.Nome
+                                            </td>
+                                            <td>
+                                                @if (chamado.Prioridade == "Alta")
+                                                {
+                                                    <span class="badge bg-danger">
+                                                        <i class="bi bi-exclamation-triangle-fill"></i> Alta
+                                                    </span>
+                                                }
+                                                else if (chamado.Prioridade == "Média")
+                                                {
+                                                    <span class="badge bg-warning text-dark">
+                                                        <i class="bi bi-exclamation-circle"></i> Média
+                                                    </span>
+                                                }
+                                                else if (chamado.Prioridade == "Baixa")
+                                                {
+                                                    <span class="badge bg-success">
+                                                        <i class="bi bi-check-circle"></i> Baixa
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">-</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (chamado.Status == "Aberto")
+                                                {
+                                                    <span class="badge bg-warning">@chamado.Status</span>
+                                                }
+                                                else if (chamado.Status == "Em Andamento")
+                                                {
+                                                    <span class="badge bg-info">@chamado.Status</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">@chamado.Status</span>
+                                                }
+                                            </td>
+                                            <td>@chamado.DataAbertura.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>
+                                                <a href="@Url.Action("Details", "Chamados", new { id = chamado.Id })" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a href="@Url.Action("Edit", "Chamados", new { id = chamado.Id })" class="btn btn-sm btn-outline-warning">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-4 text-muted">
+                            <i class="bi bi-check-circle fs-1 text-success"></i>
+                            <p class="mt-3">Nenhum chamado aguardando atendimento no momento</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meus Chamados Ativos -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-primary text-white border-0 py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-person-check me-2"></i>
+                        Meus Chamados Ativos
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.MeusChamados != null && ViewBag.MeusChamados.Count > 0)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Título</th>
+                                        <th>Cliente</th>
+                                        <th>Status</th>
+                                        <th>Data Abertura</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var chamado in ViewBag.MeusChamados)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <i class="bi bi-ticket-detailed text-primary me-1"></i>
+                                                @chamado.Titulo
+                                            </td>
+                                            <td>
+                                                <i class="bi bi-person-circle me-1"></i>@chamado.Usuario?.Nome
+                                            </td>
+                                            <td>
+                                                @if (chamado.Status == "Aberto")
+                                                {
+                                                    <span class="badge bg-warning">
+                                                        <i class="bi bi-hourglass-split"></i> Aberto
+                                                    </span>
+                                                }
+                                                else if (chamado.Status == "Em Andamento")
+                                                {
+                                                    <span class="badge bg-info">
+                                                        <i class="bi bi-arrow-repeat"></i> Em Andamento
+                                                    </span>
+                                                }
+                                            </td>
+                                            <td>@chamado.DataAbertura.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>
+                                                <a href="@Url.Action("Index", "Chat", new { chamadoId = chamado.Id })" class="btn btn-sm btn-info">
+                                                    <i class="bi bi-chat-dots-fill"></i> Chat
+                                                </a>
+                                                <a href="@Url.Action("Details", "Chamados", new { id = chamado.Id })" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5 text-muted">
+                            <i class="bi bi-inbox fs-1"></i>
+                            <p class="mt-3">Você não possui chamados ativos no momento</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chamados Transferidos -->
+    @if (ViewBag.ChamadosTransferidos != null && ViewBag.ChamadosTransferidos.Count > 0)
+    {
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-warning text-dark border-0 py-3">
+                        <h5 class="mb-0 fw-bold">
+                            <i class="bi bi-arrow-left-right me-2"></i>
+                            Chamados que Transferi
+                        </h5>
+                        <small class="text-muted">Chamados que você atendeu mas transferiu para outro suporte</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Título</th>
+                                        <th>Cliente</th>
+                                        <th>Responsável Atual</th>
+                                        <th>Data Abertura</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var chamado in ViewBag.ChamadosTransferidos)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <i class="bi bi-ticket-detailed text-warning me-1"></i>
+                                                @chamado.Titulo
+                                            </td>
+                                            <td>
+                                                <i class="bi bi-person-circle me-1"></i>@chamado.Usuario?.Nome
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-secondary">
+                                                    <i class="bi bi-person-badge"></i> @chamado.SuporteResponsavel?.Nome
+                                                </span>
+                                            </td>
+                                            <td>@chamado.DataAbertura.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>
+                                                <a href="@Url.Action("Details", "Chamados", new { id = chamado.Id })" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-eye"></i> Detalhes
+                                                </a>
+                                                <form asp-controller="Chamados" asp-action="Reassumir" method="post" style="display: inline;">
+                                                    <input type="hidden" name="chamadoId" value="@chamado.Id" />
+                                                    <button type="submit" class="btn btn-sm btn-warning" title="Reassumir este atendimento">
+                                                        <i class="bi bi-arrow-counterclockwise"></i> Reassumir
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Chamados abertos -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-inbox text-primary me-2"></i>
+                        Chamados Aguardando Atendimento
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.ChamadosAbertos != null && ViewBag.ChamadosAbertos.Count > 0)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Título</th>
+                                        <th>Usuário</th>
+                                        <th>Prioridade</th>
+                                        <th>Data Abertura</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var chamado in ViewBag.ChamadosAbertos)
+                                    {
+                                        <tr>
+                                            <td>@chamado.Titulo</td>
+                                            <td>
+                                                <i class="bi bi-person-circle me-1"></i>@chamado.Usuario?.Nome
+                                            </td>
+                                            <td>
+                                                @if (chamado.Prioridade == "Alta")
+                                                {
+                                                    <span class="badge bg-danger">
+                                                        <i class="bi bi-exclamation-triangle-fill"></i> Alta
+                                                    </span>
+                                                }
+                                                else if (chamado.Prioridade == "Média")
+                                                {
+                                                    <span class="badge bg-warning text-dark">
+                                                        <i class="bi bi-exclamation-circle"></i> Média
+                                                    </span>
+                                                }
+                                                else if (chamado.Prioridade == "Baixa")
+                                                {
+                                                    <span class="badge bg-success">
+                                                        <i class="bi bi-check-circle"></i> Baixa
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">-</span>
+                                                }
+                                            </td>
+                                            <td>@chamado.DataAbertura.ToString("dd/MM/yyyy HH:mm")</td>
+                                            <td>
+                                                <a href="@Url.Action("Details", "Chamados", new { id = chamado.Id })" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a href="@Url.Action("Edit", "Chamados", new { id = chamado.Id })" class="btn btn-sm btn-outline-warning">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5 text-muted">
+                            <i class="bi bi-inbox fs-1"></i>
+                            <p class="mt-3">Nenhum chamado aguardando atendimento</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "smQoHtvFJKc=",
+  "success": true,
+  "projectFilePath": "C:\\wamp64\\www\\GestaoChamadosAI\\TesteAPI_Console\\TesteAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lucas\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

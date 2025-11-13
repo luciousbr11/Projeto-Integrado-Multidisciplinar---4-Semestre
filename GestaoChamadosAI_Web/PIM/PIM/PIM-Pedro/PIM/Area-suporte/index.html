@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atendente • Início</title>
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/theme.css" rel="stylesheet">
+</head>
+<body data-page="a-dashboard">
+  <div class="app-wrapper">
+    <nav class="sidebar d-flex flex-column">
+      <div class="brand">
+        <button class="btn btn-sm btn-light d-lg-none me-2" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+  <img src="../../../Logotipo-sem-fundo.png" alt="" onerror="this.style.display='none'">
+        <span class="brand-name">PIM</span>
+      </div>
+      <ul class="nav nav-pills flex-column gap-1">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="chamados.html"><i class="bi bi-ticket-detailed"></i><span>Meus Chamados</span></a></li>
+  <li class="nav-item"><a class="nav-link" href="relatorios.html"><i class="bi bi-graph-up"></i><span>Relatórios</span></a></li>
+  <!-- Item Configurações removido -->
+      </ul>
+    </nav>
+
+    <nav class="app-header navbar navbar-light bg-white px-3">
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-secondary d-none d-lg-inline" title="Recolher" data-toggle="collapse-sidebar"><i class="bi bi-layout-sidebar-inset"></i></button>
+        <button class="btn btn-outline-secondary d-lg-none" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+      </div>
+      <div class="ms-auto d-flex align-items-center gap-3">
+        <span class="header-chip d-none d-md-inline">SLA: 4h resposta</span>
+        <div class="dropdown">
+          <a class="nav-link position-relative" href="#" title="Notificações" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="notif-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end p-0 notif-menu"></div>
+        </div>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-1"></i> Você</a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="perfil.html">Perfil</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="app-content container-fluid">
+      <div class="container-xxl">
+        <div class="row g-3">
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card kpi-card p-3"><div class="d-flex justify-content-between align-items-center"><div><div class="kpi-title">Meus abertos</div><div id="a-kpi-open" class="kpi-value">0</div></div><i class="bi bi-life-preserver text-primary"></i></div></div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card kpi-card p-3"><div class="d-flex justify-content-between align-items-center"><div><div class="kpi-title">Em andamento</div><div id="a-kpi-progress" class="kpi-value">0</div></div><i class="bi bi-arrow-repeat text-warning"></i></div></div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card kpi-card p-3"><div class="d-flex justify-content-between align-items-center"><div><div class="kpi-title">Atrasados</div><div id="a-kpi-overdue" class="kpi-value">0</div></div><i class="bi bi-exclamation-triangle text-danger"></i></div></div>
+          </div>
+          <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card kpi-card p-3"><div class="d-flex justify-content-between align-items-center"><div><div class="kpi-title">Resolvidos</div><div id="a-kpi-resolved" class="kpi-value">0</div></div><i class="bi bi-check2-circle text-success"></i></div></div>
+          </div>
+        </div>
+
+        <div class="card p-3 mt-3">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h6 class="mb-0">Meus últimos chamados</h6>
+            <a class="btn btn-sm btn-outline-primary" href="chamados.html">Ver todos</a>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle" id="a-latest">
+              <thead><tr><th>ID</th><th>Título</th><th>Cliente</th><th>Status</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    (function(){
+      const user = JSON.parse(localStorage.getItem('profile')||'{}');
+      const me = user.name || 'João Silva'; // fallback
+      const tks = (window.mockData?.tickets||[]).filter(t=> (t.assignee||'').toLowerCase() === me.toLowerCase());
+      const open = tks.filter(t=>t.status==='Aberto').length;
+      const progress = tks.filter(t=>t.status==='Em andamento').length;
+      const overdue = tks.filter(t=>t.status==='Atrasado').length;
+      const resolved = tks.filter(t=>t.status==='Resolvido').length;
+      document.getElementById('a-kpi-open').textContent=open;
+      document.getElementById('a-kpi-progress').textContent=progress;
+      document.getElementById('a-kpi-overdue').textContent=overdue;
+      document.getElementById('a-kpi-resolved').textContent=resolved;
+      const tbody = document.querySelector('#a-latest tbody');
+      tbody.innerHTML='';
+      tks.slice().sort(window.sortTickets).slice(0,6).forEach(t=>{
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td>${window.formatId(t.id)}</td><td>${t.title}</td><td>${t.client}</td><td>${window.formatBadge(t.status)}</td>`;
+        tr.addEventListener('click',()=>location.href=`chamado-detalhe.html?id=${t.id}`);
+        tbody.appendChild(tr);
+      });
+      // Render notificações
+      try{ renderNotifications(); }catch{}
+    })();
+  </script>
+</body>
+</html>

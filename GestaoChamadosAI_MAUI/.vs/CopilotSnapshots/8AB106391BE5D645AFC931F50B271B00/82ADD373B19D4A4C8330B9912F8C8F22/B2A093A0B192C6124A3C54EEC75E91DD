@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:vm="clr-namespace:GestaoChamadosAI_MAUI.ViewModels"
+      x:Class="GestaoChamadosAI_MAUI.Views.LoginPage"
+  x:DataType="vm:LoginViewModel"
+     Shell.NavBarIsVisible="False"
+     BackgroundColor="White">
+
+    <ScrollView>
+     <!-- Layout adaptativo: Desktop usa Grid com 2 colunas, Mobile usa Stack simples -->
+        <Grid x:Name="MainGrid">
+            <Grid.ColumnDefinitions>
+           <OnPlatform x:TypeArguments="ColumnDefinitionCollection">
+      <!-- Desktop: 2 colunas -->
+          <On Platform="WinUI">
+        <ColumnDefinition Width="*"/>
+       <ColumnDefinition Width="*"/>
+        </On>
+        <!-- Mobile: 1 coluna -->
+  <On Platform="Android,iOS">
+         <ColumnDefinition Width="*"/>
+          </On>
+  </OnPlatform>
+        </Grid.ColumnDefinitions>
+         
+            <!-- ============================= -->
+  <!-- LADO ESQUERDO - BRANDING (Desktop) -->
+            <!-- ============================= -->
+     <Frame Grid.Column="0" 
+    BackgroundColor="{StaticResource Primary}"
+      CornerRadius="0"
+       Padding="40"
+       HasShadow="False"
+        BorderColor="Transparent">
+         <Frame.IsVisible>
+      <OnPlatform x:TypeArguments="x:Boolean">
+      <On Platform="WinUI" Value="True"/>
+                <On Platform="Android,iOS" Value="False"/>
+               </OnPlatform>
+            </Frame.IsVisible>
+      
+ <VerticalStackLayout Spacing="30" 
+    VerticalOptions="Center"
+        HorizontalOptions="Center">
+         
+ <!-- Logo Desktop -->
+ <Frame BackgroundColor="White"
+           CornerRadius="90"
+ HeightRequest="140"
+        WidthRequest="140"
+            Padding="20"
+     HasShadow="True"
+           HorizontalOptions="Center"
+        BorderColor="Transparent">
+  <Label Text="🪟"
+   FontSize="80"
+       HorizontalOptions="Center"
+           VerticalOptions="Center"/>
+ </Frame>
+
+              <!-- Título Desktop -->
+        <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+      <Label Text="Atendix"
+           FontSize="48"
+   FontAttributes="Bold"
+         TextColor="White"
+                   HorizontalOptions="Center"/>
+                   
+ <Label Text="Sistema Inteligente de Gestão de Chamados"
+  FontSize="16"
+                   TextColor="White"
+  HorizontalOptions="Center"
+             HorizontalTextAlignment="Center"
+         Opacity="0.95"
+        MaximumWidthRequest="300"/>
+         </VerticalStackLayout>
+
+          <!-- Features Desktop -->
+     <VerticalStackLayout Spacing="12" Margin="0,20,0,0">
+           
+     <Frame BackgroundColor="White"
+            BorderColor="Transparent"
+   CornerRadius="10"
+         Padding="12"
+         HasShadow="False">
+           <HorizontalStackLayout Spacing="12">
+       <Label Text="🤖" FontSize="24" VerticalOptions="Center"/>
+         <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+     <Label Text="IA Integrada" FontSize="14" FontAttributes="Bold" TextColor="#1a1a1a"/>
+       <Label Text="Respostas automáticas" FontSize="12" TextColor="#666666"/>
+       </VerticalStackLayout>
+    </HorizontalStackLayout>
+              </Frame>
+
+        <Frame BackgroundColor="White"
+         BorderColor="Transparent"
+  CornerRadius="10"
+        Padding="12"
+ HasShadow="False">
+            <HorizontalStackLayout Spacing="12">
+        <Label Text="⚡" FontSize="24" VerticalOptions="Center"/>
+           <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+            <Label Text="Atendimento Rápido" FontSize="14" FontAttributes="Bold" TextColor="#1a1a1a"/>
+               <Label Text="Resolução ágil" FontSize="12" TextColor="#666666"/>
+     </VerticalStackLayout>
+   </HorizontalStackLayout>
+     </Frame>
+
+              <Frame BackgroundColor="White"
+       BorderColor="Transparent"
+          CornerRadius="10"
+        Padding="12"
+      HasShadow="False">
+   <HorizontalStackLayout Spacing="12">
+  <Label Text="🛡️" FontSize="24" VerticalOptions="Center"/>
+        <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+             <Label Text="Seguro e Confiável" FontSize="14" FontAttributes="Bold" TextColor="#1a1a1a"/>
+             <Label Text="Dados protegidos" FontSize="12" TextColor="#666666"/>
+  </VerticalStackLayout>
+                  </HorizontalStackLayout>
+          </Frame>
+            
+         </VerticalStackLayout>
+   
+            </VerticalStackLayout>
+       </Frame>
+
+            <!-- ============================= -->
+    <!-- FORMULÁRIO - Desktop e Mobile -->
+      <!-- ============================= -->
+            <ScrollView>
+       <ScrollView.Column>
+ <OnPlatform x:TypeArguments="x:Int32">
+    <On Platform="WinUI" Value="1"/>
+ <On Platform="Android,iOS" Value="0"/>
+         </OnPlatform>
+                </ScrollView.Column>
+     
+        <VerticalStackLayout Spacing="20" 
+                   HorizontalOptions="Center"
+       VerticalOptions="Center">
+        <VerticalStackLayout.Padding>
+  <OnPlatform x:TypeArguments="Thickness">
+   <On Platform="WinUI" Value="60"/>
+        <On Platform="Android,iOS" Value="20"/>
+   </OnPlatform>
+    </VerticalStackLayout.Padding>
+               <VerticalStackLayout.MaximumWidthRequest>
+      <OnPlatform x:TypeArguments="x:Double">
+            <On Platform="WinUI" Value="450"/>
+    <On Platform="Android,iOS" Value="500"/>
+            </OnPlatform>
+ </VerticalStackLayout.MaximumWidthRequest>
+
+   <!-- Logo Mobile -->
+        <Frame BackgroundColor="{StaticResource Primary}"
+      CornerRadius="60"
+ HeightRequest="100"
+            WidthRequest="100"
+   Padding="0"
+             HasShadow="True"
+           HorizontalOptions="Center"
+              Margin="0,20,0,10"
+ BorderColor="Transparent">
+      <Frame.IsVisible>
+         <OnPlatform x:TypeArguments="x:Boolean">
+                   <On Platform="WinUI" Value="False"/>
+      <On Platform="Android,iOS" Value="True"/>
+           </OnPlatform>
+                </Frame.IsVisible>
+        <Label Text="🪟"
+          FontSize="60"
+ HorizontalOptions="Center"
+        VerticalOptions="Center"
+           TextColor="White"/>
+            </Frame>
+
+     <!-- Título Mobile -->
+   <VerticalStackLayout Spacing="5" 
+         HorizontalOptions="Center"
+     Margin="0,0,0,10">
+     <VerticalStackLayout.IsVisible>
+              <OnPlatform x:TypeArguments="x:Boolean">
+            <On Platform="WinUI" Value="False"/>
+      <On Platform="Android,iOS" Value="True"/>
+           </OnPlatform>
+            </VerticalStackLayout.IsVisible>
+   <Label Text="Atendix"
+   FontSize="32"
+     FontAttributes="Bold"
+          TextColor="{StaticResource Primary}"
+ HorizontalOptions="Center"/>
+            <Label Text="Sistema Inteligente de Gestão de Chamados"
+       FontSize="12"
+   TextColor="{StaticResource Gray600}"
+              HorizontalOptions="Center"
+             HorizontalTextAlignment="Center"/>
+        </VerticalStackLayout>
+
+         <!-- Cabeçalho do Formulário -->
+     <VerticalStackLayout Spacing="8" Margin="0,10,0,0">
+           <Label Text="Bem-vindo de volta!"
+          FontSize="24"
+          FontAttributes="Bold"
+        TextColor="#1a1a1a"
+  HorizontalOptions="Center"/>
+     <Label Text="Entre com suas credenciais para acessar o sistema"
+   FontSize="14"
+       TextColor="#666666"
+             HorizontalOptions="Center"
+       HorizontalTextAlignment="Center"/>
+           </VerticalStackLayout>
+
+    <!-- Mensagem de Erro -->
+       <Frame IsVisible="{Binding ErrorMessage, Converter={StaticResource StringToBoolConverter}}"
+         BackgroundColor="#FFE5E5"
+         BorderColor="{StaticResource Error}"
+        CornerRadius="10"
+           Padding="12"
+             HasShadow="False"
+      Margin="0,10,0,0">
+         <HorizontalStackLayout Spacing="8">
+      <Label Text="⚠️" FontSize="16" VerticalOptions="Center"/>
+     <Label Text="{Binding ErrorMessage}"
+          TextColor="{StaticResource Error}"
+           FontSize="13"
+VerticalOptions="Center"
+           LineBreakMode="WordWrap"
+             HorizontalOptions="FillAndExpand"/>
+         </HorizontalStackLayout>
+     </Frame>
+
+          <!-- Campo Email -->
+        <VerticalStackLayout Spacing="6">
+        <HorizontalStackLayout Spacing="6">
+  <Label Text="📧" FontSize="14" VerticalOptions="Center"/>
+    <Label Text="E-mail" 
+          FontSize="14"
+          FontAttributes="Bold"
+         TextColor="#333333"
+  VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+                   
+    <Border Stroke="#e0e0e0"
+          StrokeThickness="1.5"
+          StrokeShape="RoundRectangle 8"
+         BackgroundColor="White">
+    <Entry Text="{Binding Email}"
+     Placeholder="seu@email.com"
+          Keyboard="Email"
+        ReturnType="Next"
+          FontSize="15"
+      TextColor="#1a1a1a"
+            PlaceholderColor="#999999"
+HeightRequest="48"
+              Margin="12,0"/>
+          </Border>
+ </VerticalStackLayout>
+
+         <!-- Campo Senha -->
+       <VerticalStackLayout Spacing="6">
+       <HorizontalStackLayout Spacing="6">
+         <Label Text="🔒" FontSize="14" VerticalOptions="Center"/>
+            <Label Text="Senha" 
+     FontSize="14"
+          FontAttributes="Bold"
+         TextColor="#333333"
+  VerticalOptions="Center"/>
+         </HorizontalStackLayout>
+   
+ <Border Stroke="#e0e0e0"
+        StrokeThickness="1.5"
+                 StrokeShape="RoundRectangle 8"
+         BackgroundColor="White">
+      <Entry Text="{Binding Senha}"
+     Placeholder="Digite sua senha"
+    IsPassword="True"
+   ReturnType="Done"
+   ReturnCommand="{Binding LoginCommand}"
+FontSize="15"
+     TextColor="#1a1a1a"
+       PlaceholderColor="#999999"
+           HeightRequest="48"
+         Margin="12,0"/>
+  </Border>
+      </VerticalStackLayout>
+
+        <!-- Botão Login -->
+   <Button Text="Entrar"
+   Command="{Binding LoginCommand}"
+     IsEnabled="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}"
+    BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+   HeightRequest="50"
+    FontSize="16"
+      FontAttributes="Bold"
+           CornerRadius="8"
+ Margin="0,15,0,0">
+               <Button.Shadow>
+      <Shadow Brush="{StaticResource Primary}" Opacity="0.3" Radius="12" Offset="0,6" />
+          </Button.Shadow>
+        </Button>
+
+           <!-- Loading -->
+    <ActivityIndicator IsRunning="{Binding IsLoading}"
+       IsVisible="{Binding IsLoading}"
+           Color="{StaticResource Primary}"
+    HorizontalOptions="Center"
+            HeightRequest="30"/>
+
+         <!-- Footer -->
+               <HorizontalStackLayout Spacing="6" 
+ HorizontalOptions="Center"
+    Margin="0,15,0,20">
+         <Label Text="🔒"
+               FontSize="12"
+       TextColor="#999999"
+  VerticalOptions="Center"/>
+           <Label Text="Conexão segura e criptografada"
+       FontSize="12"
+        TextColor="#999999"
+         VerticalOptions="Center"/>
+     </HorizontalStackLayout>
+        
+                </VerticalStackLayout>
+            </ScrollView>
+       
+   </Grid>
+  </ScrollView>
+    
+</ContentPage>

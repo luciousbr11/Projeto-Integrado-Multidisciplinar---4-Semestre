@@ -1,0 +1,65 @@
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using GestaoChamadosAI_MAUI.Services;
+using GestaoChamadosAI_MAUI.Views;
+
+namespace GestaoChamadosAI_MAUI.ViewModels
+{
+    public partial class LoginViewModel : ObservableObject
+    {
+        private readonly IAuthService _authService;
+
+        [ObservableProperty]
+        private string email = string.Empty;
+
+        [ObservableProperty]
+        private string senha = string.Empty;
+
+        [ObservableProperty]
+        private bool isLoading;
+
+        [ObservableProperty]
+        private string errorMessage = string.Empty;
+
+        public LoginViewModel(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
+        [RelayCommand]
+        private async Task LoginAsync()
+        {
+            if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Senha))
+            {
+                ErrorMessage = "Por favor, preencha todos os campos";
+                return;
+            }
+
+            IsLoading = true;
+            ErrorMessage = string.Empty;
+
+            try
+            {
+                var (success, message, usuario) = await _authService.LoginAsync(Email, Senha);
+
+                if (success && usuario != null)
+                {
+                    // Navegar para o Dashboard
+                    await Shell.Current.GoToAsync($"///{nameof(DashboardPage)}");
+                }
+                else
+                {
+                    ErrorMessage = message;
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = $"Erro ao fazer login: {ex.Message}";
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+    }
+}

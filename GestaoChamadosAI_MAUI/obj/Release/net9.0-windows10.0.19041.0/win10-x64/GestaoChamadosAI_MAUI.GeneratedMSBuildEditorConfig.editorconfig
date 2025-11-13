@@ -1,0 +1,146 @@
+is_global = true
+build_property.MvvmToolkitEnableINotifyPropertyChangingSupport = true
+build_property.TargetFramework = net9.0-windows10.0.19041.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v9.0
+build_property.TargetPlatformMinVersion = 10.0.17763.0
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 9A19103F-16F7-4668-BE54-9A1E7A4F7556
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = GestaoChamadosAI_MAUI
+build_property.ProjectDir = C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_MAUI\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTAotOptimizerEnabled = true
+build_property.CsWinRTAotExportsEnabled = 
+build_property.CsWinRTRcwFactoryFallbackGeneratorForceOptIn = 
+build_property.CsWinRTRcwFactoryFallbackGeneratorForceOptOut = 
+build_property.CsWinRTCcwLookupTableGeneratorEnabled = true
+build_property.CsWinRTMergeReferencedActivationFactories = 
+build_property.CsWinRTAotWarningLevel = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/ChamadoDetalhePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.ChamadoDetalhePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ChamadoDetalhePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ChamadoDetalhePage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/ChamadosListPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.ChamadosListPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ChamadosListPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ChamadosListPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/ChatPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.ChatPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ChatPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ChatPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/ConfiguracoesPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.ConfiguracoesPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ConfiguracoesPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ConfiguracoesPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/CriarUsuarioPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.CriarUsuarioPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CriarUsuarioPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CriarUsuarioPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/DashboardPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.DashboardPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\DashboardPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\DashboardPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/EditarChamadoPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.EditarChamadoPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\EditarChamadoPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\EditarChamadoPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/EditarUsuarioPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.EditarUsuarioPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\EditarUsuarioPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\EditarUsuarioPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/FeedbackIAPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.FeedbackIAPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\FeedbackIAPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\FeedbackIAPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\LoginPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/NovoChamadoPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.NovoChamadoPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\NovoChamadoPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\NovoChamadoPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/RelatorioCategoriasPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.RelatorioCategoriasPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\RelatorioCategoriasPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\RelatorioCategoriasPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/RelatorioChamadosPeriodoPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.RelatorioChamadosPeriodoPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\RelatorioChamadosPeriodoPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\RelatorioChamadosPeriodoPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/RelatoriosPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.RelatoriosPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\RelatoriosPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\RelatoriosPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/RelatorioSuportesPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.RelatorioSuportesPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\RelatorioSuportesPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\RelatorioSuportesPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/RelatorioUsuariosPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.RelatorioUsuariosPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\RelatorioUsuariosPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\RelatorioUsuariosPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/TransferirChamadoPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.TransferirChamadoPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TransferirChamadoPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TransferirChamadoPage.xaml
+
+[C:/wamp64/www/GestaoChamadosAI/GestaoChamadosAI_MAUI/Views/UsuariosListPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = GestaoChamadosAI_MAUI.Views.UsuariosListPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\UsuariosListPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\UsuariosListPage.xaml

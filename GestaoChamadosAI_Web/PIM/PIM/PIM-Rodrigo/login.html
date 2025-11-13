@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons (for input icons) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Toggle bonito para escolher o perfil */
+    .profile-toggle{display:flex;gap:.5rem;flex-wrap:wrap;}
+    .profile-toggle .btn-option{border:2px solid var(--teal);color:var(--teal);border-radius:.75rem;padding:.6rem 1rem;font-weight:600;}
+    .profile-toggle .btn-check:checked + .btn-option{background:var(--teal);color:#fff;}
+    .profile-toggle .btn-option i{margin-right:.5rem;}
+  </style>
+</head>
+<body class="bg-light">
+  
+
+  <!-- Sem faixa azul -->
+  <main class="container pt-5" style="max-width:1100px;">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="register-card shadow-soft rounded-4 p-4 p-md-5 bg-white position-relative overflow-hidden">
+          <div class="row g-4 align-items-center">
+            <div class="col-lg-7 order-2 order-lg-1">
+              <h1 class="fw-bold mb-4">Login</h1>
+
+              <form class="row g-3" id="formLogin" novalidate>
+                <div class="col-12">
+                  <label class="form-label fw-semibold">Você é</label>
+                  <div class="profile-toggle">
+                    <input class="btn-check" type="radio" name="perfil" id="perfilColab" value="colaborador" autocomplete="off" required>
+                    <label class="btn btn-option" for="perfilColab"><i class="bi bi-people"></i>Colaborador</label>
+
+                    <input class="btn-check" type="radio" name="perfil" id="perfilCliente" value="cliente" autocomplete="off" required>
+                    <label class="btn btn-option" for="perfilCliente"><i class="bi bi-person-badge"></i>Cliente</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label fw-semibold">E-mail</label>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text bg-light"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" class="form-control" placeholder="Digite seu e-mail." required>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label fw-semibold">Senha</label>
+                  <div class="input-password">
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text bg-light"><i class="bi bi-lock-fill"></i></span>
+                      <input type="password" class="form-control" placeholder="Digite sua senha." required data-pass>
+                    </div>
+                    <button class="btn-toggle-pass" type="button" aria-label="Mostrar senha" tabindex="-1">👁</button>
+                  </div>
+                  <div class="mt-2">
+                    <a href="redefinir-senha.html" class="text-muted fst-italic" style="text-decoration: underline;">Esqueci minha senha</a>
+                  </div>
+                </div>
+
+                <div class="col-12 pt-2">
+                  <button class="btn btn-teal w-100 py-3 fw-semibold fs-5" type="submit">Acessar</button>
+                </div>
+
+                <div class="col-12 pt-3">
+                  <p class="fw-bold fs-5 mb-2">Ainda não possui conta?</p>
+                  <a class="btn btn-light w-100 py-3 fw-semibold border" href="cadastro.html">Cadastrar</a>
+                </div>
+              </form>
+            </div>
+
+            <div class="col-lg-5 order-1 order-lg-2 d-flex justify-content-center">
+              <a href="index.html" class="d-inline-block">
+                <img src="../Logotipo-site.png" alt="Logo" class="img-fluid register-logo" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-4 small text-center text-muted">&copy; <span id="year"></span> Suporte via Chat</footer>
+
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

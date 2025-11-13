@@ -1,0 +1,4 @@
+C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_MAUI\bin\Release\net9.0-android\publish\com.gestaochamados.ai-Signed.apk
+C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_MAUI\bin\Release\net9.0-android\publish\com.gestaochamados.ai.apk
+C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_MAUI\bin\Release\net9.0-android\publish\com.gestaochamados.ai-Signed.aab
+C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_MAUI\bin\Release\net9.0-android\publish\_Microsoft.Android.Resource.Designer.dll

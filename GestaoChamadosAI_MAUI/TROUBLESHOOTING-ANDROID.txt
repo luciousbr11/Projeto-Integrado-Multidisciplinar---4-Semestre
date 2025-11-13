@@ -1,0 +1,157 @@
+═══════════════════════════════════════════════════════════
+   GUIA COMPLETO - CORRIGIR PROBLEMAS DE LOGIN ANDROID
+═══════════════════════════════════════════════════════════
+
+✅ CORREÇÕES APLICADAS:
+
+1. URL da API corrigida: http://192.168.200.107:5000/api
+2. App recompilado e reinstalado no celular
+3. Script do firewall criado
+
+─────────────────────────────────────────────────────────
+
+📋 CHECKLIST PARA LOGIN FUNCIONAR:
+
+☐ 1. API WEB RODANDO
+   cd c:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+   dotnet run
+   
+   Deve mostrar: "Now listening on: http://localhost:5000"
+
+☐ 2. PC E CELULAR NA MESMA REDE WI-FI
+   - No celular: Configuracoes > Wi-Fi
+   - Verificar se esta conectado na mesma rede do PC
+   - Exemplo: "MinhaRede-5G" ou "MinhaRede"
+
+☐ 3. FIREWALL DO WINDOWS LIBERADO
+   - Clique com botao direito em: abrir-firewall.ps1
+   - Selecione: "Executar como Administrador"
+   - Isso permite que o celular acesse a porta 5000
+
+☐ 4. TESTAR CONEXAO DO CELULAR
+   - No celular, abra o navegador (Chrome/Firefox)
+   - Digite: http://192.168.200.107:5000/api
+   - Deve aparecer uma pagina ou JSON
+   - Se der erro "Site nao acessivel" = problema de rede/firewall
+
+─────────────────────────────────────────────────────────
+
+🔧 SOLUÇÃO DE PROBLEMAS:
+
+PROBLEMA: "Erro ao fazer login" ou "Nao foi possivel conectar"
+CAUSAS POSSIVEIS:
+
+1. API NAO ESTA RODANDO
+   Solucao: 
+   - Abra terminal no PC
+   - cd c:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+   - dotnet run
+   - Deixe rodando!
+
+2. FIREWALL BLOQUEANDO
+   Solucao:
+   - Execute: abrir-firewall.ps1 COMO ADMINISTRADOR
+   - Ou desative o firewall temporariamente para testar
+
+3. REDES WI-FI DIFERENTES
+   Solucao:
+   - PC e celular devem estar no MESMO Wi-Fi
+   - Verifique no celular e no PC
+
+4. IP DO PC MUDOU
+   Solucao:
+   - Execute no PC: ipconfig
+   - Procure "IPv4": ex: 192.168.X.X
+   - Se for diferente de 192.168.200.107:
+     * Edite: Services/ApiService.cs linha 27
+     * Troque pelo IP correto
+     * Recompile: dotnet build -f net9.0-android
+     * Reinstale: dotnet build -t:Run -f net9.0-android
+
+5. PORTA 5000 OCUPADA
+   Solucao:
+   - Verifique se outra aplicacao esta usando porta 5000
+   - Execute: netstat -ano | findstr :5000
+   - Se aparecer algo, mude a porta da API ou feche o programa
+
+─────────────────────────────────────────────────────────
+
+🧪 TESTE PASSO A PASSO:
+
+PASSO 1: Testar API no PC
+   - Abra navegador no PC
+   - Acesse: http://localhost:5000/api
+   - Deve funcionar!
+
+PASSO 2: Descobrir IP do PC
+   - Execute: ipconfig
+   - Anote o IPv4 (ex: 192.168.200.107)
+
+PASSO 3: Testar API do celular via navegador
+   - No celular, abra navegador
+   - Digite: http://SEU_IP_AQUI:5000/api
+   - Exemplo: http://192.168.200.107:5000/api
+   - Se funcionar = rede OK!
+   - Se NAO funcionar = problema de firewall/rede
+
+PASSO 4: Se navegador funcionou, abrir app
+   - Feche e abra o app novamente
+   - Tente fazer login
+   - Deve funcionar!
+
+─────────────────────────────────────────────────────────
+
+🌐 ALTERNATIVA: USAR NGROK (INTERNET)
+
+Se nada funcionar, use ngrok para expor API na internet:
+
+1. Baixe ngrok: https://ngrok.com/download
+2. Execute: ngrok http 5000
+3. Copie URL: https://XXXX-XX-XX.ngrok.io
+4. Edite Services/ApiService.cs:
+   BaseUrl = "https://XXXX-XX-XX.ngrok.io/api"
+5. Recompile e reinstale
+
+Vantagem: Funciona em qualquer rede (3G/4G/5G)
+
+─────────────────────────────────────────────────────────
+
+📱 CREDENCIAIS DE TESTE:
+
+Admin:
+  Email: admin@admin.com
+  Senha: admin123
+
+Suporte:
+  Email: suporte@teste.com
+  Senha: suporte123
+
+Cliente:
+  Email: cliente@teste.com
+  Senha: cliente123
+
+─────────────────────────────────────────────────────────
+
+✅ COMANDOS RAPIDOS:
+
+# Verificar IP do PC
+ipconfig
+
+# Iniciar API
+cd c:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+dotnet run
+
+# Verificar celular conectado
+adb devices
+
+# Reinstalar app
+cd c:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_MAUI
+dotnet build -t:Run -f net9.0-android
+
+# Abrir firewall (COMO ADMIN)
+.\abrir-firewall.ps1
+
+# Ver logs do app no celular
+adb logcat | findstr "GestaoChamados"
+
+═══════════════════════════════════════════════════════════

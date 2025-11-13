@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atendente • Meus chamados</title>
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/theme.css" rel="stylesheet">
+</head>
+<body data-page="a-chamados">
+  <div class="app-wrapper">
+    <nav class="sidebar d-flex flex-column">
+      <div class="brand">
+        <button class="btn btn-sm btn-light d-lg-none me-2" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+  <img src="../../../Logotipo-sem-fundo.png" alt="" onerror="this.style.display='none'">
+        <span class="brand-name">PIM</span>
+      </div>
+      <ul class="nav nav-pills flex-column gap-1">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="chamados.html"><i class="bi bi-ticket-detailed"></i><span>Meus Chamados</span></a></li>
+  <li class="nav-item"><a class="nav-link" href="relatorios.html"><i class="bi bi-graph-up"></i><span>Relatórios</span></a></li>
+  <!-- Item Configurações removido -->
+      </ul>
+    </nav>
+
+    <nav class="app-header navbar navbar-light bg-white px-3">
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-secondary d-none d-lg-inline" title="Recolher" data-toggle="collapse-sidebar"><i class="bi bi-layout-sidebar-inset"></i></button>
+        <button class="btn btn-outline-secondary d-lg-none" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+      </div>
+      <div class="ms-auto d-flex align-items-center gap-3">
+        <span class="header-chip d-none d-md-inline">SLA: 4h resposta</span>
+        <div class="dropdown">
+          <a class="nav-link position-relative" href="#" title="Notificações" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-bell"></i>
+            <span class="notif-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end p-0 notif-menu"></div>
+        </div>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-1"></i> Você</a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="perfil.html">Perfil</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="app-content container-fluid">
+      <div class="container-xxl">
+        <div class="card p-3 mb-3">
+          <div class="row g-2 align-items-end">
+            <div class="col-12 col-sm-6 col-md-3">
+              <label class="form-label">Status</label>
+              <select id="a-filter-status" class="form-select">
+                <option value="">Todos</option>
+                <option>Aberto</option>
+                <option>Em andamento</option>
+                <option>Resolvido</option>
+                <option>Atrasado</option>
+              </select>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label class="form-label">Responsável</label>
+              <select id="a-filter-assignee" class="form-select">
+                <option value="">Todos</option>
+              </select>
+            </div>
+            <div class="col-12 col-sm-6 col-md-3">
+              <label class="form-label">Data</label>
+              <input id="a-filter-date" type="date" class="form-control">
+            </div>
+            <div class="col-12 col-sm-6 col-md-2">
+              <label class="form-label">Ordenar</label>
+              <select id="a-sort-order" class="form-select">
+                <option value="desc">Chegada (mais recente)</option>
+                <option value="asc">Chegada (mais antigo)</option>
+              </select>
+            </div>
+            <div class="col-12 col-sm-6 col-md-1 d-grid">
+              <button id="a-btn-search" class="btn btn-outline-secondary">Filtrar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-0">
+          <div class="table-responsive">
+            <table id="a-tickets" class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>ID</th><th>Título</th><th>Nome</th><th>Status</th><th>Prioridade</th><th>Responsável</th><th>Abertura</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    (function(){
+      const data = (window.mockData?.tickets||[]);
+      const profile = JSON.parse(localStorage.getItem('profile')||'{}');
+      const meNameRaw = (profile.name||'').trim();
+      const norm = (s)=> (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+      // Fallback: se não houver nome no perfil, assume 'Pedro Alves' se existir nos dados
+      let meName = meNameRaw;
+      if(!meName){
+        const names = [...new Set(data.map(d=>d.assignee).filter(Boolean))];
+        if(names.some(n=> norm(n)===norm('Pedro Alves'))) meName = 'Pedro Alves';
+      }
+      const tbody = document.querySelector('#a-tickets tbody');
+      const filters = {
+        status: document.getElementById('a-filter-status'),
+        assignee: document.getElementById('a-filter-assignee'),
+        date: document.getElementById('a-filter-date'),
+        order: document.getElementById('a-sort-order'),
+      };
+      // Popular responsáveis
+      const assignees = [...new Set(data.map(d=>d.assignee).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+      assignees.forEach(name=>{ 
+        const o=document.createElement('option'); 
+        o.value=name; 
+        o.textContent= name + (norm(name)===norm(meName) ? ' (Você)' : ''); 
+        filters.assignee.appendChild(o); 
+      });
+      const apply = ()=>{
+        tbody.innerHTML='';
+        data.slice()
+            // Mostra todos; filtra por responsável se selecionado
+            .filter(d=> !filters.assignee.value || d.assignee===filters.assignee.value)
+            .filter(d=> !filters.status.value || d.status===filters.status.value)
+            .filter(d=> !filters.date.value || d.opened.startsWith(filters.date.value))
+            .sort((a,b)=>{
+              const ar=a.status==='Resolvido', br=b.status==='Resolvido';
+              if(ar!==br) return ar-br;
+              const da=window.parseDate(a.opened), db=window.parseDate(b.opened);
+              const asc=(filters.order?.value==='asc');
+              const diff=asc?(da-db):(db-da);
+              if(diff!==0) return diff;
+              return asc?(a.id-b.id):(b.id-a.id);
+            })
+            .forEach(t=>{
+              const tr=document.createElement('tr');
+              const openedBr = (t.opened.includes('-')?t.opened.split('-').reverse().join('/') : t.opened);
+              tr.innerHTML=`<td>${window.formatId(t.id)}</td><td>${t.title}</td><td>${t.client}</td><td>${window.formatBadge(t.status)}</td><td>${t.priority}</td><td>${t.assignee||'-'}</td><td>${openedBr}</td>`;
+              tr.addEventListener('click',()=>location.href=`chamado-detalhe.html?id=${t.id}`);
+              tbody.appendChild(tr);
+            });
+      };
+      Object.values(filters).forEach(el=>el?.addEventListener('change',apply));
+      document.getElementById('a-btn-search')?.addEventListener('click',apply);
+      apply();
+      try{ renderNotifications(); }catch{}
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GestaoChamadosAI_MAUI.ViewModels"
+             xmlns:models="clr-namespace:GestaoChamadosAI_MAUI.Models"
+             xmlns:behaviors="clr-namespace:GestaoChamadosAI_MAUI.Behaviors"
+             x:Class="GestaoChamadosAI_MAUI.Views.RelatorioChamadosPeriodoPage"
+             x:DataType="vm:RelatorioChamadosPeriodoViewModel"
+             Title="Relatório de Chamados por Período">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="0,0,0,10">
+        
+        <!-- Logo + Barra de Ações -->
+        <Grid Grid.Row="0" BackgroundColor="{StaticResource Primary}" Padding="15" ColumnDefinitions="Auto,*,Auto">
+            <Image Grid.Column="0" Source="logo.png" WidthRequest="35" HeightRequest="35" HorizontalOptions="Start" VerticalOptions="Center"/>
+            
+            <HorizontalStackLayout Grid.Column="2" Spacing="10">
+                <Button Text="← Voltar"
+                        Command="{Binding VoltarCommand}"
+                        HeightRequest="45"
+                        WidthRequest="110"
+                        FontSize="14"
+                        BackgroundColor="{StaticResource Gray700}"
+                        TextColor="White"
+                        CornerRadius="8"
+                        Padding="5,0"/>
+                <Button Text="📄 PDF"
+                        Command="{Binding ImprimirPDFCommand}"
+                        HeightRequest="45"
+                        FontSize="14"
+                        BackgroundColor="#dc3545"
+                        TextColor="White"
+                        WidthRequest="90"
+                        CornerRadius="8"
+                        Padding="5,0"/>
+            </HorizontalStackLayout>
+        </Grid>
+        
+        <!-- Filtros de Período -->
+        <Frame Grid.Row="2" 
+               BackgroundColor="White" 
+               CornerRadius="12" 
+               Padding="20" 
+               HasShadow="True"
+               Margin="10,10,10,10">
+            <VerticalStackLayout Spacing="15">
+                <Label Text="📅 Selecione o Período" 
+                       FontSize="20" 
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Primary}"/>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Grid.Behaviors>
+                        <behaviors:ResponsiveGridBehavior Columns="2"/>
+                    </Grid.Behaviors>
+                    <!-- Data Início -->
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label Text="Data Início:" FontSize="14" FontAttributes="Bold"/>
+                        <DatePicker Date="{Binding DataInicio}"
+                                   Format="dd/MM/yyyy"
+                                   BackgroundColor="{StaticResource Gray100}"
+                                   TextColor="{StaticResource Gray900}"/>
+                    </VerticalStackLayout>
+
+                    <!-- Data Fim -->
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label Text="Data Fim:" FontSize="14" FontAttributes="Bold"/>
+                        <DatePicker Date="{Binding DataFim}"
+                                   Format="dd/MM/yyyy"
+                                   BackgroundColor="{StaticResource Gray100}"
+                                   TextColor="{StaticResource Gray900}"/>
+                    </VerticalStackLayout>
+                </Grid>
+
+                <Button Text="🔍 Filtrar"
+                        Command="{Binding FiltrarCommand}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"
+                        HeightRequest="45"
+                        CornerRadius="8"/>
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Conteúdo do Relatório -->
+        <ScrollView Grid.Row="3">
+            <VerticalStackLayout Spacing="10" IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
+                
+                <!-- Resumo Geral -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="📊 Resumo Geral" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                        
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                            <Grid.Behaviors>
+                                <behaviors:ResponsiveGridBehavior Columns="2"/>
+                            </Grid.Behaviors>
+                            <!-- Total -->
+                            <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="{StaticResource Gray100}" Padding="15" CornerRadius="8">
+                                <VerticalStackLayout>
+                                    <Label Text="Total" FontSize="12" TextColor="{StaticResource Gray600}"/>
+                                    <Label Text="{Binding Total}" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <!-- Abertos -->
+                            <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="#FEF3C7" Padding="15" CornerRadius="8">
+                                <VerticalStackLayout>
+                                    <Label Text="Abertos" FontSize="12" TextColor="#92400E"/>
+                                    <Label Text="{Binding Abertos}" FontSize="24" FontAttributes="Bold" TextColor="#B45309"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <!-- Em Atendimento -->
+                            <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#DBEAFE" Padding="15" CornerRadius="8">
+                                <VerticalStackLayout>
+                                    <Label Text="Em Atendimento" FontSize="12" TextColor="#1E3A8A"/>
+                                    <Label Text="{Binding EmAtendimento}" FontSize="24" FontAttributes="Bold" TextColor="#2563EB"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <!-- Aguardando Cliente -->
+                            <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="#FCE7F3" Padding="15" CornerRadius="8">
+                                <VerticalStackLayout>
+                                    <Label Text="Aguardando Cliente" FontSize="12" TextColor="#831843"/>
+                                    <Label Text="{Binding AguardandoCliente}" FontSize="24" FontAttributes="Bold" TextColor="#BE185D"/>
+                                </VerticalStackLayout>
+                            </Frame>
+
+                            <!-- Fechados -->
+                            <Frame Grid.Row="2" Grid.ColumnSpan="2" BackgroundColor="#D1FAE5" Padding="15" CornerRadius="8">
+                                <VerticalStackLayout>
+                                    <Label Text="Fechados" FontSize="12" TextColor="#065F46"/>
+                                    <Label Text="{Binding Fechados}" FontSize="24" FontAttributes="Bold" TextColor="#059669"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Por Prioridade -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="🎯 Por Prioridade" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                        
+                        <CollectionView ItemsSource="{Binding PorPrioridade}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:PrioridadeCount">
+                                    <Grid ColumnDefinitions="*,Auto" Padding="10,5">
+                                        <Label Grid.Column="0" Text="{Binding Prioridade}" FontSize="16" VerticalOptions="Center"/>
+                                        <Frame Grid.Column="1" 
+                                               BackgroundColor="{StaticResource Primary}" 
+                                               Padding="10,5" 
+                                               CornerRadius="5" 
+                                               HasShadow="False">
+                                            <Label Text="{Binding Total}" FontAttributes="Bold" TextColor="White"/>
+                                        </Frame>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Por Categoria IA - COMENTADO -->
+                <!-- <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="📂 Por Categoria IA" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                        
+                        <CollectionView ItemsSource="{Binding PorCategoria}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:CategoriaCount">
+                                    <Grid ColumnDefinitions="*,Auto" Padding="10,5">
+                                        <Label Grid.Column="0" Text="{Binding Categoria}" FontSize="16" VerticalOptions="Center"/>
+                                        <Frame Grid.Column="1" 
+                                               BackgroundColor="{StaticResource Secondary}" 
+                                               Padding="10,5" 
+                                               CornerRadius="5" 
+                                               HasShadow="False">
+                                            <Label Text="{Binding Total}" FontAttributes="Bold" TextColor="White"/>
+                                        </Frame>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame> -->
+
+                <!-- Lista de Chamados -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="📋 Chamados do Período" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                        
+                        <CollectionView ItemsSource="{Binding Chamados}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:ChamadoResumo">
+                                    <Frame Margin="0,5" Padding="15" BackgroundColor="{StaticResource Gray100}" CornerRadius="8">
+                                        <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto">
+                                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Titulo}" FontAttributes="Bold" FontSize="16"/>
+                                            
+                                            <Frame Grid.Row="0" Grid.Column="1" 
+                                                   Padding="8,4" 
+                                                   CornerRadius="6" 
+                                                   HasShadow="False" 
+                                                   BackgroundColor="{Binding Status, Converter={StaticResource StatusToColorConverter}}">
+                                                <Label Text="{Binding Status}" FontSize="11" TextColor="White" FontAttributes="Bold"/>
+                                            </Frame>
+                                            
+                                            <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="8">
+                                                <Label Text="🎯" FontSize="14"/>
+                                                <Frame Padding="6,3" CornerRadius="5" HasShadow="False" BackgroundColor="{Binding Prioridade, Converter={StaticResource PrioridadeToColorConverter}}">
+                                                    <Label Text="{Binding Prioridade}" FontSize="12" TextColor="White" FontAttributes="Bold"/>
+                                                </Frame>
+                                            </HorizontalStackLayout>
+                                            
+                                            <Label Grid.Row="2" Grid.ColumnSpan="2" 
+                                                   Text="{Binding CategoriaIA, StringFormat='📂 Categoria: {0}'}" 
+                                                   FontSize="13" 
+                                                   TextColor="{StaticResource Gray700}"/>
+                                            
+                                            <Label Grid.Row="3" Grid.ColumnSpan="2" 
+                                                   Text="{Binding DataAbertura, StringFormat='📅 Aberto em: {0:dd/MM/yyyy}'}" 
+                                                   FontSize="12" 
+                                                   TextColor="{StaticResource Gray600}"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Loading Indicator -->
+        <ActivityIndicator Grid.Row="1" 
+                          IsRunning="{Binding IsLoading}" 
+                          IsVisible="{Binding IsLoading}"
+                          Color="{StaticResource Primary}"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

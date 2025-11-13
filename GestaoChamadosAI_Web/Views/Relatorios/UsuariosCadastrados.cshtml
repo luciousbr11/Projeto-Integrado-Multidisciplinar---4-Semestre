@@ -1,0 +1,132 @@
+@model GestaoChamadosAI_Web.Models.ViewModels.RelatoriosViewModel
+@{
+    ViewData["Title"] = "Usuários Cadastrados";
+}
+
+<!-- Cabeçalho -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="display-6 fw-bold">
+                <i class="bi bi-people-fill text-primary"></i>
+                Relatório de Usuários Cadastrados
+            </h1>
+            <p class="text-muted">Lista completa de usuários do sistema</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            <a asp-action="ImprimirUsuariosPDF" class="btn btn-danger" target="_blank">
+                <i class="bi bi-file-earmark-pdf"></i> Imprimir PDF
+            </a>
+        </div>
+    </div>
+
+    <!-- Cards de Resumo -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-primary">
+                <div class="card-body" style="color: #ffffff !important;">
+                    <h6 class="card-subtitle mb-2 opacity-75" style="color: #ffffff !important;">Total de Usuários</h6>
+                    <h2 class="card-title mb-0" style="color: #ffffff !important;">@Model.TotalUsuarios</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-info">
+                <div class="card-body" style="color: #ffffff !important;">
+                    <h6 class="card-subtitle mb-2 opacity-75" style="color: #ffffff !important;">Clientes</h6>
+                    <h2 class="card-title mb-0" style="color: #ffffff !important;">@Model.TotalClientes</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-warning text-dark">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2">Suportes</h6>
+                    <h2 class="card-title mb-0">@Model.TotalSuportes</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-danger">
+                <div class="card-body" style="color: #ffffff !important;">
+                    <h6 class="card-subtitle mb-2 opacity-75" style="color: #ffffff !important;">Administradores</h6>
+                    <h2 class="card-title mb-0" style="color: #ffffff !important;">@Model.TotalAdministradores</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Usuários -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title mb-4">
+                <i class="bi bi-table"></i> Lista Detalhada
+            </h5>
+            
+            @if (Model.Usuarios != null && Model.Usuarios.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Tipo</th>
+                                <th class="text-center">Total Chamados</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var usuario in Model.Usuarios)
+                            {
+                                <tr>
+                                    <td>@usuario.Id</td>
+                                    <td>
+                                        <strong>@usuario.Nome</strong>
+                                    </td>
+                                    <td>
+                                        <i class="bi bi-envelope text-muted"></i>
+                                        @usuario.Email
+                                    </td>
+                                    <td>
+                                        @if (usuario.Tipo == "Cliente")
+                                        {
+                                            <span class="badge bg-info">
+                                                <i class="bi bi-person"></i> Cliente
+                                            </span>
+                                        }
+                                        else if (usuario.Tipo == "Suporte")
+                                        {
+                                            <span class="badge bg-warning text-dark">
+                                                <i class="bi bi-headset"></i> Suporte
+                                            </span>
+                                        }
+                                        else if (usuario.Tipo == "Administrador")
+                                        {
+                                            <span class="badge bg-danger">
+                                                <i class="bi bi-shield-fill-check"></i> Administrador
+                                            </span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-secondary rounded-pill">
+                                            @usuario.TotalChamados
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i>
+                    Nenhum usuário encontrado no sistema.
+                </div>
+            }
+        </div>
+    </div>

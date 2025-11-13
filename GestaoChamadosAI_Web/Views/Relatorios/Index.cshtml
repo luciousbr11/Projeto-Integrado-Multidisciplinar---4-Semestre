@@ -1,0 +1,100 @@
+@{
+    ViewData["Title"] = "Relatórios";
+}
+
+<div class="row mb-4">
+    <div class="col-12">
+            <h1 class="display-5 fw-bold">
+                <i class="bi bi-file-earmark-bar-graph text-primary"></i>
+                Relatórios Gerenciais
+            </h1>
+            <p class="text-muted">Visualize estatísticas e dados consolidados do sistema</p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Card: Usuários Cadastrados -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="bi bi-people-fill text-primary" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Usuários Cadastrados</h5>
+                    <p class="card-text text-muted">
+                        Visualize todos os usuários do sistema com informações detalhadas por tipo e atividade
+                    </p>
+                    <a asp-action="UsuariosCadastrados" class="btn btn-primary">
+                        <i class="bi bi-eye"></i> Ver Relatório
+                    </a>
+                </div>
+                <div class="card-footer bg-light border-0">
+                    <small class="text-muted">
+                        <i class="bi bi-info-circle"></i> Clientes, Suportes e Administradores
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Chamados por Período -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="bi bi-calendar-range text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Chamados por Período</h5>
+                    <p class="card-text text-muted">
+                        Filtre chamados por data e visualize estatísticas de status, categoria e prioridade
+                    </p>
+                    <a asp-action="ChamadosPorPeriodo" class="btn btn-success">
+                        <i class="bi bi-eye"></i> Ver Relatório
+                    </a>
+                </div>
+                <div class="card-footer bg-light border-0">
+                    <small class="text-muted">
+                        <i class="bi bi-info-circle"></i> Filtros por data de abertura
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card: Chamados por Suporte -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="bi bi-person-badge text-warning" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="card-title fw-bold">Chamados por Suporte</h5>
+                    <p class="card-text text-muted">
+                        Acompanhe o desempenho de cada suporte com estatísticas de atendimento
+                    </p>
+                    <a asp-action="ChamadosPorSuporte" class="btn btn-warning">
+                        <i class="bi bi-eye"></i> Ver Relatório
+                    </a>
+                </div>
+                <div class="card-footer bg-light border-0">
+                    <small class="text-muted">
+                        <i class="bi bi-info-circle"></i> Produtividade e tempo médio
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Informações Adicionais -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="alert alert-info border-0 shadow-sm">
+                <h5 class="alert-heading">
+                    <i class="bi bi-lightbulb"></i> Dicas para Usar os Relatórios
+                </h5>
+                <ul class="mb-0">
+                    <li><strong>Exportar Dados:</strong> Use os botões de exportaçáo para baixar relatórios em formato CSV</li>
+                    <li><strong>Filtros:</strong> Utilize os filtros de período para análises mais específicas</li>
+                    <li><strong>Atualizaçáo:</strong> Os relatórios sáo atualizados em tempo real com os dados do sistema</li>
+                </ul>
+            </div>
+        </div>
+    </div>

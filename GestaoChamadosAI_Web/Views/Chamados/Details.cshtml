@@ -1,0 +1,462 @@
+@model GestaoChamadosAI_Web.Models.Chamado
+
+@{
+    ViewData["Title"] = "Detalhes do Chamado";
+    if (User.IsInRole("Cliente"))
+    {
+        Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    }
+}
+
+<div class="@(User.IsInRole("Cliente") ? "cliente-card" : "container") mt-4">
+    <!-- Mensagens -->
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i> @TempData["Mensagem"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    
+    @if (TempData["Erro"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i> @TempData["Erro"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="row">
+        <!-- Coluna Principal (Esquerda) -->
+        <div class="col-12 col-lg-8 mb-4">
+            <!-- Card principal com dados do chamado -->
+            <div class="card shadow mb-4">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-ticket-detailed-fill"></i> Ticket #@Model.Id
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <!-- Título -->
+                    <div class="mb-4">
+                        <label class="text-muted small">TÍTULO</label>
+                        <h5 class="fw-bold">@Model.Titulo</h5>
+                    </div>
+
+                    <!-- Descrição -->
+                    <div class="mb-4">
+                        <label class="text-muted small">DESCRIÇÃO</label>
+                        <p class="border-start border-primary border-4 ps-3">
+                            @Model.Descricao
+                        </p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-3">
+                            <!-- Usuário -->
+                            <div class="mb-3">
+                                <label class="text-muted small">
+                                    <i class="bi bi-person"></i> USUÁRIO
+                                </label>
+                                <p class="fw-bold">
+                                    @Model.Usuario?.Nome
+                                    <br />
+                                    <small class="text-muted">@Model.Usuario?.Email</small>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <!-- Data de Abertura -->
+                            <div class="mb-3">
+                                <label class="text-muted small">
+                                    <i class="bi bi-calendar-event"></i> DATA DE ABERTURA
+                                </label>
+                                <p class="fw-bold">
+                                    @Model.DataAbertura.ToString("dd/MM/yyyy")
+                                    <br />
+                                    <small class="text-muted">às @Model.DataAbertura.ToString("HH:mm")</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="mb-3">
+                        <label class="text-muted small">
+                            <i class="bi bi-flag"></i> STATUS ATUAL
+                        </label>
+                        <p>
+                            @if (Model.Status == "Aberto")
+                            {
+                                <span class="badge bg-danger fs-5">
+                                    <i class="bi bi-exclamation-circle"></i> @Model.Status
+                                </span>
+                                
+                                @if (User.IsInRole("Cliente") && Model.SuporteResponsavelId == null)
+                                {
+                                    <div class="alert alert-info mt-3 mb-0">
+                                        <div class="d-flex align-items-center">
+                                            <div class="spinner-border spinner-border-sm text-info me-2" role="status">
+                                                <span class="visually-hidden">Carregando...</span>
+                                            </div>
+                                            <div>
+                                                <strong>Aguarde ser atendido</strong>
+                                                <span class="loading-dots"></span>
+                                                <p class="mb-0 small">Em breve um de nossos atendentes assumirá seu chamado.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else if (Model.Status == "Em Andamento")
+                            {
+                                <span class="badge bg-warning text-dark fs-5">
+                                    <i class="bi bi-hourglass-split"></i> @Model.Status
+                                </span>
+                            }
+                            else if (Model.Status == "Concluído")
+                            {
+                                <span class="badge bg-success fs-5">
+                                    <i class="bi bi-check-circle-fill"></i> @Model.Status
+                                </span>
+                            }
+                            else if (Model.Status == "Aguardando Cliente")
+                            {
+                                <span class="badge bg-info fs-5">
+                                    <i class="bi bi-clock"></i> @Model.Status
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary fs-5">@Model.Status</span>
+                            }
+                        </p>
+                    </div>
+
+                    <!-- Botões de ação -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4 border-top pt-3 flex-wrap">
+                        <a asp-action="Index" class="btn btn-secondary w-100 w-md-auto">
+                            <i class="bi bi-arrow-left"></i> Voltar para Lista
+                        </a>
+                        
+                        @if (User.IsInRole("Suporte") || User.IsInRole("Administrador"))
+                        {
+                            @if (Model.SuporteResponsavelId == null && Model.Status != "Concluído" && Model.Status != "Solucionado por IA")
+                            {
+                                <button type="button" id="btnAssumirAtendimento" class="btn btn-success w-100 w-md-auto" data-chamado-id="@Model.Id">
+                                    <i class="bi bi-hand-thumbs-up"></i> Assumir Atendimento
+                                </button>
+                            }
+                            else if (Model.Status != "Concluído" && Model.Status != "Solucionado por IA")
+                            {
+                                @* Suporte só vê botão de chat se for o responsável, Admin vê sempre *@
+                                @if (User.IsInRole("Administrador") || Model.SuporteResponsavelId == ViewBag.UsuarioAtualId)
+                                {
+                                    <a href="@Url.Action("Index", "Chat", new { chamadoId = Model.Id })" class="btn btn-info w-100 w-md-auto">
+                                        <i class="bi bi-chat-dots-fill"></i> Abrir Chat
+                                    </a>
+                                }
+                                else if (User.IsInRole("Suporte"))
+                                {
+                                    @* Suporte que não é o responsável pode reassumir *@
+                                    <form asp-action="Reassumir" method="post" style="display: inline;" class="w-100 w-md-auto">
+                                        <input type="hidden" name="chamadoId" value="@Model.Id" />
+                                        <button type="submit" class="btn btn-warning w-100" onclick="return confirm('Deseja reassumir este atendimento?');">
+                                            <i class="bi bi-arrow-counterclockwise"></i> Reassumir Atendimento
+                                        </button>
+                                    </form>
+                                }
+                            }
+                        }
+                        
+                        @if (User.IsInRole("Cliente") && Model.SuporteResponsavelId != null)
+                        {
+                            <a href="@Url.Action("Index", "Chat", new { chamadoId = Model.Id })" class="btn btn-info w-100 w-md-auto">
+                                <i class="bi bi-chat-dots-fill"></i> Chat com Suporte
+                            </a>
+                        }
+                        
+                        @if (User.IsInRole("Cliente") && (Model.Status == "Aberto" || Model.Status == "Em Andamento"))
+                        {
+                            <form asp-action="FinalizarChamado" method="post" style="display: inline;" class="w-100 w-md-auto">
+                                <input type="hidden" name="chamadoId" value="@Model.Id" />
+                                <button type="submit" class="btn btn-success w-100" onclick="return confirm('Tem certeza que deseja finalizar este chamado?');">
+                                    <i class="bi bi-check-circle-fill"></i> Finalizar Chamado
+                                </button>
+                            </form>
+                        }
+                        
+                        @* Botão de editar REMOVIDO - não permitir edição de chamados *@
+                        
+                        @if (User.IsInRole("Suporte") || User.IsInRole("Administrador"))
+                        {
+                            @* Só o responsável atual ou Admin pode transferir *@
+                            @if (Model.Status != "Concluído" && Model.Status != "Solucionado por IA" && (User.IsInRole("Administrador") || Model.SuporteResponsavelId == ViewBag.UsuarioAtualId))
+                            {
+                                <button type="button" class="btn btn-secondary w-100 w-md-auto" data-bs-toggle="modal" data-bs-target="#transferirModal">
+                                    <i class="bi bi-arrow-left-right"></i> Transferir
+                                </button>
+                            }
+                        }
+                        
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card de Categoria e Prioridade -->
+            @if (!string.IsNullOrEmpty(Model.CategoriaIA) || !string.IsNullOrEmpty(Model.Prioridade))
+            {
+                <div class="card shadow mb-4">
+                    <div class="card-header" style="background: #01acac;">
+                        <h6 class="mb-0 text-white">
+                            <i class="bi bi-robot"></i> Análise da IA
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @if (!string.IsNullOrEmpty(Model.CategoriaIA))
+                            {
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label class="text-muted small">
+                                        <i class="bi bi-tag-fill"></i> CATEGORIA IDENTIFICADA
+                                    </label>
+                                    <div class="mt-2">
+                                        <span class="badge bg-primary fs-6">@Model.CategoriaIA</span>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrEmpty(Model.Prioridade))
+                            {
+                                <div class="col-md-6">
+                                    <label class="text-muted small">
+                                        <i class="bi bi-exclamation-triangle-fill"></i> PRIORIDADE
+                                    </label>
+                                    <div class="mt-2">
+                                        @if (Model.Prioridade == "Alta")
+                                        {
+                                            <span class="badge bg-danger fs-6">
+                                                <i class="bi bi-exclamation-triangle-fill"></i> Alta
+                                            </span>
+                                            <p class="small text-muted mt-2 mb-0">Requer atenção imediata</p>
+                                        }
+                                        else if (Model.Prioridade == "Média")
+                                        {
+                                            <span class="badge bg-warning text-dark fs-6">
+                                                <i class="bi bi-exclamation-circle"></i> Média
+                                            </span>
+                                            <p class="small text-muted mt-2 mb-0">Deve ser tratado em breve</p>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-success fs-6">
+                                                <i class="bi bi-check-circle"></i> Baixa
+                                            </span>
+                                            <p class="small text-muted mt-2 mb-0">Pode aguardar atendimento normal</p>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Card de Informações Adicionais -->
+            <div class="card shadow">
+                <div class="card-header bg-secondary text-white">
+                    <h6 class="mb-0">
+                        <i class="bi bi-info-circle"></i> Informações Adicionais
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 col-md-3 mb-3">
+                            <small class="text-muted d-block">Ticket</small>
+                            <p class="fw-bold mb-0">Ticket #@Model.Id</p>
+                        </div>
+                        <div class="col-6 col-md-3 mb-3">
+                            <small class="text-muted d-block">Criado há</small>
+                            <p class="fw-bold mb-0">@((DateTime.Now - Model.DataAbertura).Days) dias</p>
+                        </div>
+                        @if (Model.SuporteResponsavel != null)
+                        {
+                            <div class="col-12 col-md-6">
+                                <small class="text-muted d-block">Responsável</small>
+                                <p class="fw-bold mb-0">
+                                    <i class="bi bi-person-badge"></i> @Model.SuporteResponsavel.Nome
+                                </p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coluna Lateral Direita (IA) -->
+        <div class="col-12 col-lg-4 mb-4">
+            <!-- 🤖 NOVA SEÇáO: Resposta Gerada pela IA (Google Gemini) -->
+            @if (!string.IsNullOrEmpty(Model.RespostaIA))
+            {
+                <div class="card shadow mb-3 border-success">
+                    <div class="card-header bg-success text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-chat-right-text-fill"></i> Resposta Sugerida pela IA
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="p-3 bg-light border-start border-success border-4 rounded">
+                            <p class="mb-0 text-break" style="white-space: pre-wrap;">@Model.RespostaIA</p>
+                        </div>
+                        <div class="alert alert-success mt-3 mb-0">
+                            <small>
+                                <i class="bi bi-robot"></i> 
+                                <strong>Google Gemini AI:</strong> Esta resposta foi gerada automaticamente 
+                                usando inteligência artificial avançada baseada no conteúdo do chamado.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (User.IsInRole("Suporte") || User.IsInRole("Administrador"))
+            {
+                <div class="card shadow mb-3 border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-magic"></i> Gerar Resposta com IA
+                        </h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="text-muted">
+                            <i class="bi bi-robot" style="font-size: 3rem;"></i>
+                        </p>
+                        <p>Use o Google Gemini AI para gerar uma resposta profissional automática para este chamado.</p>
+                        
+                        <form asp-action="GerarRespostaIA" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-magic"></i> Gerar Resposta Automática
+                            </button>
+                        </form>
+                        
+                        <div class="alert alert-info mt-3 mb-0">
+                            <small>
+                                <i class="bi bi-info-circle"></i> 
+                                A IA analisará o título, descriçáo e categoria do chamado para criar uma resposta objetiva e profissional.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <style>
+        /* Animação de pontos de loading */
+        .loading-dots::after {
+            content: '';
+            animation: loadingDots 1.5s infinite;
+        }
+        
+        @@keyframes loadingDots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+    </style>
+    
+    <script>
+        // Botão Assumir Atendimento - JavaScript Puro
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnAssumirAtendimento = document.getElementById('btnAssumirAtendimento');
+            
+            if (btnAssumirAtendimento) {
+                btnAssumirAtendimento.addEventListener('click', function() {
+                    const chamadoId = this.getAttribute('data-chamado-id');
+                    
+                    if (!confirm('Deseja assumir o atendimento deste chamado?')) {
+                        return;
+                    }
+
+                    // Desabilitar botão durante requisição
+                    btnAssumirAtendimento.disabled = true;
+                    btnAssumirAtendimento.innerHTML = '<i class="bi bi-hourglass-split"></i> Processando...';
+
+                    fetch('@Url.Action("AssumirAtendimento", "Chat")', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify({ chamadoId: parseInt(chamadoId) })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(data.message);
+                            window.location.href = '@Url.Action("Index", "Chat")?chamadoId=' + chamadoId;
+                        } else {
+                            alert('Erro: ' + data.message);
+                            // Reabilitar botão em caso de erro
+                            btnAssumirAtendimento.disabled = false;
+                            btnAssumirAtendimento.innerHTML = '<i class="bi bi-hand-thumbs-up"></i> Assumir Atendimento';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        alert('Erro ao assumir atendimento. Verifique sua conexão.');
+                        // Reabilitar botão em caso de erro
+                        btnAssumirAtendimento.disabled = false;
+                        btnAssumirAtendimento.innerHTML = '<i class="bi bi-hand-thumbs-up"></i> Assumir Atendimento';
+                    });
+                });
+            }
+        });
+    </script>
+}
+
+<!-- Modal para transferir chamado -->
+<div class="modal fade" id="transferirModal" tabindex="-1" aria-labelledby="transferirModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form asp-action="TransferirChamado" method="post">
+                <input type="hidden" name="chamadoId" value="@Model.Id" />
+                <div class="modal-header">
+                    <h5 class="modal-title" id="transferirModalLabel">
+                        <i class="bi bi-arrow-left-right"></i> Transferir Chamado
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Selecione o suporte para quem deseja transferir este chamado:</p>
+                    <div class="mb-3">
+                        <label for="novoSuporteId" class="form-label">Suporte</label>
+                        <select class="form-select" id="novoSuporteId" name="novoSuporteId" required>
+                            <option value="">Selecione um suporte</option>
+                            @foreach (var suporte in ViewBag.Suportes ?? new List<GestaoChamadosAI_Web.Models.Usuario>())
+                            {
+                                @if (suporte.Id != Model.SuporteResponsavelId)
+                                {
+                                    <option value="@suporte.Id">@suporte.Nome (@suporte.Email)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer d-grid d-md-flex gap-2">
+                    <button type="button" class="btn btn-secondary w-100 w-md-auto" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary w-100 w-md-auto">
+                        <i class="bi bi-arrow-left-right"></i> Transferir
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

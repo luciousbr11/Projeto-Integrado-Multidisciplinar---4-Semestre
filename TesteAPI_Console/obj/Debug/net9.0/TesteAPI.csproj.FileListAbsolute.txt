@@ -1,0 +1,17 @@
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\bin\Debug\net9.0\TesteAPI.exe
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\bin\Debug\net9.0\TesteAPI.deps.json
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\bin\Debug\net9.0\TesteAPI.runtimeconfig.json
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\bin\Debug\net9.0\TesteAPI.dll
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\bin\Debug\net9.0\TesteAPI.pdb
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\TesteAPI.csproj.AssemblyReference.cache
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\TesteAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\TesteAPI.AssemblyInfoInputs.cache
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\TesteAPI.AssemblyInfo.cs
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\TesteAPI.csproj.CoreCompileInputs.cache
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\TesteAPI.csproj.Up2Date
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\TesteAPI.dll
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\refint\TesteAPI.dll
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\TesteAPI.pdb
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\TesteAPI.genruntimeconfig.cache
+C:\wamp64\www\GestaoChamadosAI\TesteAPI_Console\obj\Debug\net9.0\ref\TesteAPI.dll

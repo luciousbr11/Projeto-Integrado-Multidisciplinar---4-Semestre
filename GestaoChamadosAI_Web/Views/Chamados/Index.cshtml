@@ -1,0 +1,353 @@
+@model IEnumerable<GestaoChamadosAI_Web.Models.Chamado>
+
+@{
+    ViewData["Title"] = "Meus Chamados";
+    var isCliente = User.IsInRole("Cliente");
+    
+    if (isCliente)
+    {
+        Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    }
+}
+
+<!-- Cabeçalho Simples -->
+<div class="@(isCliente ? "cliente-card" : "") mb-4">
+    <h3 class="fw-bold mb-2">
+        @if (isCliente)
+        {
+            <text>📋 Meus Chamados</text>
+        }
+        else
+        {
+            <text><i class="bi bi-ticket-perforated"></i> Gerenciar Chamados</text>
+        }
+    </h3>
+    @if (isCliente)
+    {
+        <p class="text-muted mb-0">Acompanhe o status dos seus chamados</p>
+    }
+</div>
+
+<!-- Mensagem de sucesso -->
+@if (TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>@TempData["Mensagem"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<!-- Botão e Filtros -->
+<div class="@(isCliente ? "cliente-card" : "") mb-4">
+    @if (isCliente)
+    {
+        <!-- Cliente: Botão + Filtros Simples -->
+        <a asp-action="Create" class="btn btn-success btn-lg w-100 mb-3 shadow-sm d-flex align-items-center justify-content-center gap-2" style="padding: 1rem; border-radius: 12px;">
+            <i class="bi bi-plus-circle-fill fs-5"></i>
+            <span class="fw-bold">Abrir Novo Chamado</span>
+        </a>
+        
+        <div class="d-flex gap-2 overflow-auto pb-2" style="scrollbar-width: none; -ms-overflow-style: none;">
+            <a asp-action="Index" class="btn btn-sm @(string.IsNullOrEmpty(ViewBag.StatusFiltro) ? "btn-primary" : "btn-outline-secondary") flex-shrink-0">
+                Todos
+            </a>
+            <a asp-action="Index" asp-route-status="Aberto" 
+               class="btn btn-sm @(ViewBag.StatusFiltro == "Aberto" ? "btn-info text-white" : "btn-outline-info") flex-shrink-0">
+                ⏳ Aguardando
+            </a>
+            <a asp-action="Index" asp-route-status="Em Andamento" 
+               class="btn btn-sm @(ViewBag.StatusFiltro == "Em Andamento" ? "btn-warning" : "btn-outline-warning") flex-shrink-0">
+                👤 Em Atendimento
+            </a>
+            <a asp-action="Index" asp-route-status="Concluído" 
+               class="btn btn-sm @(ViewBag.StatusFiltro == "Concluído" ? "btn-success" : "btn-outline-success") flex-shrink-0">
+                ✅ Concluídos
+            </a>
+        </div>
+    }
+    else
+    {
+        <!-- Suporte/Admin: Interface Completa -->
+        <div class="row g-3 mb-3">
+            <div class="col-12 col-md-auto">
+                <a asp-action="Create" class="btn btn-primary w-100">
+                    <i class="bi bi-plus-circle-fill"></i> Novo Chamado
+                </a>
+            </div>
+            <div class="col-12 col-md">
+                <div class="btn-group w-100" role="group">
+                    <a asp-action="Index" class="btn btn-outline-secondary @(string.IsNullOrEmpty(ViewBag.StatusFiltro) ? "active" : "")">
+                        Todos
+                    </a>
+                    <a asp-action="Index" asp-route-status="Aberto" 
+                       class="btn btn-outline-info @(ViewBag.StatusFiltro == "Aberto" ? "active" : "")">
+                        Abertos
+                    </a>
+                    <a asp-action="Index" asp-route-status="Em Andamento" 
+                       class="btn btn-outline-warning @(ViewBag.StatusFiltro == "Em Andamento" ? "active" : "")">
+                        Em Andamento
+                    </a>
+                    <a asp-action="Index" asp-route-status="Concluído" 
+                       class="btn btn-outline-success @(ViewBag.StatusFiltro == "Concluído" ? "active" : "")">
+                        Concluídos
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Filtros Adicionais -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <form asp-action="Index" method="get" class="row g-3">
+                    <div class="col-md-4">
+                        <label for="suporteId" class="form-label small text-muted">
+                            <i class="bi bi-person-badge"></i> Responsável
+                        </label>
+                        <select name="suporteId" id="suporteId" class="form-select">
+                            <option value="">Todos os responsáveis</option>
+                            @foreach (var suporte in ViewBag.Suportes ?? new List<GestaoChamadosAI_Web.Models.Usuario>())
+                            {
+                                <option value="@suporte.Id" selected="@(ViewBag.SuporteIdFiltro == suporte.Id)">
+                                    @suporte.Nome (@suporte.Tipo)
+                                </option>
+                            }
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <label for="prioridade" class="form-label small text-muted">
+                            <i class="bi bi-exclamation-triangle"></i> Prioridade
+                        </label>
+                        <select name="prioridade" id="prioridade" class="form-select">
+                            <option value="">Todas as prioridades</option>
+                            <option value="Alta" selected="@(ViewBag.PrioridadeFiltro == "Alta")">🔴 Alta</option>
+                            <option value="Média" selected="@(ViewBag.PrioridadeFiltro == "Média")">🟡 Média</option>
+                            <option value="Baixa" selected="@(ViewBag.PrioridadeFiltro == "Baixa")">🟢 Baixa</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-4 d-flex align-items-end gap-2">
+                        <button type="submit" class="btn btn-primary flex-grow-1">
+                            <i class="bi bi-funnel"></i> Filtrar
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="bi bi-x-circle"></i> Limpar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Lista de Chamados -->
+<div class="@(isCliente ? "cliente-card" : "")">
+    @if (Model != null && Model.Any())
+    {
+        @if (isCliente)
+        {
+            <!-- CLIENTE: Cards Simples e Grandes -->
+            <div class="row g-3">
+            @foreach (var chamado in Model)
+            {
+                var statusClass = chamado.Status switch
+                {
+                    "Aberto" => "info",
+                    "Em Andamento" => "warning",
+                    "Concluído" => "success",
+                    "Solucionado por IA" => "primary",
+                    _ => "secondary"
+                };
+                
+                var statusText = chamado.Status switch
+                {
+                    "Aberto" => "⏳ Aguardando Atendimento",
+                    "Em Andamento" => "👤 Sendo Atendido",
+                    "Concluído" => "✅ Concluído",
+                    "Solucionado por IA" => "🤖 Resolvido pela IA",
+                    _ => chamado.Status
+                };
+                
+                var iconClass = chamado.Status switch
+                {
+                    "Aberto" => "bi-hourglass-split",
+                    "Em Andamento" => "bi-person-check",
+                    "Concluído" => "bi-check-circle-fill",
+                    "Solucionado por IA" => "bi-robot",
+                    _ => "bi-ticket"
+                };
+
+                <div class="col-12 col-md-6">
+                    <a asp-action="Details" asp-route-id="@chamado.Id" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-sm hover-lift" style="transition: all 0.2s ease;">
+                            <div class="card-body d-flex gap-3 align-items-start">
+                                <!-- Ícone -->
+                                <div class="rounded-circle bg-@statusClass bg-opacity-10 d-flex align-items-center justify-content-center flex-shrink-0"
+                                     style="width: 56px; height: 56px;">
+                                    <i class="bi @iconClass text-@statusClass fs-4"></i>
+                                </div>
+                                
+                                <!-- Conteúdo -->
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <h6 class="card-title mb-2 text-dark text-truncate fw-bold">@chamado.Titulo</h6>
+                                    <p class="card-text small text-muted mb-2 text-truncate">
+                                        <i class="bi bi-calendar3"></i> @chamado.DataAbertura.ToString("dd/MM/yyyy 'às' HH:mm")
+                                    </p>
+                                    <span class="badge bg-@statusClass bg-opacity-10 text-@statusClass border border-@statusClass">
+                                        @statusText
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <!-- SUPORTE/ADMIN: Tabela Responsiva Completa -->
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th><i class="bi bi-hash"></i> Ticket</th>
+                        <th><i class="bi bi-card-text"></i> Título</th>
+                        <th><i class="bi bi-person"></i> Cliente</th>
+                        <th><i class="bi bi-flag"></i> Status</th>
+                        <th class="text-center"><i class="bi bi-exclamation-triangle"></i> Prioridade</th>
+                        <th><i class="bi bi-person-badge"></i> Responsável</th>
+                        <th><i class="bi bi-calendar"></i> Abertura</th>
+                        <th class="text-center"><i class="bi bi-gear"></i> Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var chamado in Model)
+                    {
+                        var statusClass = chamado.Status switch
+                        {
+                            "Aberto" => "info",
+                            "Em Andamento" => "warning",
+                            "Concluído" => "success",
+                            "Solucionado por IA" => "primary",
+                            _ => "secondary"
+                        };
+
+                        var prioridadeClass = chamado.Prioridade switch
+                        {
+                            "Baixa" => "success",
+                            "Média" => "warning",
+                            "Alta" => "danger",
+                            _ => "secondary"
+                        };
+
+                        <tr>
+                            <td class="fw-bold">#@chamado.Id</td>
+                            <td>
+                                <div class="d-flex flex-column">
+                                    <span class="fw-semibold">@chamado.Titulo</span>
+                                    @if (!string.IsNullOrEmpty(chamado.CategoriaIA))
+                                    {
+                                        <small class="text-muted">
+                                            <i class="bi bi-tag-fill"></i> @chamado.CategoriaIA
+                                        </small>
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                <i class="bi bi-person-circle"></i> @chamado.Usuario?.Nome
+                            </td>
+                            <td>
+                                <span class="badge bg-@statusClass">
+                                    @chamado.Status
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge bg-@prioridadeClass">
+                                    @chamado.Prioridade
+                                </span>
+                            </td>
+                            <td>
+                                @if (chamado.SuporteResponsavel != null)
+                                {
+                                    <i class="bi bi-person-check-fill text-success"></i>
+                                    <span>@chamado.SuporteResponsavel.Nome</span>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">
+                                        <i class="bi bi-dash-circle"></i> Não atribuído
+                                    </span>
+                                }
+                            </td>
+                            <td>
+                                <small>@chamado.DataAbertura.ToString("dd/MM/yyyy HH:mm")</small>
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-action="Details" asp-route-id="@chamado.Id" 
+                                       class="btn btn-outline-primary" title="Detalhes">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    @* Botão de editar REMOVIDO - não permitir edição de chamados *@
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+else
+{
+    <!-- Estado Vazio -->
+    <div class="text-center py-5">
+        @if (isCliente)
+        {
+            <div class="mb-4">
+                <i class="bi bi-inbox display-1 text-muted"></i>
+            </div>
+            <h4 class="text-muted mb-3">Nenhum chamado encontrado</h4>
+            <p class="text-muted mb-4">Quando precisar de ajuda, é só abrir um chamado!</p>
+            <a asp-action="Create" class="btn btn-success btn-lg">
+                <i class="bi bi-plus-circle-fill"></i> Abrir Meu Primeiro Chamado
+            </a>
+        }
+        else
+        {
+            <div class="mb-4">
+                <i class="bi bi-inbox display-1 text-muted"></i>
+            </div>
+            <h4 class="text-muted">Nenhum chamado encontrado</h4>
+            <p class="text-muted">
+                @if (!string.IsNullOrEmpty(ViewBag.StatusFiltro))
+                {
+                    <text>Não há chamados com o status "@ViewBag.StatusFiltro".</text>
+                }
+                else
+                {
+                    <text>Ainda não há chamados cadastrados no sistema.</text>
+                }
+            </p>
+        }
+    </div>
+}
+</div>
+
+<style>
+    .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    /* Remove scrollbar do filtro horizontal */
+    .overflow-auto::-webkit-scrollbar {
+        display: none;
+    }
+</style>
+
+@section Scripts {
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+}

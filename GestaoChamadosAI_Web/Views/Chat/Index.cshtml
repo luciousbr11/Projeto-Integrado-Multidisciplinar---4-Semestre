@@ -1,0 +1,608 @@
+@model GestaoChamadosAI_Web.Models.Chamado
+
+@{
+    ViewData["Title"] = "Chat - Chamado #" + Model.Id;
+    var usuarioAtualId = ViewBag.UsuarioAtualId;
+    var usuarioRole = ViewBag.UsuarioRole;
+    
+    if (User.IsInRole("Cliente"))
+    {
+        Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    }
+}
+
+<div class="@(User.IsInRole("Cliente") ? "cliente-card" : "container-fluid") py-4">
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <a href="@Url.Action("Details", "Chamados", new { id = Model.Id })" class="btn btn-secondary btn-lg">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            <h4 class="mb-0 text-primary">
+                <i class="bi bi-chat-dots"></i> Chat - Chamado #@Model.Id
+            </h4>
+            <div style="width: 150px;"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Informações do Chamado -->
+        <div class="col-12 col-lg-4 mb-4 order-2 order-lg-1">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-ticket-detailed"></i> Informações do Chamado
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <strong>Ticket:</strong> Ticket #@Model.Id
+                    </div>
+                    <div class="mb-3">
+                        <strong>Título:</strong><br />
+                        @Model.Titulo
+                    </div>
+                    <div class="mb-3">
+                        <strong>Status:</strong><br />
+                        @if (Model.Status == "Aberto")
+                        {
+                            <span class="badge bg-warning">@Model.Status</span>
+                        }
+                        else if (Model.Status == "Em Andamento")
+                        {
+                            <span class="badge bg-info">@Model.Status</span>
+                        }
+                        else if (Model.Status == "Concluído")
+                        {
+                            <span class="badge bg-success">@Model.Status</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@Model.Status</span>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <strong>Cliente:</strong><br />
+                        <i class="bi bi-person-circle"></i> @Model.Usuario?.Nome<br />
+                        <small class="text-muted">@Model.Usuario?.Email</small>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.CategoriaIA))
+                    {
+                        <div class="mb-3">
+                            <strong>Categoria:</strong><br />
+                            <span class="badge bg-info">@Model.CategoriaIA</span>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Prioridade))
+                    {
+                        <div class="mb-3">
+                            <strong>Prioridade:</strong><br />
+                            @if (Model.Prioridade == "Alta")
+                            {
+                                <span class="badge bg-danger">@Model.Prioridade</span>
+                            }
+                            else if (Model.Prioridade == "Média")
+                            {
+                                <span class="badge bg-warning">@Model.Prioridade</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">@Model.Prioridade</span>
+                            }
+                        </div>
+                    }
+                    @if (Model.SuporteResponsavel != null)
+                    {
+                        <div class="mb-3">
+                            <strong>Suporte Responsável:</strong><br />
+                            <i class="bi bi-headset"></i> @Model.SuporteResponsavel.Nome
+                        </div>
+                    }
+
+                    @if (usuarioRole == "Suporte" || usuarioRole == "Administrador")
+                    {
+                        <hr />
+                        <div class="d-grid gap-2">
+                            @if (Model.Status != "Concluído" && Model.Status != "Solucionado por IA")
+                            {
+                                <button id="btnFinalizar" class="btn btn-success">
+                                    <i class="bi bi-check-circle"></i> Finalizar Atendimento
+                                </button>
+                                
+                                @if (usuarioRole == "Administrador" || Model.SuporteResponsavelId == usuarioAtualId)
+                                {
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#transferirModal">
+                                        <i class="bi bi-arrow-left-right"></i> Transferir Chamado
+                                    </button>
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Área do Chat -->
+        <div class="col-12 col-lg-8 mb-4 order-1 order-lg-2">
+            <div class="card shadow" style="height: 70vh; min-height: 500px;">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-chat-dots"></i> Chat do Atendimento
+                    </h5>
+                </div>
+
+                @* Banner informativo para Admin que não é o responsável *@
+                @if (usuarioRole == "Administrador" && Model.SuporteResponsavelId != null && Model.SuporteResponsavelId != usuarioAtualId)
+                {
+                    <div class="alert alert-warning m-3 mb-0">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="bi bi-info-circle-fill me-2"></i>
+                                <strong>Modo Visualização:</strong> Este atendimento está sendo realizado por <strong>@Model.SuporteResponsavel?.Nome</strong>. 
+                                Você está visualizando o chat mas não pode enviar mensagens.
+                            </div>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#assumirAdminModal">
+                                <i class="bi bi-hand-thumbs-up"></i> Assumir Atendimento
+                            </button>
+                        </div>
+                    </div>
+                }
+                
+                <!-- Mensagens -->
+                <div class="card-body" id="chatMessages" style="overflow-y: auto; height: calc(100% - 140px);">
+                    @if (Model.Mensagens != null && Model.Mensagens.Any())
+                    {
+                        foreach (var mensagem in Model.Mensagens.OrderBy(m => m.DataEnvio))
+                        {
+                            var isUsuarioAtual = mensagem.UsuarioId == usuarioAtualId;
+                            var alignClass = isUsuarioAtual ? "text-end" : "text-start";
+                            var bgClass = isUsuarioAtual ? "bg-primary text-white" : "bg-light";
+
+                            <div class="mb-3 @alignClass">
+                                <div class="d-inline-block @bgClass p-3 rounded" style="max-width: 70%;">
+                                    <div class="fw-bold small mb-1">
+                                        @mensagem.Usuario?.Nome
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(mensagem.Mensagem))
+                                    {
+                                        <div class="mb-1">
+                                            @mensagem.Mensagem
+                                        </div>
+                                    }
+                                    @if (mensagem.Anexos != null && mensagem.Anexos.Any())
+                                    {
+                                        <div class="mt-2">
+                                            @foreach (var anexo in mensagem.Anexos)
+                                            {
+                                                var isImage = new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp" }.Contains(anexo.TipoArquivo.ToLower());
+                                                var fileUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{anexo.CaminhoArquivo}";
+                                                
+                                                if (isImage)
+                                                {
+                                                    <div class="mb-2">
+                                                        <a href="@fileUrl" target="_blank">
+                                                            <img src="@fileUrl" alt="@anexo.NomeArquivo" class="img-fluid rounded" style="max-width: 250px; max-height: 200px;" />
+                                                        </a>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="mb-1">
+                                                        <a href="@fileUrl" target="_blank" class="@(isUsuarioAtual ? "text-white" : "text-primary")">
+                                                            <i class="bi bi-file-earmark-arrow-down"></i> @anexo.NomeArquivo
+                                                        </a>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    }
+                                    <div class="small text-muted" style="opacity: 0.8;">
+                                        @mensagem.DataEnvio.ToString("dd/MM/yyyy HH:mm")
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-center text-muted py-5">
+                            <i class="bi bi-chat-square-text fs-1"></i>
+                            <p class="mt-3">Nenhuma mensagem ainda. Inicie a conversa!</p>
+                        </div>
+                    }
+                </div>
+
+                <!-- Área de Envio -->
+                <div class="card-footer bg-white">
+                    @if (Model.Status != "Concluído" && Model.Status != "Solucionado por IA")
+                    {
+                        var podeEnviar = true;
+                        var mensagemBloqueio = "";
+                        
+                        // Admin não responsável não pode enviar
+                        if (usuarioRole == "Administrador" && Model.SuporteResponsavelId != null && Model.SuporteResponsavelId != usuarioAtualId)
+                        {
+                            podeEnviar = false;
+                            mensagemBloqueio = "Você está no modo visualização. Assuma o atendimento para enviar mensagens.";
+                        }
+
+                        if (podeEnviar)
+                        {
+                            <form id="formEnviarMensagem">
+                                <div class="row g-2">
+                                    <div class="col-12">
+                                        <textarea id="txtMensagem" class="form-control" rows="2" placeholder="Digite sua mensagem..."></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="d-flex gap-2">
+                                            <input type="file" id="fileInput" class="form-control" multiple style="display: none;" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.txt,.csv,.zip,.rar,.7z" />
+                                            <button type="button" id="btnAnexar" class="btn btn-secondary">
+                                                <i class="bi bi-paperclip"></i> Anexar
+                                            </button>
+                                            <button type="submit" class="btn btn-primary flex-grow-1">
+                                                <i class="bi bi-send-fill"></i> Enviar
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div id="previewAnexos" class="d-flex flex-wrap gap-2 mt-2"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning mb-0">
+                                <i class="bi bi-eye-fill"></i> @mensagemBloqueio
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-info mb-0">
+                            <i class="bi bi-info-circle"></i> Este atendimento foi finalizado. Náo é mais possível enviar mensagens.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    let ultimaMensagemId = @(Model.Mensagens?.Max(m => m.Id) ?? 0);
+    const chamadoId = @Model.Id;
+    const usuarioAtualId = @usuarioAtualId;
+    let arquivosParaEnviar = [];
+
+    // Botão de anexar
+    $('#btnAnexar').on('click', function() {
+        $('#fileInput').click();
+    });
+
+    // Preview de arquivos selecionados
+    $('#fileInput').on('change', function() {
+        const files = Array.from(this.files);
+        arquivosParaEnviar = files;
+        mostrarPreviewAnexos(files);
+    });
+
+    function mostrarPreviewAnexos(files) {
+        const preview = $('#previewAnexos');
+        preview.empty();
+
+        files.forEach((file, index) => {
+            const isImage = file.type.startsWith('image/');
+            
+            if (isImage) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.append(`
+                        <div class="position-relative" style="width: 80px; height: 80px;">
+                            <img src="${e.target.result}" class="img-thumbnail" style="width: 80px; height: 80px; object-fit: cover;" />
+                            <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" onclick="removerAnexo(${index})" style="padding: 0.1rem 0.3rem;">
+                                <i class="bi bi-x"></i>
+                            </button>
+                        </div>
+                    `);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.append(`
+                    <div class="alert alert-secondary py-2 px-3 mb-0 d-flex align-items-center gap-2">
+                        <i class="bi bi-file-earmark"></i>
+                        <span>${file.name}</span>
+                        <button type="button" class="btn btn-sm btn-danger ms-2" onclick="removerAnexo(${index})" style="padding: 0.1rem 0.3rem;">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </div>
+                `);
+            }
+        });
+    }
+
+    window.removerAnexo = function(index) {
+        arquivosParaEnviar.splice(index, 1);
+        const dt = new DataTransfer();
+        arquivosParaEnviar.forEach(file => dt.items.add(file));
+        $('#fileInput')[0].files = dt.files;
+        mostrarPreviewAnexos(arquivosParaEnviar);
+    };
+
+    // Envia mensagem
+    $('#formEnviarMensagem').on('submit', async function(e) {
+        e.preventDefault();
+        
+        const mensagem = $('#txtMensagem').val().trim();
+        
+        if (!mensagem && arquivosParaEnviar.length === 0) {
+            alert('Digite uma mensagem ou selecione um arquivo.');
+            return;
+        }
+
+        // Upload dos arquivos primeiro
+        const anexosUrls = [];
+        
+        if (arquivosParaEnviar.length > 0) {
+            for (const file of arquivosParaEnviar) {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                try {
+                    const uploadResponse = await $.ajax({
+                        url: '/api/Upload',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false
+                    });
+
+                    if (uploadResponse.success) {
+                        anexosUrls.push(uploadResponse.url);
+                    } else {
+                        alert('Erro ao enviar arquivo: ' + uploadResponse.message);
+                        return;
+                    }
+                } catch (error) {
+                    alert('Erro ao enviar arquivo.');
+                    return;
+                }
+            }
+        }
+
+        // Envia a mensagem com os anexos
+        const data = { mensagem: mensagem || '' };
+        if (anexosUrls.length > 0) {
+            anexosUrls.forEach((url, index) => {
+                data[`anexosUrls[${index}]`] = url;
+            });
+        }
+
+        $.ajax({
+            url: `/api/Chat/${chamadoId}/mensagens`,
+            type: 'POST',
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    $('#txtMensagem').val('');
+                    $('#fileInput').val('');
+                    $('#previewAnexos').empty();
+                    arquivosParaEnviar = [];
+                    adicionarMensagemAoChat(response.mensagem);
+                    ultimaMensagemId = response.mensagem.id;
+                } else {
+                    alert('Erro: ' + response.message);
+                }
+            },
+            error: function() {
+                alert('Erro ao enviar mensagem.');
+            }
+        });
+    });
+
+    // Adiciona mensagem ao chat
+    function adicionarMensagemAoChat(mensagem) {
+        const isUsuarioAtual = mensagem.isUsuarioAtual;
+        const alignClass = isUsuarioAtual ? 'text-end' : 'text-start';
+        const bgClass = isUsuarioAtual ? 'bg-primary text-white' : 'bg-light';
+        const textClass = isUsuarioAtual ? 'text-white' : 'text-primary';
+
+        let anexosHtml = '';
+        if (mensagem.anexos && mensagem.anexos.length > 0) {
+            anexosHtml = '<div class="mt-2">';
+            mensagem.anexos.forEach(anexo => {
+                const isImage = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'].includes(anexo.tipo.toLowerCase());
+                
+                if (isImage) {
+                    anexosHtml += `
+                        <div class="mb-2">
+                            <a href="${anexo.url}" target="_blank">
+                                <img src="${anexo.url}" alt="${anexo.nomeArquivo}" class="img-fluid rounded" style="max-width: 250px; max-height: 200px;" />
+                            </a>
+                        </div>
+                    `;
+                } else {
+                    anexosHtml += `
+                        <div class="mb-1">
+                            <a href="${anexo.url}" target="_blank" class="${textClass}">
+                                <i class="bi bi-file-earmark-arrow-down"></i> ${anexo.nomeArquivo}
+                            </a>
+                        </div>
+                    `;
+                }
+            });
+            anexosHtml += '</div>';
+        }
+
+        const html = `
+            <div class="mb-3 ${alignClass}">
+                <div class="d-inline-block ${bgClass} p-3 rounded" style="max-width: 70%;">
+                    <div class="fw-bold small mb-1">${mensagem.usuarioNome}</div>
+                    ${mensagem.mensagem ? `<div class="mb-1">${mensagem.mensagem}</div>` : ''}
+                    ${anexosHtml}
+                    <div class="small text-muted" style="opacity: 0.8;">${mensagem.dataEnvio}</div>
+                </div>
+            </div>
+        `;
+
+        // Remove mensagem "Nenhuma mensagem ainda" se existir
+        $('#chatMessages').find('.text-center.text-muted.py-5').remove();
+        
+        $('#chatMessages').append(html);
+        scrollToBottom();
+    }
+
+    // Rola para o final do chat
+    function scrollToBottom() {
+        const chatMessages = document.getElementById('chatMessages');
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Busca novas mensagens a cada 3 segundos
+    setInterval(function() {
+        $.ajax({
+            url: `/api/Chat/${chamadoId}`,
+            type: 'GET',
+            data: {
+                chamadoId: chamadoId,
+                ultimaMensagemId: ultimaMensagemId
+            },
+            success: function(response) {
+                if (response.success && response.data && response.data.length > 0) {
+                    // Encontra mensagens novas
+                    const mensagensNovas = response.data.filter(m => m.id > ultimaMensagemId);
+                    
+                    mensagensNovas.forEach(function(msg) {
+                        const mensagemFormatada = {
+                            isUsuarioAtual: msg.isMinhaMensagem,
+                            usuarioNome: msg.nomeUsuario,
+                            mensagem: msg.mensagem,
+                            dataEnvio: new Date(msg.dataEnvio).toLocaleString('pt-BR'),
+                            anexos: msg.anexos || []
+                        };
+                        adicionarMensagemAoChat(mensagemFormatada);
+                        ultimaMensagemId = msg.id;
+                    });
+                }
+            }
+        });
+    }, 3000);
+
+    // Finalizar atendimento
+    $('#btnFinalizar').on('click', function() {
+        if (!confirm('Deseja realmente finalizar este atendimento?')) return;
+
+        $.ajax({
+            url: '/api/Chat/FinalizarAtendimento',
+            type: 'POST',
+            data: { chamadoId: chamadoId },
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message);
+                    window.location.href = response.redirectUrl;
+                } else {
+                    alert('Erro: ' + response.message);
+                }
+            },
+            error: function() {
+                alert('Erro ao finalizar atendimento.');
+            }
+        });
+    });
+
+    // Scroll inicial
+    $(document).ready(function() {
+        scrollToBottom();
+    });
+</script>
+}
+
+<!-- Modal de Transferência -->
+<div class="modal fade" id="transferirModal" tabindex="-1" aria-labelledby="transferirModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title" id="transferirModalLabel">
+                    <i class="bi bi-arrow-left-right"></i> Transferir Chamado
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-controller="Chamados" asp-action="TransferirChamado" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="chamadoId" value="@Model.Id" />
+                    
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i>
+                        O chamado será transferido para o suporte selecionado e você não terá mais acesso ao chat.
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="novoSuporteId" class="form-label">Selecione o novo suporte responsável:</label>
+                        <select class="form-select" id="novoSuporteId" name="novoSuporteId" required>
+                            <option value="">-- Selecione um suporte --</option>
+                            @if (ViewBag.Suportes != null)
+                            {
+                                @foreach (var suporte in ViewBag.Suportes)
+                                {
+                                    @if (suporte.Id != Model.SuporteResponsavelId)
+                                    {
+                                        <option value="@suporte.Id">@suporte.Nome</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-warning">
+                        <i class="bi bi-arrow-left-right"></i> Confirmar Transferência
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Admin Assumir Atendimento -->
+<div class="modal fade" id="assumirAdminModal" tabindex="-1" aria-labelledby="assumirAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="assumirAdminModalLabel">
+                    <i class="bi bi-exclamation-triangle-fill"></i> Assumir Atendimento
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form asp-controller="Chat" asp-action="AssumirAtendimento" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="chamadoId" value="@Model.Id" />
+                    
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <strong>Atenção!</strong>
+                    </div>
+
+                    <p>Ao assumir este atendimento:</p>
+                    <ul>
+                        <li>✓ Você se tornará o responsável pelo chamado</li>
+                        <li>✓ Poderá enviar mensagens no chat</li>
+                        <li>✗ <strong>@Model.SuporteResponsavel?.Nome</strong> perderá o acesso ao atendimento</li>
+                    </ul>
+
+                    <p class="mb-0"><strong>Deseja realmente assumir este atendimento?</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-hand-thumbs-up"></i> Sim, Assumir Atendimento
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

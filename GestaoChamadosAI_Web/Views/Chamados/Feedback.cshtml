@@ -1,0 +1,134 @@
+@model GestaoChamadosAI_Web.Models.Chamado
+
+@{
+    ViewData["Title"] = "Resposta Automática da IA";
+    if (User.IsInRole("Cliente"))
+    {
+        Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+    }
+}
+
+<div class="@(User.IsInRole("Cliente") ? "cliente-card" : "container") mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <!-- Card com informações do chamado -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-ticket-detailed"></i> Ticket #@Model.Id - @Model.Titulo
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Usuário:</strong> @Model.Usuario?.Nome</p>
+                            <p><strong>Data de Abertura:</strong> @Model.DataAbertura.ToString("dd/MM/yyyy HH:mm")</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Categoria:</strong> <span class="badge bg-info">@Model.CategoriaIA</span></p>
+                            <p><strong>Prioridade:</strong> 
+                                @if (Model.Prioridade == "Alta")
+                                {
+                                    <span class="badge bg-danger">Alta</span>
+                                }
+                                else if (Model.Prioridade == "Média")
+                                {
+                                    <span class="badge bg-warning text-dark">Média</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Baixa</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                    <hr />
+                    <p><strong>Descriçáo do Problema:</strong></p>
+                    <p class="text-muted">@Model.Descricao</p>
+                </div>
+            </div>
+
+            <!-- Card com a resposta da IA -->
+            <div class="card shadow-lg border-primary mb-4">
+                <div class="card-header bg-gradient text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h4 class="mb-0">
+                        <i class="bi bi-robot"></i> Resposta Automática da Inteligência Artificial
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-info border-0" style="background-color: #e3f2fd;">
+                        <i class="bi bi-info-circle-fill"></i>
+                        <strong>Nossa IA analisou seu problema e gerou esta resposta:</strong>
+                    </div>
+                    
+                    <div class="bg-light p-4 rounded-3 border" style="white-space: pre-wrap;">@Model.RespostaIA</div>
+                </div>
+            </div>
+
+            <!-- Card de feedback -->
+            <div class="card shadow-sm border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">
+                        <i class="bi bi-question-circle"></i> Esta resposta resolveu seu problema?
+                    </h5>
+                </div>
+                <div class="card-body text-center p-4">
+                    <p class="mb-4">Por favor, nos ajude a melhorar! Essa resposta foi útil e resolveu sua questáo?</p>
+                    
+                    <form asp-action="ProcessarFeedback" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <input type="hidden" name="resolvido" value="true" />
+                        @Html.AntiForgeryToken()
+                        
+                        <button type="submit" class="btn btn-success btn-lg px-5 me-3">
+                            <i class="bi bi-check-circle-fill"></i> Sim, Resolveu!
+                        </button>
+                    </form>
+                    
+                    <form asp-action="ProcessarFeedback" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <input type="hidden" name="resolvido" value="false" />
+                        @Html.AntiForgeryToken()
+                        
+                        <button type="submit" class="btn btn-outline-danger btn-lg px-5">
+                            <i class="bi bi-x-circle-fill"></i> Preciso de Ajuda
+                        </button>
+                    </form>
+                    
+                    <hr class="my-4" />
+                    
+                    <p class="text-muted mb-0">
+                        <small>
+                            <i class="bi bi-info-circle"></i>
+                            Se marcar "Sim", o chamado será encerrado automaticamente. 
+                            Se marcar "Preciso de Ajuda", um especialista irá atendê-lo em breve.
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .card {
+        transition: transform 0.2s;
+    }
+    
+    .card:hover {
+        transform: translateY(-2px);
+    }
+    
+    .btn {
+        transition: all 0.3s;
+    }
+    
+    .btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+</style>

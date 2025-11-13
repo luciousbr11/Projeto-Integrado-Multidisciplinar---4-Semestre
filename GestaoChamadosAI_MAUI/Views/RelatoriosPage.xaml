@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GestaoChamadosAI_MAUI.ViewModels"
+             x:Class="GestaoChamadosAI_MAUI.Views.RelatoriosPage"
+             x:DataType="vm:RelatoriosViewModel"
+             Title="Relatórios"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0" Spacing="0">
+            <!-- Logo Header -->
+            <Grid BackgroundColor="{StaticResource Primary}" Padding="20,15,20,15">
+                <Image Source="logo.png" WidthRequest="35" HeightRequest="35" HorizontalOptions="Start" VerticalOptions="Center"/>
+            </Grid>
+            
+            <VerticalStackLayout Padding="20" Spacing="25">
+                <!-- Cabeçalho -->
+                <VerticalStackLayout Spacing="5" Margin="0,0,0,20">
+                    <Label Text="📊 Relatórios Gerenciais"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="#212529"/>
+                <Label Text="Visualize estatísticas e dados consolidados do sistema"
+                       FontSize="14"
+                       TextColor="#6c757d"/>
+            </VerticalStackLayout>
+
+            <!-- Card: Usuários Cadastrados -->
+            <Frame Padding="20" 
+                   CornerRadius="10" 
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   BackgroundColor="White">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="👥 Usuários Cadastrados"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="#212529"/>
+                    <Label Text="Visualize todos os usuários do sistema com informações detalhadas por tipo e atividade"
+                           FontSize="14"
+                           TextColor="#6c757d"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+                    <Button Text="Ver Relatório"
+                            Command="{Binding AbrirRelatorioUsuariosCommand}"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            Margin="0,10,0,0"/>
+                    <Label Text="ℹ️ Clientes, Suportes e Administradores"
+                           FontSize="12"
+                           TextColor="#6c757d"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Card: Chamados por Período -->
+            <Frame Padding="20" 
+                   CornerRadius="10" 
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   BackgroundColor="White">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="📋 Chamados por Período"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="#212529"/>
+                    <Label Text="Filtre chamados por data e visualize estatísticas de status, categoria e prioridade"
+                           FontSize="14"
+                           TextColor="#6c757d"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+                    <Button Text="Ver Relatório"
+                            Command="{Binding AbrirRelatorioChamadosCommand}"
+                            BackgroundColor="#198754"
+                            TextColor="White"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            Margin="0,10,0,0"/>
+                    <Label Text="ℹ️ Filtros por data de abertura"
+                           FontSize="12"
+                           TextColor="#6c757d"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Card: Performance dos Suportes -->
+            <Frame Padding="20" 
+                   CornerRadius="10" 
+                   HasShadow="True"
+                   BorderColor="Transparent"
+                   BackgroundColor="White">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="🛠️ Chamados por Suporte"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="#212529"/>
+                    <Label Text="Acompanhe o desempenho de cada suporte com estatísticas de atendimento"
+                           FontSize="14"
+                           TextColor="#6c757d"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+                    <Button Text="Ver Relatório"
+                            Command="{Binding AbrirRelatorioSuportesCommand}"
+                            BackgroundColor="#ffc107"
+                            TextColor="#212529"
+                            CornerRadius="8"
+                            HeightRequest="50"
+                            Margin="0,10,0,0"/>
+                    <Label Text="ℹ️ Produtividade e tempo médio"
+                           FontSize="12"
+                           TextColor="#6c757d"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Informações Adicionais -->
+            <Frame Padding="20"
+                   CornerRadius="10"
+                   BackgroundColor="#d1ecf1"
+                   BorderColor="#bee5eb"
+                   Margin="0,10,0,20">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="💡 Dicas para Usar os Relatórios"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#0c5460"/>
+                    <Label TextColor="#0c5460" FontSize="14">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="• " FontAttributes="Bold"/>
+                                <Span Text="Exportar Dados: " FontAttributes="Bold"/>
+                                <Span Text="Use os botões de exportação para baixar relatórios"/>
+                                <Span Text="&#x0a;&#x0a;"/>
+                                <Span Text="• " FontAttributes="Bold"/>
+                                <Span Text="Filtros: " FontAttributes="Bold"/>
+                                <Span Text="Utilize os filtros de período para análises mais específicas"/>
+                                <Span Text="&#x0a;&#x0a;"/>
+                                <Span Text="• " FontAttributes="Bold"/>
+                                <Span Text="Atualização: " FontAttributes="Bold"/>
+                                <Span Text="Os relatórios são atualizados em tempo real"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+            </Frame>
+
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

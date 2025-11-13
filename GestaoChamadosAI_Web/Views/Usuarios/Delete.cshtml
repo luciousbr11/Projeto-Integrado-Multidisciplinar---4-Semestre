@@ -1,0 +1,125 @@
+@model GestaoChamadosAI_Web.Models.Usuario
+
+@{
+    ViewData["Title"] = "Excluir Usuário";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <!-- Alerta de aviso -->
+            <div class="alert alert-danger border-danger" role="alert">
+                <h4 class="alert-heading">
+                    <i class="bi bi-exclamation-triangle-fill"></i> Atençáo!
+                </h4>
+                <p>Você está prestes a excluir este usuário permanentemente.</p>
+                <hr>
+                <p class="mb-0">
+                    <strong>Esta açáo náo pode ser desfeita!</strong>
+                    @if (Model.Chamados != null && Model.Chamados.Any())
+                    {
+                        <br />
+                        <span class="text-danger">
+                            <i class="bi bi-exclamation-circle"></i> 
+                            Este usuário possui <strong>@Model.Chamados.Count()</strong> chamado(s) que também será(áo) excluído(s).
+                        </span>
+                    }
+                </p>
+            </div>
+
+            <!-- Card com informações do usuário -->
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-trash-fill"></i> Confirmar Exclusáo de Usuário
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="mb-3">Dados do Usuário:</h5>
+                    
+                    <dl class="row">
+                        <dt class="col-sm-3">ID:</dt>
+                        <dd class="col-sm-9">#@Model.Id</dd>
+
+                        <dt class="col-sm-3">
+                            <i class="bi bi-person"></i> Nome:
+                        </dt>
+                        <dd class="col-sm-9">@Model.Nome</dd>
+
+                        <dt class="col-sm-3">
+                            <i class="bi bi-envelope"></i> E-mail:
+                        </dt>
+                        <dd class="col-sm-9">@Model.Email</dd>
+
+                        <dt class="col-sm-3">
+                            <i class="bi bi-shield-check"></i> Tipo:
+                        </dt>
+                        <dd class="col-sm-9">
+                            @if (Model.Tipo == "Administrador")
+                            {
+                                <span class="badge bg-danger">
+                                    <i class="bi bi-shield-fill"></i> @Model.Tipo
+                                </span>
+                            }
+                            else if (Model.Tipo == "Suporte")
+                            {
+                                <span class="badge bg-info">
+                                    <i class="bi bi-tools"></i> @Model.Tipo
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">
+                                    <i class="bi bi-person"></i> @Model.Tipo
+                                </span>
+                            }
+                        </dd>
+                    </dl>
+
+                    @if (Model.Chamados != null && Model.Chamados.Any())
+                    {
+                        <hr />
+                        <div class="alert alert-warning">
+                            <h6>
+                                <i class="bi bi-ticket-perforated-fill"></i> 
+                                Chamados que seráo excluídos:
+                            </h6>
+                            <ul class="mb-0">
+                                @foreach (var chamado in Model.Chamados.Take(5))
+                                {
+                                    <li>#@chamado.Id - @chamado.Titulo (@chamado.Status)</li>
+                                }
+                                @if (Model.Chamados.Count() > 5)
+                                {
+                                    <li><em>... e mais @(Model.Chamados.Count() - 5) chamado(s)</em></li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <!-- Form de confirmaçáo -->
+                    <form asp-action="Delete" method="post" class="mt-4">
+                        <input type="hidden" asp-for="Id" />
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Cancelar
+                            </a>
+                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">
+                                <i class="bi bi-eye-fill"></i> Ver Detalhes
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="bi bi-trash-fill"></i> Confirmar Exclusáo
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+}

@@ -1,0 +1,66 @@
+2025-11-05 23:22:11.531 -03:00 [INF] 🚀 API iniciada com sucesso!
+2025-11-05 23:22:11.570 -03:00 [INF] 📊 Ambiente: Production
+2025-11-05 23:22:11.571 -03:00 [INF] 🌐 Swagger disponível em: http://localhost:5000
+2025-11-05 23:22:11.590 -03:00 [INF] User profile is available. Using 'C:\Users\Lucas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-05 23:22:11.693 -03:00 [INF] Now listening on: http://localhost:5000
+2025-11-05 23:22:11.700 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-05 23:22:11.706 -03:00 [INF] Hosting environment: Production
+2025-11-05 23:22:11.707 -03:00 [INF] Content root path: C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+2025-11-05 23:22:29.395 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/?id=9eef3f4b-1c72-4148-8f6c-f7d9c99d5b0e&vscodeBrowserReqId=1762395749360 - null null
+2025-11-05 23:22:29.448 -03:00 [WRN] Failed to determine the https port for redirect.
+2025-11-05 23:22:29.493 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/?id=9eef3f4b-1c72-4148-8f6c-f7d9c99d5b0e&vscodeBrowserReqId=1762395749360 - 404 0 null 99.1429ms
+2025-11-05 23:22:29.512 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-11-05 23:24:47.528 -03:00 [INF] Application is shutting down...
+2025-11-05 23:46:23.298 -03:00 [INF] 🚀 API iniciada com sucesso!
+2025-11-05 23:46:23.341 -03:00 [INF] 📊 Ambiente: Production
+2025-11-05 23:46:23.342 -03:00 [INF] 🌐 Swagger disponível em: http://localhost:5000
+2025-11-05 23:46:23.370 -03:00 [INF] User profile is available. Using 'C:\Users\Lucas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-05 23:46:23.472 -03:00 [INF] Now listening on: http://localhost:5000
+2025-11-05 23:46:23.474 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-05 23:46:23.475 -03:00 [INF] Hosting environment: Production
+2025-11-05 23:46:23.477 -03:00 [INF] Content root path: C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+2025-11-05 23:49:43.683 -03:00 [INF] 🚀 API iniciada com sucesso!
+2025-11-05 23:49:43.721 -03:00 [INF] 📊 Ambiente: Production
+2025-11-05 23:49:43.731 -03:00 [INF] 🌐 Swagger disponível em: http://localhost:5000
+2025-11-05 23:49:43.748 -03:00 [INF] User profile is available. Using 'C:\Users\Lucas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-05 23:49:43.826 -03:00 [INF] Now listening on: http://localhost:5000
+2025-11-05 23:49:43.829 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-05 23:49:43.830 -03:00 [INF] Hosting environment: Production
+2025-11-05 23:49:43.832 -03:00 [INF] Content root path: C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+2025-11-05 23:53:51.327 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 56
+2025-11-05 23:53:51.379 -03:00 [WRN] Failed to determine the https port for redirect.
+2025-11-05 23:53:51.411 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 86.0917ms
+2025-11-05 23:53:51.418 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-05 23:53:52.497 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 56
+2025-11-05 23:53:52.503 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 6.0195ms
+2025-11-05 23:53:52.506 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-05 23:54:09.329 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 46
+2025-11-05 23:54:09.334 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 5.5673ms
+2025-11-05 23:54:09.336 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-05 23:54:14.321 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 47
+2025-11-05 23:54:14.324 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 2.9034ms
+2025-11-05 23:54:14.326 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-05 23:54:14.897 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 47
+2025-11-05 23:54:14.901 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 4.1534ms
+2025-11-05 23:54:14.904 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-05 23:54:15.052 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 47
+2025-11-05 23:54:15.054 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 2.6041ms
+2025-11-05 23:54:15.056 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-05 23:54:15.221 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 47
+2025-11-05 23:54:15.224 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 3.3778ms
+2025-11-05 23:54:15.226 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-05 23:55:46.454 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/?id=dc1e9ade-51f6-476e-9fb6-8b0620f1a53e&vscodeBrowserReqId=1762397746447 - null null
+2025-11-05 23:55:46.456 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/?id=dc1e9ade-51f6-476e-9fb6-8b0620f1a53e&vscodeBrowserReqId=1762397746447 - 404 0 null 2.3101ms
+2025-11-05 23:55:46.459 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-11-05 23:56:21.688 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json; charset=utf-8 null
+2025-11-05 23:56:21.693 -03:00 [INF] Executing endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-05 23:56:21.714 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[GestaoChamadosAI_API.Helpers.ApiResponse`1[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto]]] Login(GestaoChamadosAI_API.DTOs.Auth.LoginRequestDto) on controller GestaoChamadosAI_API.Controllers.AuthController (GestaoChamadosAI_API).
+2025-11-05 23:56:22.733 -03:00 [INF] Executed DbCommand (48ms) [Parameters=[@__loginDto_Email_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DataCadastro], [u].[Email], [u].[Nome], [u].[Senha], [u].[Tipo]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__loginDto_Email_0
+2025-11-05 23:56:22.750 -03:00 [WRN] Tentativa de login com email inexistente: admin@teste.com
+2025-11-05 23:56:22.756 -03:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'GestaoChamadosAI_API.Helpers.ApiResponse`1[[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto, GestaoChamadosAI_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-05 23:56:22.771 -03:00 [INF] Executed action GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API) in 1052.6592ms
+2025-11-05 23:56:22.772 -03:00 [INF] Executed endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-05 23:56:22.781 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 401 null application/json; charset=utf-8 1092.7637ms

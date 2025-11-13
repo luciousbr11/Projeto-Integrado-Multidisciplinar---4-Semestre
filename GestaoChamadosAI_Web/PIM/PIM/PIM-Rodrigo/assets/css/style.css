@@ -1,0 +1,78 @@
+/* Custom Styles for Landing Page */
+:root {
+  --teal:#009da3;
+  --teal-dark:#00838a;
+  --gray-100:#f8f9fa;
+  --gray-700:#495057;
+  --radius-lg:1.75rem;
+  --font-title:'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+html {scroll-behavior:smooth;}
+body {font-family:'Poppins','Segoe UI',Arial,sans-serif; color:#1d1d1d;}
+
+.navbar-brand img {height:48px; width:auto;}
+.navbar {transition:box-shadow .3s, background-color .3s; background:#fff; box-shadow:0 4px 18px -6px rgba(0,0,0,.18);}
+.nav-link {font-weight:500; position:relative;}
+.nav-link.active, .nav-link:hover {color:var(--teal)!important;}
+
+.btn-teal {background:var(--teal); color:#fff; font-weight:600; letter-spacing:.5px;}
+.btn-teal:hover {background:var(--teal-dark); color:#fff;}
+.btn-rounded {border-radius:2.5rem; padding:.85rem 2rem; font-size:.9rem;}
+
+.hero {position:relative; background:var(--teal); color:#fff; padding:9rem 0 6.5rem; overflow:hidden;}
+.hero h1 {font-weight:700; font-size:clamp(2.2rem,5vw,4.2rem); line-height:1.05;}
+.hero p.lead {font-size:clamp(1rem,1.2vw,1.25rem); font-weight:500; max-width:38rem;}
+
+/* Decorative circle (top-right) */
+.hero::after {content:""; position:absolute; top:-80px; right:-80px; width:240px; height:240px; background:rgba(255,255,255,0.06); border-radius:50%; box-shadow:0 0 0 30px rgba(255,255,255,0.05), 0 0 0 60px rgba(255,255,255,0.04);}
+
+/* Wave */
+.wave-wrapper {position:absolute; left:0; right:0; bottom:-2px; line-height:0;}
+.wave-wrapper svg {display:block; width:200%; height:140px; animation:waveSlide 18s linear infinite;}
+@keyframes waveSlide {from {transform:translateX(0);} to {transform:translateX(-50%);} }
+
+/* Utilities */
+.shadow-soft {box-shadow:0 10px 40px -12px rgba(0,0,0,.18);} 
+.rounded-4 {border-radius:var(--radius-lg)!important;}
+
+/* Register Card */
+.register-card {border-radius:2.2rem;}
+.register-logo {max-width:380px; width:100%; height:auto; display:block;}
+@media (min-width: 1200px){
+  .register-logo {max-width:440px;}
+}
+.register-card .form-control {background:#f1f1f1; border:2px solid #e2e2e2; border-radius:.75rem; font-weight:500;}
+.register-card .form-control:focus {background:#fff; border-color:var(--teal); box-shadow:0 0 0 .2rem rgba(0,157,163,.15);}
+.input-password {position:relative;}
+.input-password input {padding-right:3rem;}
+.btn-toggle-pass {position:absolute; top:50%; right:.85rem; transform:translateY(-50%); background:transparent; border:none; font-size:1.05rem; opacity:.55; transition:.25s;}
+.btn-toggle-pass:hover {opacity:.9;}
+
+/* Input group tweaks for login */
+.input-group-lg .input-group-text {border-radius:.75rem 0 0 .75rem; border:2px solid #e2e2e2; border-right:0;}
+.input-group-lg .form-control {background:#f1f1f1; border:2px solid #e2e2e2; border-left:0; border-radius:0 .75rem .75rem 0;}
+.input-group-lg .form-control:focus {background:#fff; border-color:var(--teal); box-shadow:0 0 0 .2rem rgba(0,157,163,.15);} 
+
+/* Scroll margin for hero and sections */
+.hero, #cadastro, #login {scroll-margin-top:80px;}
+
+/* Page hero (teal band for internal pages) */
+.page-hero {background: var(--teal); color:#fff; padding:8rem 0 3.5rem;}
+@media (max-width: 992px){
+  .page-hero {padding:7rem 0 3rem;}
+}
+@media (max-width: 576px){
+  .page-hero {padding:6rem 0 2.5rem;}
+}
+
+/* Responsive tweaks */
+@media (max-width: 992px){
+  .hero {padding:7rem 0 5rem;}
+  .navbar-collapse {background:#fff; border-radius:1rem; padding:1rem; box-shadow:0 0 0 1px rgba(0,0,0,.04), 0 12px 32px -10px rgba(0,0,0,.18);}  
+}
+
+@media (max-width: 576px){
+  .hero {padding:6.5rem 0 4rem;}
+  .btn-rounded {width:100%; text-align:center;}
+  .register-logo {max-width:220px; margin-bottom:1rem;}
+}

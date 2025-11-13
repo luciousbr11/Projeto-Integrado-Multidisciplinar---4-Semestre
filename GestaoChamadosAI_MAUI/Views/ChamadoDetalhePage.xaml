@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GestaoChamadosAI_MAUI.ViewModels"
+             x:Class="GestaoChamadosAI_MAUI.Views.ChamadoDetalhePage"
+             x:DataType="vm:ChamadoDetalheViewModel"
+             Title="Detalhes do Chamado">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        
+        <!-- Logo Header -->
+        <Grid Grid.Row="0" BackgroundColor="{StaticResource Primary}" Padding="20,15,20,15">
+            <Image Source="logo.png" WidthRequest="35" HeightRequest="35" HorizontalOptions="Start" VerticalOptions="Center"/>
+        </Grid>
+        
+        <Grid Grid.Row="1" 
+              IsVisible="{Binding IsLoading}"
+              BackgroundColor="#DD000000"
+              ZIndex="999">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="True"
+                                 Color="{StaticResource Primary}"
+                                 HeightRequest="50"
+                                 WidthRequest="50"/>
+                <Label Text="Carregando..."
+                       TextColor="White"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,15,0,0"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="18">
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{Binding Chamado.Id, StringFormat='Ticket #{0}', FallbackValue='Ticket #...'}"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray600}"/>
+                    
+                    <Label Text="{Binding Chamado.Titulo, FallbackValue='Carregando...'}"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Gray900}"/>
+
+                    <FlexLayout Wrap="Wrap" JustifyContent="Start" AlignItems="Start">
+                        <Frame Padding="10,6" 
+                               CornerRadius="8" 
+                               BackgroundColor="{StaticResource Primary}" 
+                               HasShadow="False"
+                               Margin="0,0,8,8">
+                            <Label Text="{Binding Chamado.Status, FallbackValue='...'}" 
+                                   TextColor="White" 
+                                   FontSize="13" 
+                                   FontAttributes="Bold"/>
+                        </Frame>
+                        
+                        <Frame Padding="10,6" 
+                               CornerRadius="8" 
+                               BackgroundColor="{StaticResource Warning}" 
+                               HasShadow="False"
+                               Margin="0,0,8,8"
+                               IsVisible="{Binding Chamado.Prioridade, Converter={StaticResource StringToBoolConverter}}">
+                            <Label Text="{Binding Chamado.Prioridade, FallbackValue='...'}" 
+                                   TextColor="White" 
+                                   FontSize="13" 
+                                   FontAttributes="Bold"/>
+                        </Frame>
+                        
+                        <Frame Padding="10,6" 
+                               CornerRadius="8" 
+                               BackgroundColor="{StaticResource Gray500}" 
+                               HasShadow="False"
+                               Margin="0,0,8,8">
+                            <Label Text="{Binding DiasDesdeAbertura, StringFormat='{0} dias', FallbackValue='0 dias'}" 
+                                   TextColor="White" 
+                                   FontSize="13" 
+                                   FontAttributes="Bold"/>
+                        </Frame>
+                    </FlexLayout>
+                </VerticalStackLayout>
+
+                <Frame BackgroundColor="#FFF3CD" 
+                       BorderColor="#FFC107"
+                       Padding="15"
+                       CornerRadius="10"
+                       HasShadow="False"
+                       IsVisible="{Binding CanAssume}">
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="⏳" FontSize="20" VerticalOptions="Center"/>
+                        <VerticalStackLayout Spacing="4" HorizontalOptions="FillAndExpand">
+                            <Label Text="Aguardando Atendimento"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#856404"/>
+                            <Label Text="Este chamado ainda não foi assumido por nenhum suporte."
+                                   FontSize="12"
+                                   TextColor="#856404"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <Frame Padding="18" CornerRadius="12" HasShadow="True">
+                    <VerticalStackLayout Spacing="14">
+                        <Label Text="📋 Informações"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Gray900}"/>
+                        
+                        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="12" ColumnSpacing="12">
+                            <Label Grid.Row="0" Grid.Column="0" Text="📅" FontSize="20" VerticalOptions="Center"/>
+                            <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="2">
+                                <Label Text="Data de Abertura" FontSize="11" TextColor="{StaticResource Gray500}"/>
+                                <Label Text="{Binding Chamado.DataAbertura, StringFormat='{0:dd/MM/yyyy HH:mm}', FallbackValue='N/A'}"
+                                       FontSize="14" TextColor="{StaticResource Gray900}"/>
+                            </VerticalStackLayout>
+
+                            <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="1" Color="{StaticResource Gray200}"/>
+
+                            <Label Grid.Row="2" Grid.Column="0" Text="👤" FontSize="20" VerticalOptions="Center"/>
+                            <VerticalStackLayout Grid.Row="2" Grid.Column="1" Spacing="2">
+                                <Label Text="Cliente" FontSize="11" TextColor="{StaticResource Gray500}"/>
+                                <Label Text="{Binding Chamado.NomeUsuario, FallbackValue='N/A'}"
+                                       FontSize="14" TextColor="{StaticResource Gray900}"/>
+                            </VerticalStackLayout>
+
+                            <BoxView Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="1" Color="{StaticResource Gray200}"/>
+                        </Grid>
+                        
+                        <HorizontalStackLayout Spacing="12">
+                            <Label Text="🛠️" FontSize="20" VerticalOptions="Center"/>
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="Suporte Responsável" FontSize="11" TextColor="{StaticResource Gray500}"/>
+                                <Label Text="{Binding Chamado.NomeSuporteResponsavel, TargetNullValue='Não atribuído', FallbackValue='Não atribuído'}"
+                                       FontSize="14" TextColor="{StaticResource Gray900}"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="18" CornerRadius="12" HasShadow="True"
+                       IsVisible="{Binding Chamado.CategoriaIA, Converter={StaticResource StringToBoolConverter}}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="🏷️ Categoria" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                        <Label Text="{Binding Chamado.CategoriaIA}" FontSize="15" TextColor="{StaticResource Gray700}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Padding="18" CornerRadius="12" HasShadow="True">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="📝 Descrição" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                        <Label Text="{Binding Chamado.Descricao, FallbackValue='Sem descrição'}"
+                               FontSize="15"
+                               TextColor="{StaticResource Gray700}"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="{StaticResource Info}"
+                       Padding="18"
+                       CornerRadius="12"
+                       HasShadow="True"
+                       IsVisible="{Binding Chamado.RespostaIA, Converter={StaticResource StringToBoolConverter}}">
+                    <VerticalStackLayout Spacing="10">
+                        <HorizontalStackLayout Spacing="10">
+                            <Label Text="🤖" FontSize="24" VerticalOptions="Center"/>
+                            <Label Text="Resposta da IA"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <Label Text="{Binding Chamado.RespostaIA}"
+                               FontSize="14"
+                               TextColor="White"
+                               LineBreakMode="WordWrap"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <VerticalStackLayout Spacing="10" Margin="0,10,0,0">
+                    
+                    <Button Text="✋ Assumir Atendimento"
+                            Command="{Binding AssumirCommand}"
+                            BackgroundColor="{StaticResource Success}"
+                            IsVisible="{Binding CanAssume}"
+                            HeightRequest="50"
+                            FontSize="14"
+                            LineBreakMode="NoWrap"/>
+
+                    <Button Text="💬 Abrir Chat"
+                            Command="{Binding AbrirChatCommand}"
+                            BackgroundColor="{StaticResource Info}"
+                            IsVisible="{Binding CanOpenChat}"
+                            HeightRequest="50"
+                            FontSize="14"/>
+
+                    <Button Text="🤖 Gerar Resposta da IA"
+                            Command="{Binding GerarIACommand}"
+                            BackgroundColor="{StaticResource Tertiary}"
+                            IsVisible="{Binding CanGenerateIA}"
+                            HeightRequest="50"
+                            FontSize="13"
+                            LineBreakMode="NoWrap"/>
+
+                    <!-- Botão de Editar REMOVIDO - não permitir edição de chamados -->
+                    <Button Text="↔️ Transferir"
+                            Command="{Binding TransferirCommand}"
+                            BackgroundColor="{StaticResource Gray600}"
+                            IsVisible="{Binding CanTransfer}"
+                            HeightRequest="50"
+                            FontSize="14"/>
+
+                    <Button Text="✅ Finalizar Chamado"
+                            Command="{Binding FinalizarCommand}"
+                            BackgroundColor="{StaticResource Success}"
+                            IsVisible="{Binding CanFinalize}"
+                            HeightRequest="50"/>
+
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button Grid.Row="2"
+                Text="← Voltar"
+                Command="{Binding VoltarCommand}"
+                BackgroundColor="{StaticResource Gray700}"
+                Margin="20,0,20,20"
+                HeightRequest="55"
+                FontSize="18"
+                Padding="15,0"/>
+
+    </Grid>
+
+</ContentPage>

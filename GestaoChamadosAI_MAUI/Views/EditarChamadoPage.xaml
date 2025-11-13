@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GestaoChamadosAI_MAUI.ViewModels"
+             x:Class="GestaoChamadosAI_MAUI.Views.EditarChamadoPage"
+             x:DataType="vm:EditarChamadoViewModel"
+             Title="Editar Chamado">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        
+        <!-- Logo Header -->
+        <Grid Grid.Row="0" BackgroundColor="{StaticResource Primary}" Padding="20,15,20,15">
+            <Image Source="logo.png" WidthRequest="35" HeightRequest="35" HorizontalOptions="Start" VerticalOptions="Center"/>
+        </Grid>
+        
+        <!-- Loading Overlay -->
+        <Grid Grid.Row="1"
+              IsVisible="{Binding IsLoading}"
+              BackgroundColor="#DD000000"
+              ZIndex="999">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="True"
+                                 Color="{StaticResource Primary}"
+                                 HeightRequest="50"
+                                 WidthRequest="50"/>
+                <Label Text="Salvando..."
+                       TextColor="White"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,15,0,0"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Formulário -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <!-- Info do Chamado -->
+                <Frame Padding="15" CornerRadius="10" BackgroundColor="{StaticResource Primary}" HasShadow="False">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="{Binding ChamadoId, StringFormat='Ticket #{0}'}"
+                               TextColor="White"
+                               FontSize="14"
+                               FontAttributes="Bold"/>
+                        <Label Text="{Binding ChamadoTituloOriginal}"
+                               TextColor="White"
+                               FontSize="12"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Título -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Título *" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                    <Frame Padding="0" CornerRadius="10" BorderColor="{StaticResource Gray300}" HasShadow="False">
+                        <Entry Text="{Binding Titulo}"
+                               Placeholder="Digite o título do chamado"
+                               FontSize="15"
+                               Margin="12,0"/>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- Descrição -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Descrição *" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                    <Frame Padding="0" CornerRadius="10" BorderColor="{StaticResource Gray300}" HasShadow="False">
+                        <Editor Text="{Binding Descricao}"
+                                Placeholder="Descreva o problema ou solicitação"
+                                FontSize="15"
+                                HeightRequest="150"
+                                Margin="12,8"/>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- Status -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Status *" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                    <Frame Padding="0" CornerRadius="10" BorderColor="{StaticResource Gray300}" HasShadow="False">
+                        <Picker ItemsSource="{Binding StatusOptions}"
+                                SelectedItem="{Binding StatusSelecionado}"
+                                Title="Selecione o status"
+                                FontSize="15"
+                                Margin="12,0"/>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- Prioridade -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Prioridade *" FontSize="14" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                    <Frame Padding="0" CornerRadius="10" BorderColor="{StaticResource Gray300}" HasShadow="False">
+                        <Picker ItemsSource="{Binding PrioridadeOptions}"
+                                SelectedItem="{Binding PrioridadeSelecionada}"
+                                Title="Selecione a prioridade"
+                                FontSize="15"
+                                Margin="12,0"/>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <!-- Info -->
+                <Frame Padding="12" CornerRadius="8" BackgroundColor="#E3F2FD" BorderColor="#2196F3" HasShadow="False">
+                    <Label Text="ℹ️ As alterações serão salvas imediatamente ao clicar em Salvar."
+                           FontSize="12"
+                           TextColor="#1976D2"
+                           LineBreakMode="WordWrap"/>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Botões -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10" Padding="20,0,20,20">
+            <Button Grid.Column="0"
+                    Text="Cancelar"
+                    Command="{Binding CancelarCommand}"
+                    BackgroundColor="{StaticResource Gray500}"
+                    HeightRequest="50"/>
+            
+            <Button Grid.Column="1"
+                    Text="💾 Salvar"
+                    Command="{Binding SalvarCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    HeightRequest="50"/>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

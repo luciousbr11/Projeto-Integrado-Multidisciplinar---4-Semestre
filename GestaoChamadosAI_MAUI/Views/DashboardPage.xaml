@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GestaoChamadosAI_MAUI.ViewModels"
+             xmlns:models="clr-namespace:GestaoChamadosAI_MAUI.Models"
+             xmlns:behaviors="clr-namespace:GestaoChamadosAI_MAUI.Behaviors"
+             x:Class="GestaoChamadosAI_MAUI.Views.DashboardPage"
+             x:DataType="vm:DashboardViewModel"
+             Title="Início"
+             Shell.NavBarIsVisible="True"
+             Shell.BackButtonBehavior="{x:Null}"
+             BackgroundColor="#F8F9FA">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0" Spacing="0">
+
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- ==================== DASHBOARD ADMINISTRADOR ==================== -->
+            <VerticalStackLayout Spacing="20" IsVisible="{Binding IsAdministrador}">
+                
+                <!-- Cabeçalho Admin -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                    <VerticalStackLayout Spacing="4">
+                        <Label FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Gray900}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="🎯 Painel do Administrador"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="14" TextColor="{StaticResource Gray600}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Bem-vindo, "/>
+                                    <Span Text="{Binding CurrentUser.Nome}" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Cards de Estatísticas Admin (4 cards) - RESPONSIVO -->
+                <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                    <Grid.Behaviors>
+                        <behaviors:ResponsiveGridBehavior Columns="2"/>
+                    </Grid.Behaviors>
+                    <!-- Total -->
+                    <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="Total de Chamados" FontSize="11" TextColor="{StaticResource Gray600}" LineBreakMode="WordWrap" MaxLines="2"/>
+                                <Label Text="{Binding TotalChamados}" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                            </VerticalStackLayout>
+                            <Frame Grid.Column="1" BackgroundColor="{StaticResource Primary}" Opacity="0.1" CornerRadius="10" Padding="12" HasShadow="False" WidthRequest="48" HeightRequest="48">
+                                <Label Text="📋" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Abertos -->
+                    <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="Abertos" FontSize="11" TextColor="{StaticResource Gray600}" LineBreakMode="WordWrap"/>
+                                <Label Text="{Binding ChamadosAbertosCount}" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Warning}"/>
+                            </VerticalStackLayout>
+                            <Frame Grid.Column="1" BackgroundColor="{StaticResource Warning}" Opacity="0.1" CornerRadius="10" Padding="12" HasShadow="False" WidthRequest="48" HeightRequest="48">
+                                <Label Text="⏳" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Em Andamento -->
+                    <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="Em Andamento" FontSize="11" TextColor="{StaticResource Gray600}" LineBreakMode="WordWrap" MaxLines="2"/>
+                                <Label Text="{Binding ChamadosEmAndamentoCount}" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Info}"/>
+                            </VerticalStackLayout>
+                            <Frame Grid.Column="1" BackgroundColor="{StaticResource Info}" Opacity="0.1" CornerRadius="10" Padding="12" HasShadow="False" WidthRequest="48" HeightRequest="48">
+                                <Label Text="🔄" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Concluídos -->
+                    <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="Concluídos" FontSize="11" TextColor="{StaticResource Gray600}" LineBreakMode="WordWrap"/>
+                                <Label Text="{Binding ChamadosConcluidosCount}" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Success}"/>
+                            </VerticalStackLayout>
+                            <Frame Grid.Column="1" BackgroundColor="{StaticResource Success}" Opacity="0.1" CornerRadius="10" Padding="12" HasShadow="False" WidthRequest="48" HeightRequest="48">
+                                <Label Text="✅" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </Grid>
+
+                <!-- Ações Rápidas Admin -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="⚡ Ações Rápidas" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                        
+                        <Button Text="👥 Gerenciar Usuários" 
+                                Command="{Binding NavigateToUsuariosCommand}" 
+                                BackgroundColor="{StaticResource Primary}" 
+                                HeightRequest="50"
+                                FontSize="14"
+                                LineBreakMode="NoWrap"/>
+                        <Button Text="📋 Ver Todos os Chamados" 
+                                Command="{Binding NavigateToChamadosCommand}" 
+                                BackgroundColor="{StaticResource Info}" 
+                                HeightRequest="50"
+                                FontSize="14"
+                                LineBreakMode="NoWrap"/>
+                        <Button Text="📊 Relatórios" 
+                                Command="{Binding NavigateToRelatoriosCommand}" 
+                                BackgroundColor="{StaticResource Tertiary}" 
+                                HeightRequest="50"
+                                FontSize="14"/>
+                        <Button Text="➕ Abrir Chamado" 
+                                Command="{Binding NavigateToNovoChamadoCommand}" 
+                                BackgroundColor="{StaticResource Success}" 
+                                HeightRequest="50"
+                                FontSize="14"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Chamados Recentes Admin -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="False" BorderColor="{StaticResource Gray200}" IsVisible="{Binding HasChamadosRecentes}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="🕐 Chamados Recentes" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                        
+                        <CollectionView ItemsSource="{Binding ChamadosRecentesAdmin}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:ChamadoListItem">
+                                    <Frame Margin="0,0,0,8" Padding="12" CornerRadius="8" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DashboardViewModel}}, Path=NavigateToChamadoDetalheCommand}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                        
+                                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+                                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                                <Label Text="{Binding Titulo}" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource Gray900}" LineBreakMode="TailTruncation"/>
+                                                <Label FontSize="12" TextColor="{StaticResource Gray600}">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="👤 "/>
+                                                            <Span Text="{Binding UsuarioNome}"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </VerticalStackLayout>
+                                            <Frame Grid.Column="1" Padding="6,3" CornerRadius="6" HasShadow="False" BackgroundColor="{Binding Status, Converter={StaticResource StatusToColorConverter}}" VerticalOptions="Center">
+                                                <Label Text="{Binding Status}" FontSize="10" TextColor="White" FontAttributes="Bold"/>
+                                            </Frame>
+                                            <Label Grid.Column="2" Text="›" FontSize="24" TextColor="{StaticResource Gray400}" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Button Text="🚪 Sair" Command="{Binding LogoutCommand}" BackgroundColor="{StaticResource Error}" HeightRequest="50"/>
+            </VerticalStackLayout>
+
+            <!-- ==================== DASHBOARD SUPORTE ==================== -->
+            <VerticalStackLayout Spacing="20" IsVisible="{Binding IsSuporte}">
+                
+                <!-- Cabeçalho Suporte -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                    <VerticalStackLayout Spacing="4">
+                        <Label FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Gray900}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="🎧 Painel de Suporte"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label FontSize="14" TextColor="{StaticResource Gray600}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Bem-vindo, "/>
+                                    <Span Text="{Binding CurrentUser.Nome}" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Cards de Estatísticas Suporte (3 cards) - RESPONSIVO -->
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                    <Grid.Behaviors>
+                        <behaviors:ResponsiveGridBehavior Columns="3"/>
+                    </Grid.Behaviors>
+                    <!-- Pendentes -->
+                    <Frame Grid.Column="0" BackgroundColor="White" CornerRadius="12" Padding="12" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Frame BackgroundColor="{StaticResource Warning}" Opacity="0.1" CornerRadius="10" Padding="12" HasShadow="False" WidthRequest="48" HeightRequest="48" HorizontalOptions="Center">
+                                <Label Text="⏳" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+                            <Label Text="{Binding ChamadosPendentesCount}" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Warning}" HorizontalOptions="Center"/>
+                            <Label Text="Pendentes" FontSize="10" TextColor="{StaticResource Gray600}" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" MaxLines="2"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Em Atendimento -->
+                    <Frame Grid.Column="1" BackgroundColor="White" CornerRadius="12" Padding="12" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Frame BackgroundColor="{StaticResource Info}" Opacity="0.1" CornerRadius="10" Padding="12" HasShadow="False" WidthRequest="48" HeightRequest="48" HorizontalOptions="Center">
+                                <Label Text="🔄" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+                            <Label Text="{Binding ChamadosEmAtendimentoCount}" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Info}" HorizontalOptions="Center"/>
+                            <Label Text="Em Atendimento" FontSize="10" TextColor="{StaticResource Gray600}" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" MaxLines="2"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Concluídos Hoje -->
+                    <Frame Grid.Column="2" BackgroundColor="White" CornerRadius="12" Padding="12" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                        <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                            <Frame BackgroundColor="{StaticResource Success}" Opacity="0.1" CornerRadius="10" Padding="12" HasShadow="False" WidthRequest="48" HeightRequest="48" HorizontalOptions="Center">
+                                <Label Text="✅" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Frame>
+                            <Label Text="{Binding ChamadosConcluidosHojeCount}" FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Success}" HorizontalOptions="Center"/>
+                            <Label Text="Concluídos Hoje" FontSize="10" TextColor="{StaticResource Gray600}" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" MaxLines="2"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+                <!-- Ações Rápidas Suporte -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="⚡ Ações Rápidas" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                        
+                        <Button Text="📋 Ver Todos os Chamados" 
+                                Command="{Binding NavigateToChamadosCommand}" 
+                                BackgroundColor="{StaticResource Primary}" 
+                                HeightRequest="50"
+                                FontSize="14"
+                                LineBreakMode="NoWrap"/>
+                        <Button Text="⏳ Chamados Pendentes" 
+                                Command="{Binding NavigateToChamadosPendentesCommand}" 
+                                BackgroundColor="{StaticResource Info}" 
+                                HeightRequest="50"
+                                FontSize="14"
+                                LineBreakMode="NoWrap"/>
+                        <Button Text="🔄 Em Atendimento" 
+                                Command="{Binding NavigateToChamadosEmAtendimentoCommand}" 
+                                BackgroundColor="{StaticResource Warning}" 
+                                HeightRequest="50"
+                                FontSize="14"
+                                LineBreakMode="NoWrap"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Meus Chamados Ativos (Suporte) -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="False" BorderColor="{StaticResource Gray200}" IsVisible="{Binding HasMeusChamadosAtivos}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="👤 Meus Chamados Ativos" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Primary}"/>
+                        
+                        <CollectionView ItemsSource="{Binding MeusChamadosAtivos}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:ChamadoListItem">
+                                    <Frame Margin="0,0,0,8" Padding="14" CornerRadius="10" BackgroundColor="#E3F2FD" HasShadow="False" BorderColor="{StaticResource Primary}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DashboardViewModel}}, Path=NavigateToChamadoDetalheCommand}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                        
+                                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                                            <VerticalStackLayout Grid.Column="0" Spacing="6">
+                                                <Label Text="{Binding Titulo}" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource Gray900}" LineBreakMode="TailTruncation"/>
+                                                <HorizontalStackLayout Spacing="8">
+                                                    <Label FontSize="12" TextColor="{StaticResource Gray600}">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="👤 "/>
+                                                                <Span Text="{Binding UsuarioNome}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                    <Label Text="{Binding DataAbertura, StringFormat='{0:dd/MM/yy}'}" FontSize="11" TextColor="{StaticResource Gray500}"/>
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                            <Frame Grid.Column="1" Padding="8,4" CornerRadius="6" HasShadow="False" BackgroundColor="{Binding Status, Converter={StaticResource StatusToColorConverter}}" VerticalOptions="Center">
+                                                <Label Text="{Binding Status}" FontSize="11" TextColor="White" FontAttributes="Bold"/>
+                                            </Frame>
+                                            <Label Grid.Column="2" Text="›" FontSize="28" TextColor="{StaticResource Primary}" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Chamados Aguardando Atendimento -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="False" BorderColor="{StaticResource Gray200}" IsVisible="{Binding HasChamadosAbertos}">
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="📥 Aguardando Atendimento" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Warning}"/>
+                        
+                        <CollectionView ItemsSource="{Binding ChamadosAbertos}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:ChamadoListItem">
+                                    <Frame Margin="0,0,0,8" Padding="14" CornerRadius="10" BackgroundColor="#FFF9E6" HasShadow="False" BorderColor="{StaticResource Warning}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DashboardViewModel}}, Path=NavigateToChamadoDetalheCommand}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                        
+                                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                                            <VerticalStackLayout Grid.Column="0" Spacing="6">
+                                                <Label Text="{Binding Titulo}" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource Gray900}" LineBreakMode="TailTruncation"/>
+                                                <HorizontalStackLayout Spacing="8">
+                                                    <Label FontSize="12" TextColor="{StaticResource Gray600}">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="👤 "/>
+                                                                <Span Text="{Binding UsuarioNome}"/>
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                    <Frame Padding="6,2" CornerRadius="4" HasShadow="False" BackgroundColor="{Binding Prioridade, Converter={StaticResource PrioridadeToColorConverter}}">
+                                                        <Label Text="{Binding Prioridade}" FontSize="10" TextColor="White" FontAttributes="Bold"/>
+                                                    </Frame>
+                                                    <Label Text="{Binding DataAbertura, StringFormat='{0:dd/MM}'}" FontSize="11" TextColor="{StaticResource Gray500}"/>
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+                                            <Label Grid.Column="2" Text="›" FontSize="28" TextColor="{StaticResource Warning}" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Estado Vazio -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="40" HasShadow="False" BorderColor="{StaticResource Gray200}" IsVisible="{Binding HasNoChamadosAtivos}">
+                    <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+                        <Label Text="😊" FontSize="64" HorizontalOptions="Center"/>
+                        <Label Text="Tudo em Dia!" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Gray900}" HorizontalOptions="Center"/>
+                        <Label Text="Não há chamados pendentes no momento" FontSize="14" TextColor="{StaticResource Gray600}" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Button Text="🚪 Sair" Command="{Binding LogoutCommand}" BackgroundColor="{StaticResource Error}" HeightRequest="50"/>
+            </VerticalStackLayout>
+
+            <!-- ==================== DASHBOARD CLIENTE ==================== -->
+            <VerticalStackLayout Spacing="20" IsVisible="{Binding IsCliente}">
+
+                <!-- Cabeçalho Simples (Tipo Web) -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                    <VerticalStackLayout Spacing="4">
+                        <Label FontSize="24" FontAttributes="Bold" TextColor="{StaticResource Gray900}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Olá, "/>
+                                    <Span Text="{Binding CurrentUser.Nome}"/>
+                                    <Span Text="! 👋"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Text="Como podemos te ajudar hoje?" FontSize="14" TextColor="{StaticResource Gray600}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Botão Principal Grande -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="0" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToNovoChamadoCommand}"/>
+                    </Frame.GestureRecognizers>
+                    
+                    <Frame BackgroundColor="{StaticResource Success}" CornerRadius="12" Padding="24" HasShadow="False">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToNovoChamadoCommand}"/>
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout Spacing="16" HorizontalOptions="Center">
+                            <Label Text="➕" FontSize="40" VerticalOptions="Center"/>
+                            <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                                <Label Text="Preciso de Ajuda" FontSize="18" FontAttributes="Bold" TextColor="White"/>
+                                <Label Text="Abrir um novo chamado" FontSize="12" TextColor="White" Opacity="0.85"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </Frame>
+
+                <!-- Resumo Visual -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="16" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <Grid.Behaviors>
+                            <behaviors:ResponsiveGridBehavior Columns="2"/>
+                        </Grid.Behaviors>
+                        <Frame Grid.Column="0" BackgroundColor="{StaticResource Primary}" CornerRadius="12" Padding="16" HasShadow="False">
+                            <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                                <Label Text="⏳" FontSize="32" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Estatisticas.MeusChamados.Abertos}" FontSize="28" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center"/>
+                                <Label Text="Em Aberto" FontSize="12" TextColor="White" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                        
+                        <Frame Grid.Column="1" BackgroundColor="{StaticResource PrimaryDark}" CornerRadius="12" Padding="16" HasShadow="False">
+                            <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                                <Label Text="🔄" FontSize="32" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Estatisticas.MeusChamados.EmAtendimento}" FontSize="28" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center"/>
+                                <Label Text="Em Atendimento" FontSize="12" TextColor="White" HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </Grid>
+                </Frame>
+
+                <!-- Meus Chamados Ativos -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="False" BorderColor="{StaticResource Gray200}" IsVisible="{Binding HasChamadosAtivos}">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="📋 Meus Chamados Ativos" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+
+                        <CollectionView ItemsSource="{Binding ChamadosAtivos}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:ChamadoListItem">
+                                    <Frame Margin="0,0,0,12" Padding="16" CornerRadius="12" BackgroundColor="#F8F9FA" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DashboardViewModel}}, Path=NavigateToChamadoDetalheCommand}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+
+                                        <Grid ColumnDefinitions="56,*,Auto" ColumnSpacing="12">
+                                            <Frame Grid.Column="0" WidthRequest="56" HeightRequest="56" CornerRadius="28" Padding="0" HasShadow="False" VerticalOptions="Start" BackgroundColor="#E3F2FD">
+                                                <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize="28" Text="{Binding Status, Converter={StaticResource StatusToIconConverter}}"/>
+                                            </Frame>
+
+                                            <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                                                <Label Text="{Binding Titulo}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Gray900}" LineBreakMode="TailTruncation" MaxLines="2"/>
+                                                <HorizontalStackLayout Spacing="8">
+                                                    <Frame Padding="6,3" CornerRadius="6" HasShadow="False" BackgroundColor="{Binding Status, Converter={StaticResource StatusToColorConverter}}">
+                                                        <Label Text="{Binding Status, Converter={StaticResource StatusToTextConverter}}" FontSize="11" TextColor="White" FontAttributes="Bold"/>
+                                                    </Frame>
+                                                    <Label Text="{Binding DataAbertura, StringFormat='{0:dd/MM/yyyy}'}" FontSize="12" TextColor="{StaticResource Gray600}" VerticalOptions="Center"/>
+                                                </HorizontalStackLayout>
+                                            </VerticalStackLayout>
+
+                                            <Label Grid.Column="2" Text="›" FontSize="32" TextColor="{StaticResource Gray400}" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Estado Vazio -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="40" HasShadow="False" BorderColor="{StaticResource Gray200}" IsVisible="{Binding HasNoChamadosAtivos}">
+                    <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+                        <Label Text="😊" FontSize="64" HorizontalOptions="Center"/>
+                        <Label Text="Tudo Certo!" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource Gray900}" HorizontalOptions="Center"/>
+                        <Label Text="Você não tem chamados ativos no momento" FontSize="14" TextColor="{StaticResource Gray600}" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Histórico Resolvidos -->
+                <Frame BackgroundColor="White" CornerRadius="12" Padding="20" HasShadow="False" BorderColor="{StaticResource Gray200}" IsVisible="{Binding HasChamadosRecentes}">
+                    <VerticalStackLayout Spacing="16">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0" Text="✅ Resolvidos" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource Gray600}"/>
+                            <Label Grid.Column="1" FontSize="12" TextColor="{StaticResource Gray500}">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="Últimos {0}">
+                                        <Binding Path="ChamadosRecentes.Count"/>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </Grid>
+
+                        <CollectionView ItemsSource="{Binding ChamadosRecentes}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:ChamadoListItem">
+                                    <Frame Margin="0,0,0,8" Padding="12" CornerRadius="8" BackgroundColor="Transparent" HasShadow="False" BorderColor="{StaticResource Gray200}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DashboardViewModel}}, Path=NavigateToChamadoDetalheCommand}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+
+                                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                                <Label Text="{Binding Titulo}" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource Gray900}" LineBreakMode="TailTruncation"/>
+                                                <Label Text="{Binding DataAbertura, StringFormat='{0:dd/MM/yyyy}'}" FontSize="12" TextColor="{StaticResource Gray600}"/>
+                                            </VerticalStackLayout>
+                                            <Label Grid.Column="1" Text="›" FontSize="24" TextColor="{StaticResource Gray400}" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Button Text="🚪 Sair" Command="{Binding LogoutCommand}" BackgroundColor="{StaticResource Error}" HeightRequest="50" Margin="0,20,0,20"/>
+            </VerticalStackLayout>
+
+            <!-- Loading -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Color="{StaticResource Primary}" HorizontalOptions="Center" Margin="0,20,0,0"/>
+
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

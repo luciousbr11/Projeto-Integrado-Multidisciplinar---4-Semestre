@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atendente • Relatórios</title>
+  <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/css/theme.css" rel="stylesheet">
+</head>
+<body data-page="a-relatorios">
+  <div class="app-wrapper">
+    <nav class="sidebar d-flex flex-column">
+      <div class="brand">
+        <button class="btn btn-sm btn-light d-lg-none me-2" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+  <img src="../../../Logotipo-sem-fundo.png" alt="" onerror="this.style.display='none'">
+        <span class="brand-name">PIM</span>
+      </div>
+      <ul class="nav nav-pills flex-column gap-1">
+        <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="chamados.html"><i class="bi bi-ticket-detailed"></i><span>Meus Chamados</span></a></li>
+  <li class="nav-item"><a class="nav-link" href="relatorios.html"><i class="bi bi-graph-up"></i><span>Relatórios</span></a></li>
+  <!-- Item Configurações removido -->
+      </ul>
+    </nav>
+
+    <nav class="app-header navbar navbar-light bg-white px-3">
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-secondary d-none d-lg-inline" title="Recolher" data-toggle="collapse-sidebar"><i class="bi bi-layout-sidebar-inset"></i></button>
+        <button class="btn btn-outline-secondary d-lg-none" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+      </div>
+      <div class="ms-auto d-flex align-items-center gap-3">
+        <span class="header-chip d-none d-md-inline">SLA: 4h resposta</span>
+        <div class="dropdown">
+          <a class="nav-link position-relative" href="#" title="Notificações" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-bell"></i>
+            <span class="notif-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end p-0 notif-menu"></div>
+        </div>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-1"></i> Você</a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="perfil.html">Perfil</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="app-content container-fluid">
+      <div class="container-xxl">
+        <div class="card p-3 mb-3">
+          <div class="row g-2 align-items-end">
+            <div class="col-6 col-md-3">
+              <label class="form-label">Status</label>
+              <select id="f-status" class="form-select">
+                <option value="">Todos</option>
+                <option>Aberto</option>
+                <option>Em andamento</option>
+                <option>Resolvido</option>
+                <option>Atrasado</option>
+              </select>
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="form-label">Prioridade</label>
+              <select id="f-priority" class="form-select">
+                <option value="">Todas</option>
+                <option>Baixa</option>
+                <option>Média</option>
+                <option>Alta</option>
+                <option>Urgente</option>
+              </select>
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="form-label">Data inicial</label>
+              <input id="f-start" type="date" class="form-control">
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="form-label">Data final</label>
+              <input id="f-end" type="date" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-0">
+          <div class="d-flex justify-content-between align-items-center p-3">
+            <h6 class="mb-0">Meus chamados</h6>
+            <div class="d-flex gap-2">
+              <button id="btn-csv" class="btn btn-outline-secondary btn-sm"><i class="bi bi-filetype-csv me-1"></i>CSV</button>
+              <button id="btn-pdf" class="btn btn-outline-danger btn-sm"><i class="bi bi-filetype-pdf me-1"></i>PDF</button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table id="tbl" class="table table-hover align-middle mb-0">
+              <thead class="table-light"><tr><th>ID</th><th>Título</th><th>Nome</th><th>Status</th><th>Prioridade</th><th>Abertura</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+  <script src="../assets/js/data.js"></script>
+  <script src="../assets/js/app.js"></script>
+  <script>
+    (function(){
+      const me = (JSON.parse(localStorage.getItem('profile')||'{}').name || 'João Silva').toLowerCase();
+      const all = (window.mockData?.tickets||[]);
+      const tbody = document.querySelector('#tbl tbody');
+
+      const f = {
+        status: document.getElementById('f-status'),
+        priority: document.getElementById('f-priority'),
+        start: document.getElementById('f-start'),
+        end: document.getElementById('f-end'),
+      };
+
+      function inRange(d){
+        const ds = f.start.value ? new Date(f.start.value+'T00:00:00') : null;
+        const de = f.end.value ? new Date(f.end.value+'T23:59:59') : null;
+        const x = (d.includes('-')? new Date(d) : new Date(d.split('/').reverse().join('-')));
+        if(ds && x<ds) return false;
+        if(de && x>de) return false;
+        return true;
+      }
+
+      function apply(){
+        tbody.innerHTML='';
+        const rows = all
+          .filter(t=> (t.assignee||'').toLowerCase()===me)
+          .filter(t=> !f.status.value || t.status===f.status.value)
+          .filter(t=> !f.priority.value || t.priority===f.priority.value)
+          .filter(t=> inRange(t.opened))
+          .sort((a,b)=> window.parseDate(b.opened)-window.parseDate(a.opened));
+        rows.forEach(t=>{
+          const tr=document.createElement('tr');
+          const openedBr = (t.opened.includes('-')?t.opened.split('-').reverse().join('/') : t.opened);
+          tr.innerHTML = `<td>${window.formatId(t.id)}</td><td>${t.title}</td><td>${t.client}</td><td>${window.formatBadge(t.status)}</td><td>${t.priority}</td><td>${openedBr}</td>`;
+          tbody.appendChild(tr);
+        });
+        if(rows.length===0){
+          const tr=document.createElement('tr'); tr.innerHTML='<td colspan="6" class="text-center text-muted">Nenhum registro</td>'; tbody.appendChild(tr);
+        }
+      }
+
+      function toCSV(){
+        const headers=['ID','Título','Nome','Status','Prioridade','Abertura'];
+        const lines=[headers.join(',')];
+        [...tbody.querySelectorAll('tr')].forEach(tr=>{
+          const tds = [...tr.querySelectorAll('td')].map(td=> td.innerText.replace(/\n/g,' ').replace(/,/g,';'));
+          if(tds.length===6) lines.push(tds.join(','));
+        });
+        const blob = new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8;'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href=url; a.download='meus-chamados.csv'; a.click(); URL.revokeObjectURL(url);
+      }
+
+      async function toPDF(){
+        const rows=[];
+        [...tbody.querySelectorAll('tr')].forEach(tr=>{
+          const tds = [...tr.querySelectorAll('td')].map(td=> td.innerText.trim());
+          if(tds.length===6) rows.push(tds);
+        });
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({orientation:'landscape'});
+        doc.text('Relatório - Meus chamados', 14, 12);
+        const headers=[['ID','Título','Nome','Status','Prioridade','Abertura']];
+        if(doc.autoTable){
+          doc.autoTable({ head: headers, body: rows, startY: 18, styles: { fontSize: 8 } });
+        }
+        doc.save('meus-chamados.pdf');
+      }
+
+      document.getElementById('btn-csv').addEventListener('click', toCSV);
+      document.getElementById('btn-pdf').addEventListener('click', toPDF);
+      Object.values(f).forEach(el=> el.addEventListener('change', apply));
+
+      apply();
+      try{ renderNotifications(); }catch{}
+    })();
+  </script>
+</body>
+</html>

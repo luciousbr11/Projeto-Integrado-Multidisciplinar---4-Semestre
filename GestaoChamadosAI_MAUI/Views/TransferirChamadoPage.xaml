@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GestaoChamadosAI_MAUI.ViewModels"
+             x:Class="GestaoChamadosAI_MAUI.Views.TransferirChamadoPage"
+             x:DataType="vm:TransferirChamadoViewModel"
+             Title="Transferir Chamado">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="0,0,0,20">
+        
+        <!-- Logo + Botão Voltar -->
+        <Grid Grid.Row="0" BackgroundColor="{StaticResource Primary}" Padding="15" ColumnDefinitions="Auto,*,Auto">
+            <Image Grid.Column="0" Source="logo.png" WidthRequest="35" HeightRequest="35" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Button Grid.Column="2"
+                    Text="← Voltar"
+                    Command="{Binding VoltarCommand}"
+                    HeightRequest="45"
+                    WidthRequest="120"
+                    FontSize="16"
+                    BackgroundColor="{StaticResource Gray700}"
+                    TextColor="White"
+                    CornerRadius="8"
+                    Padding="10,0"/>
+        </Grid>
+        
+        <!-- Loading Overlay -->
+        <Grid Grid.Row="2" 
+              IsVisible="{Binding IsLoading}"
+              BackgroundColor="#DD000000"
+              ZIndex="999">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="True"
+                                 Color="{StaticResource Primary}"
+                                 HeightRequest="50"
+                                 WidthRequest="50"/>
+                <Label Text="Processando..."
+                       TextColor="White"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,15,0,0"/>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- Conteúdo -->
+        <ScrollView Grid.Row="2" Padding="20,0,20,0">
+            <VerticalStackLayout Spacing="20">
+
+                <!-- Informação do Chamado -->
+                <Frame Padding="15" CornerRadius="12" BackgroundColor="{StaticResource Secondary}">
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Chamado a ser transferido:"
+                               FontSize="12"
+                               TextColor="{StaticResource Gray600}"/>
+                        <Label Text="{Binding ChamadoTitulo}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Gray900}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Instrução -->
+                <Label Text="Selecione o suporte para quem deseja transferir este chamado:"
+                       FontSize="15"
+                       TextColor="{StaticResource Gray700}"/>
+
+                <!-- Picker de Suportes -->
+                <Frame Padding="0" CornerRadius="10" HasShadow="False" BorderColor="{StaticResource Primary}">
+                    <Picker x:Name="SuportePicker"
+                            Title="Selecione um suporte"
+                            ItemsSource="{Binding Suportes}"
+                            ItemDisplayBinding="{Binding Nome}"
+                            SelectedItem="{Binding SuporteSelecionado}"
+                            FontSize="16"
+                            TextColor="{StaticResource Gray900}"
+                            Margin="10"/>
+                </Frame>
+
+                <!-- Informação do Suporte Selecionado -->
+                <Frame Padding="15" 
+                       CornerRadius="12" 
+                       BackgroundColor="{StaticResource Gray50}"
+                       IsVisible="{Binding SuporteSelecionado, Converter={StaticResource StringToBoolConverter}}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Transferir para:"
+                               FontSize="12"
+                               TextColor="{StaticResource Gray600}"/>
+                        <Label Text="{Binding SuporteSelecionado.Nome}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Gray900}"/>
+                        <Label Text="{Binding SuporteSelecionado.Email}"
+                               FontSize="14"
+                               TextColor="{StaticResource Gray600}"/>
+                        <Label Text="{Binding SuporteSelecionado.Tipo}"
+                               FontSize="12"
+                               TextColor="{StaticResource Primary}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Botões -->
+        <Grid Grid.Row="3" ColumnDefinitions="*,*" ColumnSpacing="10" Padding="20,20,20,0">
+            <Button Grid.Column="0"
+                    Text="Cancelar"
+                    Command="{Binding CancelarCommand}"
+                    BackgroundColor="{StaticResource Gray500}"
+                    HeightRequest="50"/>
+            
+            <Button Grid.Column="1"
+                    Text="✓ Transferir"
+                    Command="{Binding TransferirCommand}"
+                    BackgroundColor="{StaticResource Primary}"
+                    HeightRequest="50"/>
+        </Grid>
+
+    </Grid>
+
+</ContentPage>

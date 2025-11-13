@@ -1,0 +1,120 @@
+═══════════════════════════════════════════════════════════
+   GUIA RAPIDO - TESTAR APP NO SEU CELULAR ANDROID
+═══════════════════════════════════════════════════════════
+
+📱 PREPARAR O CELULAR (FAZER UMA VEZ):
+
+1. Ativar Modo Desenvolvedor:
+   - Abra: Configuracoes > Sobre o telefone
+   - Encontre: "Numero da compilacao"
+   - Toque 7 VEZES no numero
+   - Deve aparecer: "Voce agora e um desenvolvedor!"
+
+2. Ativar Depuracao USB:
+   - Volte em: Configuracoes
+   - Procure: "Opcoes do desenvolvedor"
+   - Ative: Depuracao USB (toggle)
+
+3. Conectar no PC:
+   - Conecte o cabo USB
+   - No celular, aceite: "Permitir depuracao USB?"
+   - Marque: "Sempre permitir neste computador"
+
+─────────────────────────────────────────────────────────
+
+🚀 INSTALAR O APP NO CELULAR:
+
+1. Conecte o celular via USB
+
+2. Execute o script:
+   cd c:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_MAUI
+   .\install-android.ps1
+
+3. Aguarde 1-2 minutos (primeira vez demora mais)
+
+4. Pronto! App instalado no celular!
+
+─────────────────────────────────────────────────────────
+
+✅ VERIFICAR SE ESTA CONECTADO:
+
+Execute: adb devices
+
+Resultado esperado:
+   List of devices attached
+   ABC123XYZ    device
+
+Se aparecer "unauthorized":
+   - Desconecte e reconecte o cabo
+   - Aceite novamente o popup no celular
+
+─────────────────────────────────────────────────────────
+
+🌐 CONFIGURACAO DA API:
+
+Seu celular vai acessar a API no IP: 192.168.200.107:5000
+
+IMPORTANTE:
+✓ PC e celular devem estar na MESMA rede Wi-Fi
+✓ API Web deve estar rodando na porta 5000
+✓ Execute a API Web antes de testar o app
+
+Para iniciar a API Web:
+   cd c:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_Web
+   dotnet run
+
+─────────────────────────────────────────────────────────
+
+📱 TESTANDO NO CELULAR:
+
+1. Certifique-se que a API esta rodando
+2. Abra o app no celular
+3. Faca login
+4. Teste todas as telas!
+5. Veja a responsividade funcionando perfeitamente!
+
+─────────────────────────────────────────────────────────
+
+🔧 COMANDOS UTEIS:
+
+Ver dispositivos conectados:
+   adb devices
+
+Instalar manualmente:
+   dotnet build -t:Run -f net9.0-android
+
+Ver logs do app:
+   adb logcat
+
+Desinstalar do celular:
+   adb uninstall com.companyname.gestaochamadosai_maui
+
+─────────────────────────────────────────────────────────
+
+❌ PROBLEMAS COMUNS:
+
+"Nenhum dispositivo disponivel":
+   → Celular conectado via USB?
+   → Depuracao USB ativada?
+   → Aceitou o popup no celular?
+
+"Device offline":
+   → Execute: adb kill-server
+   → Execute: adb devices
+   → Reconecte o celular
+
+"App nao conecta na API":
+   → PC e celular na mesma rede Wi-Fi?
+   → API rodando na porta 5000?
+   → Firewall bloqueando?
+
+─────────────────────────────────────────────────────────
+
+✨ DICAS:
+
+• Use cabo USB original ou de boa qualidade
+• Primeira instalacao demora mais, depois e rapido
+• App fica instalado normalmente no celular
+• Pode compartilhar o APK com outros usuarios!
+
+═══════════════════════════════════════════════════════════

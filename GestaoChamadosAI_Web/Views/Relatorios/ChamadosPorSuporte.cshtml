@@ -1,0 +1,239 @@
+@model GestaoChamadosAI_Web.Models.ViewModels.RelatoriosViewModel
+@{
+    ViewData["Title"] = "Chamados por Suporte";
+}
+
+<!-- Cabeçalho -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="display-6 fw-bold">
+                <i class="bi bi-person-badge text-warning"></i>
+                Chamados por Suporte
+            </h1>
+            <p class="text-muted">Desempenho e estatísticas de atendimento</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+            <a asp-action="ImprimirChamadosSuportePDF" class="btn btn-danger" target="_blank">
+                <i class="bi bi-file-earmark-pdf"></i> Imprimir PDF
+            </a>
+        </div>
+    </div>
+
+    <!-- Card de Resumo Total -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="card-body">
+                    <h3 class="mb-0" style="color: #ffffff !important;">
+                        <i class="bi bi-bar-chart"></i>
+                        Total de Chamados Atendidos: <strong style="color: #ffffff !important;">@Model.TotalChamadosAtendidos</strong>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de Suportes -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title mb-4">
+                <i class="bi bi-table"></i> Estatísticas por Suporte
+            </h5>
+            
+            @if (Model.ChamadosPorSuporte != null && Model.ChamadosPorSuporte.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Suporte</th>
+                                <th>Email</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Abertos</th>
+                                <th class="text-center">Em Andamento</th>
+                                <th class="text-center">Concluídos</th>
+                                <th class="text-center">Tempo SLA</th>
+                                <th>Último Atendimento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var suporte in Model.ChamadosPorSuporte)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            <i class="bi bi-person-circle text-primary"></i>
+                                            @suporte.Nome
+                                        </strong>
+                                    </td>
+                                    <td>
+                                        <small class="text-muted">
+                                            <i class="bi bi-envelope"></i>
+                                            @suporte.Email
+                                        </small>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-primary rounded-pill fs-6">
+                                            @suporte.TotalChamados
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        @if (suporte.ChamadosAbertos > 0)
+                                        {
+                                            <span class="badge bg-danger rounded-pill">
+                                                @suporte.ChamadosAbertos
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">0</span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        @if (suporte.ChamadosEmAndamento > 0)
+                                        {
+                                            <span class="badge bg-warning text-dark rounded-pill">
+                                                @suporte.ChamadosEmAndamento
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">0</span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        @if (suporte.ChamadosConcluidos > 0)
+                                        {
+                                            <span class="badge bg-success rounded-pill">
+                                                @suporte.ChamadosConcluidos
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">0</span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        @if (suporte.TempoMedioResolucao.HasValue && suporte.TempoMedioResolucao > 0)
+                                        {
+                                            var totalHoras = suporte.TempoMedioResolucao.Value;
+                                            var dias = (int)(totalHoras / 24);
+                                            var horas = (int)(totalHoras % 24);
+                                            var minutos = (int)((totalHoras % 1) * 60);
+                                            
+                                            <span class="badge bg-info">
+                                                <i class="bi bi-clock"></i>
+                                                @if (dias > 0)
+                                                {
+                                                    <text>@dias d </text>
+                                                }
+                                                @if (horas > 0 || dias > 0)
+                                                {
+                                                    <text>@horas h </text>
+                                                }
+                                                @minutos min
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">N/A</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (suporte.UltimoAtendimento.HasValue)
+                                        {
+                                            <small class="text-muted">
+                                                <i class="bi bi-calendar3"></i>
+                                                @suporte.UltimoAtendimento.Value.ToString("dd/MM/yyyy HH:mm")
+                                            </small>
+                                        }
+                                        else
+                                        {
+                                            <small class="text-muted">Nenhum atendimento</small>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Análise de Produtividade -->
+                <div class="mt-4 p-3 bg-light rounded">
+                    <h6 class="fw-bold mb-3">
+                        <i class="bi bi-graph-up"></i> Análise de Produtividade
+                    </h6>
+                    <div class="row g-3">
+                        @{
+                            var suporteMaisProdutivo = Model.ChamadosPorSuporte.OrderByDescending(s => s.TotalChamados).FirstOrDefault();
+                            var suporteMaisRapido = Model.ChamadosPorSuporte
+                                .Where(s => s.TempoMedioResolucao.HasValue && s.TempoMedioResolucao > 0)
+                                .OrderBy(s => s.TempoMedioResolucao)
+                                .FirstOrDefault();
+                        }
+                        
+                        @if (suporteMaisProdutivo != null && suporteMaisProdutivo.TotalChamados > 0)
+                        {
+                            <div class="col-md-6">
+                                <div class="card border-success">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-success">
+                                            <i class="bi bi-trophy-fill"></i> Mais Produtivo
+                                        </h6>
+                                        <p class="card-text mb-0">
+                                            <strong>@suporteMaisProdutivo.Nome</strong><br/>
+                                            <small>@suporteMaisProdutivo.TotalChamados chamados atendidos</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        
+                        @if (suporteMaisRapido != null)
+                        {
+                            <div class="col-md-6">
+                                <div class="card border-info">
+                                    <div class="card-body">
+                                        <h6 class="card-subtitle mb-2 text-info">
+                                            <i class="bi bi-speedometer2"></i> Tempo de Resolução Mais Rápido
+                                        </h6>
+                                        <p class="card-text mb-0">
+                                            <strong>@suporteMaisRapido.Nome</strong><br/>
+                                            @{
+                                                var totalHorasRapido = suporteMaisRapido.TempoMedioResolucao ?? 0;
+                                                var diasRapido = (int)(totalHorasRapido / 24);
+                                                var horasRapido = (int)(totalHorasRapido % 24);
+                                                var minutosRapido = (int)((totalHorasRapido % 1) * 60);
+                                            }
+                                            <small>
+                                                @if (diasRapido > 0)
+                                                {
+                                                    <text>@diasRapido dia(s) </text>
+                                                }
+                                                @if (horasRapido > 0 || diasRapido > 0)
+                                                {
+                                                    <text>@horasRapido hora(s) </text>
+                                                }
+                                                @minutosRapido minuto(s) em média
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i>
+                    Nenhum suporte com chamados atendidos encontrado.
+                </div>
+            }
+        </div>
+    </div>
+

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GestaoChamadosAI_MAUI.ViewModels"
+             x:Class="GestaoChamadosAI_MAUI.Views.ConfiguracoesPage"
+             x:DataType="vm:ConfiguracoesViewModel"
+             Title="Configurações">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="0" Spacing="0">
+            <!-- Logo Header -->
+            <Grid BackgroundColor="{StaticResource Primary}" Padding="20,15,20,15">
+                <Image Source="logo.png" WidthRequest="35" HeightRequest="35" HorizontalOptions="Start" VerticalOptions="Center"/>
+            </Grid>
+            
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <!-- Informações do Usuário -->
+                <Label Text="Meu Perfil"
+                       Style="{StaticResource SubtitleLabel}"/>
+
+            <Frame BackgroundColor="{StaticResource Gray100}" 
+                   Padding="20"
+                   CornerRadius="15">
+                <VerticalStackLayout Spacing="15">
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="👤" FontSize="24"/>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Nome"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Gray500}"/>
+                            <Label Text="{Binding UserName}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+
+                    <BoxView HeightRequest="1" BackgroundColor="{StaticResource Gray300}"/>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="📧" FontSize="24"/>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Email"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Gray500}"/>
+                            <Label Text="{Binding UserEmail}"
+                                   FontSize="18"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+
+                    <BoxView HeightRequest="1" BackgroundColor="{StaticResource Gray300}"/>
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="🎯" FontSize="24"/>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Perfil"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Gray500}"/>
+                            <Label Text="{Binding UserTipo}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Configurações da API -->
+            <Label Text="Configurações da API"
+                   Style="{StaticResource SubtitleLabel}"
+                   Margin="0,20,0,0"/>
+
+            <Label Text="URL da API"
+                   FontSize="16"
+                   FontAttributes="Bold"/>
+            <Entry Text="{Binding ApiUrl}"
+                   Placeholder="http://localhost:5000/api"
+                   Keyboard="Url"/>
+
+            <Button Text="Salvar URL"
+                    Command="{Binding SaveApiUrlCommand}"
+                    BackgroundColor="{StaticResource Primary}"/>
+
+            <!-- Informações -->
+            <Frame BackgroundColor="{StaticResource Info}"
+                   Padding="15"
+                   CornerRadius="10"
+                   Margin="0,10,0,0">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="ℹ️ Importante"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                    <Label Text="• Android Emulator: use http://10.0.2.2:5000/api"
+                           FontSize="14"
+                           TextColor="White"/>
+                    <Label Text="• Windows Desktop: use http://localhost:5000/api"
+                           FontSize="14"
+                           TextColor="White"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Sobre -->
+            <Label Text="Sobre o App"
+                   Style="{StaticResource SubtitleLabel}"
+                   Margin="0,20,0,0"/>
+
+            <Frame BackgroundColor="{StaticResource Gray100}" 
+                   Padding="15"
+                   CornerRadius="10">
+                <VerticalStackLayout Spacing="5">
+                    <Label Text="Gestão de Chamados AI"
+                           FontSize="18"
+                           FontAttributes="Bold"/>
+                    <Label Text="Versão 1.0.0"
+                           FontSize="14"
+                           TextColor="{StaticResource Gray600}"/>
+                    <Label Text="© 2025 - Todos os direitos reservados"
+                           FontSize="12"
+                           TextColor="{StaticResource Gray500}"
+                           Margin="0,10,0,0"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Logout -->
+            <Button Text="🚪 Sair"
+                    Command="{Binding LogoutCommand}"
+                    BackgroundColor="{StaticResource Error}"
+                    Margin="0,20,0,0"
+                    HeightRequest="50"
+                    FontSize="18"
+                    FontAttributes="Bold"/>
+
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,155 @@
+@model IEnumerable<GestaoChamadosAI_Web.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuários";
+}
+
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-4">
+                <i class="bi bi-people-fill text-primary"></i> Gerenciamento de Usuários
+            </h1>
+        </div>
+    </div>
+
+    <!-- Mensagem de sucesso -->
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i> @TempData["Mensagem"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Botão para criar novo usuário e Filtros -->
+    <div class="row mb-3">
+        <div class="col-12 col-md-6 mb-2 mb-md-0">
+            <a asp-action="Create" class="btn btn-primary w-100 w-md-auto">
+                <i class="bi bi-person-plus-fill"></i> Novo Usuário
+            </a>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="btn-group w-100 d-flex d-md-inline-flex float-md-end" role="group">
+                <a asp-action="Index" class="btn btn-outline-secondary flex-fill flex-md-grow-0 @(string.IsNullOrEmpty(ViewBag.TipoFiltro) ? "active" : "")">
+                    <i class="bi bi-list"></i> Todos
+                </a>
+                <a asp-action="FiltrarPorTipo" asp-route-tipo="Administrador" 
+                   class="btn btn-outline-danger flex-fill flex-md-grow-0 @(ViewBag.TipoFiltro == "Administrador" ? "active" : "")">
+                    <i class="bi bi-shield-fill"></i> <span class="d-none d-sm-inline">Administradores</span><span class="d-inline d-sm-none">Admins</span>
+                </a>
+                <a asp-action="FiltrarPorTipo" asp-route-tipo="Suporte" 
+                   class="btn btn-outline-info flex-fill flex-md-grow-0 @(ViewBag.TipoFiltro == "Suporte" ? "active" : "")">
+                    <i class="bi bi-tools"></i> <span class="d-none d-sm-inline">Suportes</span>
+                </a>
+                <a asp-action="FiltrarPorTipo" asp-route-tipo="Cliente" 
+                   class="btn btn-outline-secondary flex-fill flex-md-grow-0 @(ViewBag.TipoFiltro == "Cliente" ? "active" : "")">
+                    <i class="bi bi-person"></i> <span class="d-none d-sm-inline">Clientes</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabela de usuários -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-list-ul"></i> Lista de Usuários</h5>
+                </div>
+                <div class="card-body p-0">
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Tipo</th>
+                                        <th class="text-center">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var usuario in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <i class="bi bi-person-circle text-primary"></i>
+                                                @usuario.Nome
+                                            </td>
+                                            <td>
+                                                <i class="bi bi-envelope"></i>
+                                                @usuario.Email
+                                            </td>
+                                            <td>
+                                                @if (usuario.Tipo == "Administrador")
+                                                {
+                                                    <span class="badge bg-danger">
+                                                        <i class="bi bi-shield-fill"></i> @usuario.Tipo
+                                                    </span>
+                                                }
+                                                else if (usuario.Tipo == "Suporte")
+                                                {
+                                                    <span class="badge bg-info">
+                                                        <i class="bi bi-tools"></i> @usuario.Tipo
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">
+                                                        <i class="bi bi-person"></i> @usuario.Tipo
+                                                    </span>
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="btn-group" role="group">
+                                                    <a asp-action="Details" asp-route-id="@usuario.Id" 
+                                                       class="btn btn-sm btn-info" title="Detalhes">
+                                                        <i class="bi bi-eye-fill"></i>
+                                                    </a>
+                                                    <a asp-action="Edit" asp-route-id="@usuario.Id" 
+                                                       class="btn btn-sm btn-warning" title="Editar">
+                                                        <i class="bi bi-pencil-fill"></i>
+                                                    </a>
+                                                    <a asp-action="Delete" asp-route-id="@usuario.Id" 
+                                                       class="btn btn-sm btn-danger" title="Excluir">
+                                                        <i class="bi bi-trash-fill"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="p-4 text-center text-muted">
+                            <i class="bi bi-inbox display-1"></i>
+                            <p class="mt-2">Nenhum usuário cadastrado ainda.</p>
+                            <a asp-action="Create" class="btn btn-primary">
+                                <i class="bi bi-person-plus-fill"></i> Cadastrar Primeiro Usuário
+                            </a>
+                        </div>
+                    }
+                </div>
+                @if (Model.Any())
+                {
+                    <div class="card-footer text-muted">
+                        <small>
+                            <i class="bi bi-info-circle"></i> 
+                            Total de usuários cadastrados: <strong>@Model.Count()</strong>
+                        </small>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+}

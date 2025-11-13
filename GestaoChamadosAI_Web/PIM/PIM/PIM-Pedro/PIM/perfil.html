@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfil • PIM</title>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/theme.css" rel="stylesheet">
+</head>
+<body data-page="perfil">
+  <div class="app-wrapper">
+    <nav class="sidebar d-flex flex-column">
+      <div class="brand">
+        <button class="btn btn-sm btn-light d-lg-none me-2" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+  <img src="../../Logotipo-sem-fundo.png" alt="" onerror="this.style.display='none'">
+        <span class="brand-name">PIM</span>
+      </div>
+      <ul class="nav nav-pills flex-column gap-1">
+        <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="chamados.html"><i class="bi bi-ticket-detailed"></i><span>Chamados</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="equipe.html"><i class="bi bi-person-workspace"></i><span>Equipe</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="relatorios.html"><i class="bi bi-graph-up"></i><span>Relatórios</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="configuracoes.html"><i class="bi bi-gear"></i><span>Configurações</span></a></li>
+      </ul>
+    </nav>
+
+    <nav class="app-header navbar navbar-light bg-white px-3">
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-secondary d-none d-lg-inline" title="Recolher" data-toggle="collapse-sidebar"><i class="bi bi-layout-sidebar-inset"></i></button>
+        <button class="btn btn-outline-secondary d-lg-none" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+      </div>
+      <div class="ms-auto d-flex align-items-center gap-3">
+        <span class="header-chip d-none d-md-inline">SLA: 4h resposta</span>
+        <div class="dropdown">
+          <a class="nav-link position-relative" href="#" title="Notificações" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="notif-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end p-0 notif-menu"></div>
+        </div>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-1"></i> Você</a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="perfil.html">Perfil</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="app-content container-fluid">
+      <div class="container-xxl">
+        <form id="form-profile" class="card p-3">
+          <h5 class="mb-3">Seu perfil</h5>
+          <div class="row g-3">
+            <div class="col-12 col-md-3 text-center">
+              <div class="position-relative d-inline-block">
+                <img id="avatar-preview" src="assets/img/avatar.png" class="rounded-circle" width="120" height="120" alt="avatar" onerror="this.src='';this.style.background='#e5e7eb';this.style.borderRadius='50%';">
+                <label class="btn btn-sm btn-outline-secondary position-absolute bottom-0 end-0" title="Trocar foto">
+                  <i class="bi bi-camera"></i><input id="avatar-input" type="file" accept="image/*" hidden>
+                </label>
+              </div>
+            </div>
+            <div class="col-12 col-md-9">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Nome</label>
+                  <input name="name" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">E-mail</label>
+                  <input name="email" type="email" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Senha</label>
+                  <div class="input-group">
+                    <input name="password" type="password" class="form-control" placeholder="Atualizar senha">
+                    <button class="btn btn-outline-secondary" type="button" id="toggle-pass"><i class="bi bi-eye"></i></button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Notificações</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="notif-email" checked>
+                    <label class="form-check-label" for="notif-email">Receber por e-mail</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-end mt-3">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    // Inicializações específicas de perfil (sem backend, usando localStorage)
+    (function(){
+      const f = document.getElementById('form-profile');
+      const name = f.querySelector('[name=name]');
+      const email = f.querySelector('[name=email]');
+      const pass = f.querySelector('[name=password]');
+      const em = document.getElementById('notif-email');
+      const img = document.getElementById('avatar-preview');
+      const file = document.getElementById('avatar-input');
+      const data = JSON.parse(localStorage.getItem('profile')||'{}');
+      name.value = data.name||'Você';
+      email.value = data.email||'voce@empresa.com';
+      em.checked = data.notifEmail!==false;
+      if (data.avatar) img.src = data.avatar;
+      document.getElementById('toggle-pass').addEventListener('click', ()=>{
+        const is = pass.type==='password'; pass.type = is?'text':'password';
+        const i = document.querySelector('#toggle-pass i'); i.classList.toggle('bi-eye'); i.classList.toggle('bi-eye-slash');
+      });
+      file.addEventListener('change', (e)=>{
+        const f = e.target.files?.[0]; if (!f) return;
+        const reader = new FileReader();
+        reader.onload = ()=>{ img.src = reader.result; };
+        reader.readAsDataURL(f);
+      });
+      f.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        localStorage.setItem('profile', JSON.stringify({
+          name: name.value,
+          email: email.value,
+          // Nota: senha não é persistida neste mock
+          notifEmail: em.checked,
+          avatar: img.getAttribute('src')||''
+        }));
+        alert('Perfil salvo (mock).');
+      });
+    })();
+  </script>
+</body>
+</html>

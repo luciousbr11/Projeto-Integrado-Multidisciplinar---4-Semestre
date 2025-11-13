@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Equipe • PIM</title>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/theme.css" rel="stylesheet">
+</head>
+<body data-page="equipe">
+  <div class="app-wrapper">
+    <nav class="sidebar d-flex flex-column">
+      <div class="brand">
+        <button class="btn btn-sm btn-light d-lg-none me-2" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+  <img src="../../Logotipo-sem-fundo.png" alt="" onerror="this.style.display='none'">
+        <span class="brand-name">PIM</span>
+      </div>
+      <ul class="nav nav-pills flex-column gap-1">
+        <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="chamados.html"><i class="bi bi-ticket-detailed"></i><span>Chamados</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="equipe.html"><i class="bi bi-person-workspace"></i><span>Equipe</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="relatorios.html"><i class="bi bi-graph-up"></i><span>Relatórios</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="configuracoes.html"><i class="bi bi-gear"></i><span>Configurações</span></a></li>
+      </ul>
+    </nav>
+
+    <nav class="app-header navbar navbar-light bg-white px-3">
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-secondary d-none d-lg-inline" title="Recolher" data-toggle="collapse-sidebar"><i class="bi bi-layout-sidebar-inset"></i></button>
+        <button class="btn btn-outline-secondary d-lg-none" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+      </div>
+      <div class="ms-auto d-flex align-items-center gap-3">
+        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNewUser"><i class="bi bi-plus-lg me-1"></i>Novo Usuário</a>
+        <span class="header-chip d-none d-md-inline">SLA: 4h resposta</span>
+        <div class="dropdown">
+          <a class="nav-link position-relative" href="#" title="Notificações" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-bell"></i>
+            <span class="notif-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end p-0 notif-menu"></div>
+        </div>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-1"></i> Você</a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" href="perfil.html">Perfil</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="app-content container-fluid">
+      <div class="container-xxl">
+        <div class="card p-0">
+          <div class="table-responsive">
+            <table id="team-table" class="table table-hover align-middle mb-0">
+              <thead class="table-light"><tr><th>Nome</th><th>E-mail</th><th>Cargo</th><th>Status</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- New User Modal -->
+  <div class="modal fade" id="modalNewUser" tabindex="-1">
+    <div class="modal-dialog">
+      <form id="form-new-user" class="modal-content">
+        <div class="modal-header"><h5 class="modal-title">Novo Usuário</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <div class="mb-2"><label class="form-label">Nome</label><input name="name" class="form-control" required></div>
+          <div class="mb-2"><label class="form-label">E-mail</label><input name="email" type="email" class="form-control" required></div>
+          <div class="mb-2"><label class="form-label">Senha</label>
+            <div class="input-group">
+              <input name="password" type="password" class="form-control" required minlength="4" placeholder="Mínimo 4 caracteres">
+              <button class="btn btn-outline-secondary" type="button" data-toggle-password title="Mostrar/ocultar senha"><i class="bi bi-eye"></i></button>
+            </div>
+          </div>
+          <div class="mb-2"><label class="form-label">Cargo</label>
+            <select name="role" class="form-select">
+              <option>Atendente</option>
+              <option>Gerente</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer"><button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancelar</button><button class="btn btn-primary" type="submit">Salvar</button></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+  
+</body>
+</html>

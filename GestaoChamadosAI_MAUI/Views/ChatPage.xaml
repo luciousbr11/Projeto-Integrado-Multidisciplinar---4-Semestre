@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GestaoChamadosAI_MAUI.ViewModels"
+             xmlns:models="clr-namespace:GestaoChamadosAI_MAUI.Models"
+             xmlns:converters="clr-namespace:GestaoChamadosAI_MAUI.Converters"
+             x:Class="GestaoChamadosAI_MAUI.Views.ChatPage"
+             x:DataType="vm:ChatViewModel"
+             Title="{Binding TituloChamado}"
+             Shell.BackButtonBehavior="{BackButtonBehavior IsVisible=True, IsEnabled=True}">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <converters:StringNotEmptyConverter x:Key="StringNotEmptyConverter" />
+            <converters:CountToVisibilityConverter x:Key="CountToVisibilityConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <!-- Toolbar com ações -->
+    <ContentPage.ToolbarItems>
+        <!-- <ToolbarItem Text="� Ver Logs"
+                     Clicked="OnVerLogsClicked"
+                     Order="Secondary"
+                     Priority="0"/> -->
+        
+        <!-- <ToolbarItem Text="�👤 Assumir"
+                     Command="{Binding AssumirCommand}"
+                     Order="Secondary"
+                     Priority="1"/> -->
+        
+        <ToolbarItem Text="✅ Finalizar"
+                     Command="{Binding FinalizarCommand}"
+                     Order="Secondary"
+                     Priority="2"/>
+        
+        <!-- Apenas Suporte/Admin devem ver esta opção -->
+        <!-- <ToolbarItem Text="🔄 Transferir"
+                     Command="{Binding TransferirCommand}"
+                     Order="Secondary"
+                     Priority="3"/> -->
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto"
+          BackgroundColor="White"
+          RowSpacing="0">
+
+        <!-- Logo Header com Botão Voltar -->
+        <Grid Grid.Row="0" BackgroundColor="{StaticResource Primary}" Padding="20,15,20,15" ColumnDefinitions="Auto,*,Auto">
+            <Image Grid.Column="0" Source="logo.png" WidthRequest="35" HeightRequest="35" HorizontalOptions="Start" VerticalOptions="Center"/>
+            
+            <Button Grid.Column="2"
+                    Text="← Voltar"
+                    Command="{Binding VoltarCommand}"
+                    HeightRequest="45"
+                    WidthRequest="120"
+                    FontSize="16"
+                    BackgroundColor="{StaticResource Gray700}"
+                    TextColor="White"
+                    CornerRadius="8"
+                    Padding="10,0"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"/>
+        </Grid>
+
+        <!-- Header com informações do chamado -->
+        <Frame Grid.Row="1"
+               Padding="15"
+               Margin="0"
+               CornerRadius="0"
+               BackgroundColor="{StaticResource Primary}"
+               HasShadow="True">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="15">
+                <!-- Informações -->
+                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                    <Label Text="{Binding TituloChamado}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                    <Label Text="{Binding DescricaoStatus}"
+                           FontSize="14"
+                           TextColor="White"
+                           Opacity="0.9"/>
+                    <Label Text="{Binding UltimaAtualizacao}"
+                           FontSize="12"
+                           TextColor="White"
+                           Opacity="0.7"/>
+                </VerticalStackLayout>
+
+                <!-- Badge de Status -->
+                <Frame Grid.Column="1"
+                       Padding="10,5"
+                       CornerRadius="15"
+                       BackgroundColor="{Binding CorStatus}"
+                       HasShadow="False"
+                       VerticalOptions="Start">
+                    <Label Text="{Binding Status}"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                </Frame>
+            </Grid>
+        </Frame>
+
+        <!-- Indicador de Loading -->
+        <ActivityIndicator Grid.Row="1"
+                          IsRunning="{Binding IsLoading}"
+                          IsVisible="{Binding IsLoading}"
+                          Color="{StaticResource Primary}"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center"
+                          WidthRequest="50"
+                          HeightRequest="50"/>
+
+        <!-- Lista de Mensagens -->
+        <ScrollView Grid.Row="2"
+                    x:Name="MessagesScrollView"
+                    IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
+            <VerticalStackLayout Spacing="10">
+                <!-- Botão Assumir Atendimento (aparece se Admin/Suporte não é responsável) -->
+                <Frame Padding="15"
+                       Margin="10,10,10,0"
+                       CornerRadius="15"
+                       BackgroundColor="#E3F2FD"
+                       BorderColor="{StaticResource Primary}"
+                       IsVisible="{Binding PodeAssumir}"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="👤 Assumir Atendimento"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource Primary}"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Você precisa assumir este chamado para poder enviar mensagens e gerenciá-lo."
+                               FontSize="13"
+                               TextColor="{StaticResource Gray700}"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               LineBreakMode="WordWrap"/>
+                        <Button Text="✋ Assumir Agora"
+                                Command="{Binding AssumirCommand}"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="White"
+                                CornerRadius="10"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                HeightRequest="45"
+                                HorizontalOptions="Center"
+                                WidthRequest="200"/>
+                    </VerticalStackLayout>
+                </Frame>
+                
+                <!-- Container de mensagens -->
+                <VerticalStackLayout x:Name="MessagesContainer"
+                                    BindableLayout.ItemsSource="{Binding Mensagens}"
+                                    Margin="10,0,10,0"
+                                    Spacing="4">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:MensagemChamado">
+                        <!-- Grid para controlar layout de cada mensagem -->
+                        <Grid Padding="0" ColumnDefinitions="*,*" ColumnSpacing="0">
+                            <!-- Mensagem de OUTROS (Esquerda - Coluna 0) -->
+                            <Frame Grid.Column="0"
+                                   IsVisible="{Binding IsMinhaMensagem, Converter={StaticResource InvertedBoolConverter}}"
+                                   Padding="12,10"
+                                   Margin="8,0,4,0"
+                                   CornerRadius="8"
+                                   BackgroundColor="#EFEFEF"
+                                   HasShadow="False"
+                                   BorderColor="Transparent"
+                                   HorizontalOptions="Start"
+                                   MaximumWidthRequest="280">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="{Binding NomeUsuario}"
+                                           FontSize="11"
+                                           FontAttributes="Bold"
+                                           TextColor="#2C2C2C"
+                                           Margin="0,0,0,2"/>
+                                    <Label Text="{Binding Mensagem}"
+                                           FontSize="14"
+                                           TextColor="#2C2C2C"
+                                           LineBreakMode="WordWrap"
+                                           IsVisible="{Binding Mensagem, Converter={StaticResource StringNotEmptyConverter}}"/>
+                                    
+                                    <!-- Anexos -->
+                                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Anexos}"
+                                                        Spacing="5"
+                                                        IsVisible="{Binding TemAnexos}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="models:AnexoMensagem">
+                                                <StackLayout>
+                                                    <!-- IMAGEM -->
+                                                    <Frame Padding="0"
+                                                           CornerRadius="8"
+                                                           IsClippedToBounds="True"
+                                                           HasShadow="False"
+                                                           IsVisible="{Binding IsImage}">
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer 
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ChatViewModel}}, Path=AbrirAnexoCommand}"
+                                                                CommandParameter="{Binding .}" />
+                                                        </Frame.GestureRecognizers>
+                                                        <Image Aspect="AspectFill"
+                                                               HeightRequest="150"
+                                                               WidthRequest="200">
+                                                            <Image.Source>
+                                                                <UriImageSource Uri="{Binding Url}"
+                                                                               CachingEnabled="True"
+                                                                               CacheValidity="7" />
+                                                            </Image.Source>
+                                                        </Image>
+                                                    </Frame>
+                                                    
+                                                    <!-- ARQUIVO (não-imagem) -->
+                                                    <Frame Padding="8"
+                                                           CornerRadius="8"
+                                                           BackgroundColor="#E0E0E0"
+                                                           HasShadow="False"
+                                                           IsVisible="{Binding IsImage, Converter={StaticResource InvertedBoolConverter}}">
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer 
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ChatViewModel}}, Path=AbrirAnexoCommand}"
+                                                                CommandParameter="{Binding .}" />
+                                                        </Frame.GestureRecognizers>
+                                                        <HorizontalStackLayout Spacing="8">
+                                                            <Label Text="{Binding IconeArquivo}"
+                                                                   FontSize="16"
+                                                                   VerticalOptions="Center"/>
+                                                            <Label Text="{Binding NomeArquivo}"
+                                                                   FontSize="12"
+                                                                   TextColor="#2C2C2C"
+                                                                   VerticalOptions="Center"
+                                                                   LineBreakMode="TailTruncation"/>
+                                                        </HorizontalStackLayout>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                    
+                                    <Label Text="{Binding DataEnvio, StringFormat='{0:dd/MM HH:mm}'}"
+                                           FontSize="10"
+                                           TextColor="#7A7A7A"
+                                           HorizontalOptions="Start"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                            
+                            <!-- Mensagem MINHA (Direita - Coluna 1) -->
+                            <Frame Grid.Column="1"
+                                   IsVisible="{Binding IsMinhaMensagem}"
+                                   Padding="12,10"
+                                   Margin="4,0,8,0"
+                                   CornerRadius="8"
+                                   BackgroundColor="{StaticResource Primary}"
+                                   HasShadow="False"
+                                   BorderColor="Transparent"
+                                   HorizontalOptions="End"
+                                   MaximumWidthRequest="280">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="{Binding Mensagem}"
+                                           FontSize="14"
+                                           TextColor="White"
+                                           LineBreakMode="WordWrap"
+                                           IsVisible="{Binding Mensagem, Converter={StaticResource StringNotEmptyConverter}}"/>
+                                    
+                                    <!-- Anexos -->
+                                    <VerticalStackLayout BindableLayout.ItemsSource="{Binding Anexos}"
+                                                        Spacing="5"
+                                                        IsVisible="{Binding TemAnexos}">
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="models:AnexoMensagem">
+                                                <StackLayout>
+                                                    <!-- IMAGEM -->
+                                                    <Frame Padding="0"
+                                                           CornerRadius="8"
+                                                           IsClippedToBounds="True"
+                                                           HasShadow="False"
+                                                           IsVisible="{Binding IsImage}">
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer 
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ChatViewModel}}, Path=AbrirAnexoCommand}"
+                                                                CommandParameter="{Binding .}" />
+                                                        </Frame.GestureRecognizers>
+                                                        <Image Aspect="AspectFill"
+                                                               HeightRequest="150"
+                                                               WidthRequest="200">
+                                                            <Image.Source>
+                                                                <UriImageSource Uri="{Binding Url}"
+                                                                               CachingEnabled="True"
+                                                                               CacheValidity="7" />
+                                                            </Image.Source>
+                                                        </Image>
+                                                    </Frame>
+                                                    
+                                                    <!-- ARQUIVO (não-imagem) -->
+                                                    <Frame Padding="8"
+                                                           CornerRadius="8"
+                                                           BackgroundColor="White"
+                                                           Opacity="0.9"
+                                                           HasShadow="False"
+                                                           IsVisible="{Binding IsImage, Converter={StaticResource InvertedBoolConverter}}">
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer 
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ChatViewModel}}, Path=AbrirAnexoCommand}"
+                                                                CommandParameter="{Binding .}" />
+                                                        </Frame.GestureRecognizers>
+                                                        <HorizontalStackLayout Spacing="8">
+                                                            <Label Text="{Binding IconeArquivo}"
+                                                                   FontSize="16"
+                                                                   VerticalOptions="Center"/>
+                                                            <Label Text="{Binding NomeArquivo}"
+                                                                   FontSize="12"
+                                                                   TextColor="#2C2C2C"
+                                                                   VerticalOptions="Center"
+                                                                   LineBreakMode="TailTruncation"/>
+                                                        </HorizontalStackLayout>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                    
+                                    <Label Text="{Binding DataEnvio, StringFormat='{0:dd/MM HH:mm}'}"
+                                           FontSize="10"
+                                           TextColor="White"
+                                           Opacity="0.7"
+                                           HorizontalOptions="End"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+                
+                <BindableLayout.EmptyView>
+                    <VerticalStackLayout VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       Padding="50">
+                        <Label Text="💬"
+                               FontSize="64"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Nenhuma mensagem ainda"
+                               FontSize="18"
+                               TextColor="{StaticResource Gray500}"
+                               HorizontalOptions="Center"
+                               Margin="0,10,0,0"/>
+                        <Label Text="Seja o primeiro a iniciar a conversa!"
+                               FontSize="14"
+                               TextColor="{StaticResource Gray400}"
+                               HorizontalOptions="Center"
+                               Margin="0,5,0,0"/>
+                    </VerticalStackLayout>
+                </BindableLayout.EmptyView>
+            </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Input de Mensagem -->
+        <Frame Grid.Row="3"
+               Padding="10"
+               Margin="10,0,10,10"
+               CornerRadius="25"
+               BackgroundColor="{StaticResource Gray100}"
+               BorderColor="{StaticResource Gray300}"
+               HasShadow="True">
+            <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="5">
+                <!-- Alerta se Admin não assumiu -->
+                <Frame Grid.Row="0"
+                       Padding="8"
+                       Margin="0"
+                       CornerRadius="10"
+                       BackgroundColor="#FFF3CD"
+                       BorderColor="#FFC107"
+                       IsVisible="{Binding MostrarAvisoAssumirChamado}"
+                       HasShadow="False">
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="⚠️"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+                        <Label Text="Você precisa assumir o atendimento para enviar mensagens"
+                               FontSize="12"
+                               TextColor="#856404"
+                               VerticalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               HorizontalOptions="FillAndExpand"/>
+                    </HorizontalStackLayout>
+                </Frame>
+                
+                <!-- Preview de anexos selecionados -->
+                <ScrollView Grid.Row="1"
+                           IsVisible="{Binding TemAnexos}"
+                           Orientation="Horizontal"
+                           HeightRequest="80">
+                    <HorizontalStackLayout BindableLayout.ItemsSource="{Binding AnexosSelecionados}"
+                                          Spacing="10">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="x:Object">
+                                <Frame Padding="5"
+                                       CornerRadius="10"
+                                       BackgroundColor="{StaticResource Gray200}"
+                                       HasShadow="False"
+                                       WidthRequest="70"
+                                       HeightRequest="70">
+                                    <Grid>
+                                        <Label Text="📎"
+                                               FontSize="32"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                        <Button Text="✕"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ChatViewModel}}, Path=RemoverAnexoCommand}"
+                                                CommandParameter="{Binding .}"
+                                                BackgroundColor="Red"
+                                                TextColor="White"
+                                                CornerRadius="10"
+                                                FontSize="12"
+                                                WidthRequest="20"
+                                                HeightRequest="20"
+                                                Padding="0"
+                                                HorizontalOptions="End"
+                                                VerticalOptions="Start"
+                                                Margin="-5,-5,0,0"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </HorizontalStackLayout>
+                </ScrollView>
+                
+                <!-- Campo de input e botões -->
+                <Grid Grid.Row="2" ColumnSpacing="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- Segunda coluna só para Android - usa Width direta -->
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Botão Câmera (Android) ou Arquivo (Desktop) -->
+                    <Button Grid.Column="0"
+                            Command="{Binding TirarFotoCommand}"
+                            IsEnabled="{Binding PodeEnviarComAnexos}"
+                            IsVisible="True"
+                            BackgroundColor="#F0F0F0"
+                            TextColor="{StaticResource Primary}"
+                            FontSize="22"
+                            WidthRequest="45"
+                            HeightRequest="45"
+                            CornerRadius="22"
+                            Padding="0"
+                            Margin="2">
+                        <Button.Text>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="📷"/>
+                                <On Platform="WinUI" Value="📎"/>
+                            </OnPlatform>
+                        </Button.Text>
+                    </Button>
+
+                    <!-- Botão Galeria (Apenas Android) -->
+                    <Button Grid.Column="1"
+                            Command="{Binding SelecionarFotoGaleriaCommand}"
+                            IsEnabled="{Binding PodeEnviarComAnexos}"
+                            BackgroundColor="#F0F0F0"
+                            TextColor="{StaticResource Primary}"
+                            FontSize="22"
+                            WidthRequest="45"
+                            HeightRequest="45"
+                            CornerRadius="22"
+                            Padding="0"
+                            Margin="2">
+                        <Button.IsVisible>
+                            <OnPlatform x:TypeArguments="x:Boolean">
+                                <On Platform="Android" Value="True"/>
+                                <On Platform="WinUI" Value="False"/>
+                            </OnPlatform>
+                        </Button.IsVisible>
+                        <Button.Text>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="🖼️"/>
+                                <On Platform="WinUI" Value=""/>
+                            </OnPlatform>
+                        </Button.Text>
+                    </Button>
+
+                    <Entry Grid.Column="2"
+                           Text="{Binding NovaMensagem}"
+                           Placeholder="Digite sua mensagem..."
+                           PlaceholderColor="{StaticResource Gray400}"
+                           ReturnType="Send"
+                           ReturnCommand="{Binding EnviarMensagemCommand}"
+                           VerticalOptions="Center"
+                           FontSize="15"
+                           BackgroundColor="Transparent"
+                           TextColor="{StaticResource Gray900}"/>
+
+                    <Button Grid.Column="3"
+                            Text="📤"
+                            Command="{Binding EnviarMensagemCommand}"
+                            IsEnabled="{Binding PodeEnviar}"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White"
+                            CornerRadius="20"
+                            FontSize="20"
+                            WidthRequest="45"
+                            HeightRequest="42"
+                            Padding="0"/>
+                </Grid>
+            </Grid>
+        </Frame>
+
+    </Grid>
+
+</ContentPage>
+

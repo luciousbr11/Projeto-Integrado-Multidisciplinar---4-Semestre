@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:GestaoChamadosAI_MAUI.Converters"
+             x:Class="GestaoChamadosAI_MAUI.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- <ResourceDictionary Source="Resources/Styles/Colors.xaml" /> -->
+                <!-- <ResourceDictionary Source="Resources/Styles/Styles.xaml" /> -->
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!-- Converters -->
+            <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+            <converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <converters:ChatAlignmentConverter x:Key="ChatAlignmentConverter" />
+            <converters:ChatColorConverter x:Key="ChatColorConverter" />
+            <converters:StatusToIconConverter x:Key="StatusToIconConverter" />
+            <converters:StatusToColorConverter x:Key="StatusToColorConverter" />
+            <converters:StatusToTextConverter x:Key="StatusToTextConverter" />
+            <converters:PrioridadeToColorConverter x:Key="PrioridadeToColorConverter" />
+
+            <!-- Cores do tema - Paleta moderna e suave -->
+            <Color x:Key="Primary">#01acac</Color>        <!-- Teal Atendix -->
+            <Color x:Key="PrimaryDark">#019999</Color>    <!-- Teal escuro -->
+            <Color x:Key="PrimaryLight">#33BDBD</Color>   <!-- Teal claro -->
+            <Color x:Key="Secondary">#F0F4FF</Color>      <!-- Azul muito claro -->
+            <Color x:Key="Tertiary">#8B5CF6</Color>       <!-- Roxo suave -->
+            <Color x:Key="White">White</Color>
+            <Color x:Key="Black">Black</Color>
+            <Color x:Key="Gray50">#F9FAFB</Color>
+            <Color x:Key="Gray100">#F3F4F6</Color>
+            <Color x:Key="Gray200">#E5E7EB</Color>
+            <Color x:Key="Gray300">#D1D5DB</Color>
+            <Color x:Key="Gray400">#9CA3AF</Color>
+            <Color x:Key="Gray500">#6B7280</Color>
+            <Color x:Key="Gray600">#4B5563</Color>
+            <Color x:Key="Gray700">#374151</Color>
+            <Color x:Key="Gray800">#1F2937</Color>
+            <Color x:Key="Gray900">#111827</Color>
+            
+            <!-- Cores de status - Mais suaves e profissionais -->
+            <Color x:Key="Success">#10B981</Color>        <!-- Verde esmeralda -->
+            <Color x:Key="Warning">#F59E0B</Color>        <!-- Âmbar -->
+            <Color x:Key="Error">#EF4444</Color>          <!-- Vermelho coral -->
+            <Color x:Key="Danger">#EF4444</Color>         <!-- Vermelho perigo (alias de Error) -->
+            <Color x:Key="Info">#3B82F6</Color>           <!-- Azul céu -->
+            
+            <!-- Cores de fundo -->
+            <Color x:Key="PageBackground">#FAFBFC</Color>
+            <Color x:Key="CardBackground">White</Color>
+
+            <!-- Estilos globais -->
+            <Style TargetType="Page" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource PageBackground}" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="TextColor" Value="{StaticResource White}" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="16,12" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Shadow">
+                    <Shadow Brush="{StaticResource Primary}" Opacity="0.3" Radius="8" Offset="0,4" />
+                </Setter>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="Opacity" Value="0.6" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="PlaceholderColor" Value="{StaticResource Gray400}" />
+                <Setter Property="TextColor" Value="{StaticResource Gray900}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="Margin" Value="0,5,0,0" />
+            </Style>
+
+            <Style TargetType="Editor">
+                <Setter Property="PlaceholderColor" Value="{StaticResource Gray400}" />
+                <Setter Property="TextColor" Value="{StaticResource Gray900}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="AutoSize" Value="TextChanges" />
+                <Setter Property="Margin" Value="0,5,0,0" />
+            </Style>
+
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource CardBackground}" />
+                <Setter Property="BorderColor" Value="Transparent" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="Shadow">
+                    <Shadow Brush="Black" Opacity="0.1" Radius="12" Offset="0,2" />
+                </Setter>
+            </Style>
+
+            <Style TargetType="Label" x:Key="TitleLabel">
+                <Setter Property="FontSize" Value="28" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource Gray900}" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="SubtitleLabel">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource Gray800}" />
+            </Style>
+            
+            <Style TargetType="Label" x:Key="BodyLabel">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{StaticResource Gray700}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

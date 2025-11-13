@@ -1,0 +1,124 @@
+2025-11-06 00:01:10.869 -03:00 [INF] Application is shutting down...
+2025-11-06 00:01:47.457 -03:00 [INF] No migrations were found in assembly 'GestaoChamadosAI_API'. A migration needs to be added before the database can be updated.
+2025-11-06 00:02:42.540 -03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA journal_mode = 'wal';
+2025-11-06 00:02:42.576 -03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-11-06 00:02:42.582 -03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsLock' AND "type" = 'table';
+2025-11-06 00:02:42.595 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsLock" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK___EFMigrationsLock" PRIMARY KEY,
+    "Timestamp" TEXT NOT NULL
+);
+2025-11-06 00:02:42.598 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT OR IGNORE INTO "__EFMigrationsLock"("Id", "Timestamp") VALUES(1, '2025-11-06 03:02:42.5976106+00:00');
+SELECT changes();
+2025-11-06 00:02:42.636 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
+    "ProductVersion" TEXT NOT NULL
+);
+2025-11-06 00:02:42.644 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsHistory' AND "type" = 'table';
+2025-11-06 00:02:42.646 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-11-06 00:02:42.652 -03:00 [INF] Applying migration '20251106030212_Inicial'.
+2025-11-06 00:02:42.664 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Usuarios" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Usuarios" PRIMARY KEY AUTOINCREMENT,
+    "Nome" TEXT NOT NULL,
+    "Email" TEXT NOT NULL,
+    "Senha" TEXT NOT NULL,
+    "Tipo" TEXT NOT NULL,
+    "DataCadastro" TEXT NOT NULL
+);
+2025-11-06 00:02:42.665 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Chamados" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Chamados" PRIMARY KEY AUTOINCREMENT,
+    "Titulo" TEXT NOT NULL,
+    "Descricao" TEXT NOT NULL,
+    "DataAbertura" TEXT NOT NULL,
+    "Status" TEXT NOT NULL,
+    "DataFechamento" TEXT NULL,
+    "CategoriaIA" TEXT NULL,
+    "Categoria" TEXT NULL,
+    "SugestaoIA" TEXT NULL,
+    "Prioridade" TEXT NULL,
+    "RespostaIA" TEXT NULL,
+    "FeedbackResolvido" INTEGER NULL,
+    "DataFeedback" TEXT NULL,
+    "AvaliacaoCliente" INTEGER NULL,
+    "SuporteResponsavelId" INTEGER NULL,
+    "UsuarioId" INTEGER NOT NULL,
+    CONSTRAINT "FK_Chamados_Usuarios_SuporteResponsavelId" FOREIGN KEY ("SuporteResponsavelId") REFERENCES "Usuarios" ("Id") ON DELETE RESTRICT,
+    CONSTRAINT "FK_Chamados_Usuarios_UsuarioId" FOREIGN KEY ("UsuarioId") REFERENCES "Usuarios" ("Id") ON DELETE RESTRICT
+);
+2025-11-06 00:02:42.667 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "MensagensChamados" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_MensagensChamados" PRIMARY KEY AUTOINCREMENT,
+    "ChamadoId" INTEGER NOT NULL,
+    "UsuarioId" INTEGER NOT NULL,
+    "Mensagem" TEXT NOT NULL,
+    "DataEnvio" TEXT NOT NULL,
+    "DataMensagem" TEXT NOT NULL,
+    "LidaPorCliente" INTEGER NOT NULL,
+    "LidaPorSuporte" INTEGER NOT NULL,
+    CONSTRAINT "FK_MensagensChamados_Chamados_ChamadoId" FOREIGN KEY ("ChamadoId") REFERENCES "Chamados" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_MensagensChamados_Usuarios_UsuarioId" FOREIGN KEY ("UsuarioId") REFERENCES "Usuarios" ("Id") ON DELETE RESTRICT
+);
+2025-11-06 00:02:42.668 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Chamados_DataAbertura" ON "Chamados" ("DataAbertura");
+2025-11-06 00:02:42.669 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Chamados_Status" ON "Chamados" ("Status");
+2025-11-06 00:02:42.671 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Chamados_SuporteResponsavelId" ON "Chamados" ("SuporteResponsavelId");
+2025-11-06 00:02:42.672 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Chamados_UsuarioId" ON "Chamados" ("UsuarioId");
+2025-11-06 00:02:42.673 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_MensagensChamados_ChamadoId" ON "MensagensChamados" ("ChamadoId");
+2025-11-06 00:02:42.674 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_MensagensChamados_UsuarioId" ON "MensagensChamados" ("UsuarioId");
+2025-11-06 00:02:42.676 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_Usuarios_Email" ON "Usuarios" ("Email");
+2025-11-06 00:02:42.677 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251106030212_Inicial', '9.0.10');
+2025-11-06 00:02:42.681 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DELETE FROM "__EFMigrationsLock";
+2025-11-06 00:05:16.283 -03:00 [INF] 🚀 API iniciada com sucesso!
+2025-11-06 00:05:16.320 -03:00 [INF] 📊 Ambiente: Production
+2025-11-06 00:05:16.321 -03:00 [INF] 🌐 Swagger disponível em: http://localhost:5000
+2025-11-06 00:05:16.338 -03:00 [INF] User profile is available. Using 'C:\Users\Lucas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-06 00:05:16.398 -03:00 [INF] Now listening on: http://localhost:5000
+2025-11-06 00:05:16.400 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-06 00:05:16.401 -03:00 [INF] Hosting environment: Production
+2025-11-06 00:05:16.402 -03:00 [INF] Content root path: C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+2025-11-06 23:23:54.745 -03:00 [INF] 🚀 API iniciada com sucesso!
+2025-11-06 23:23:54.785 -03:00 [INF] 📊 Ambiente: Production
+2025-11-06 23:23:54.795 -03:00 [INF] 🌐 Swagger disponível em: http://localhost:5000
+2025-11-06 23:23:54.812 -03:00 [INF] User profile is available. Using 'C:\Users\Lucas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-06 23:23:54.886 -03:00 [INF] Now listening on: http://localhost:5000
+2025-11-06 23:23:54.889 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-06 23:23:54.889 -03:00 [INF] Hosting environment: Production
+2025-11-06 23:23:54.890 -03:00 [INF] Content root path: C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+2025-11-06 23:24:18.494 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2025-11-06 23:24:18.546 -03:00 [WRN] Failed to determine the https port for redirect.
+2025-11-06 23:24:18.600 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 404 0 null 106.9438ms
+2025-11-06 23:24:18.607 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-11-06 23:24:21.198 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2025-11-06 23:24:21.203 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 404 0 null 5.1953ms
+2025-11-06 23:24:21.207 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-11-06 23:24:21.822 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2025-11-06 23:24:21.827 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 404 0 null 5.228ms
+2025-11-06 23:24:21.830 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-11-06 23:24:22.263 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2025-11-06 23:24:22.266 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 404 0 null 2.7449ms
+2025-11-06 23:24:22.269 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-11-06 23:24:31.726 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2025-11-06 23:30:57.305 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 47
+2025-11-06 23:31:48.230 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 404 0 null 436504.2397ms
+2025-11-06 23:31:48.232 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 499 null null 50926.7784ms
+2025-11-06 23:31:48.234 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-11-06 23:31:48.238 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 499

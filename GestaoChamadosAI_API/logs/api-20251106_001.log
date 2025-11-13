@@ -1,0 +1,258 @@
+2025-11-06 23:33:03.121 -03:00 [INF] 🚀 API iniciada com sucesso!
+2025-11-06 23:33:03.162 -03:00 [INF] 📊 Ambiente: Production
+2025-11-06 23:33:03.163 -03:00 [INF] 🌐 Swagger disponível em: http://localhost:5000
+2025-11-06 23:33:03.182 -03:00 [INF] User profile is available. Using 'C:\Users\Lucas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-06 23:33:03.247 -03:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5000: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Normalmente é permitida apenas uma utilização de cada endereço de soquete (protocolo/endereço de rede/porta).
+ ---> System.Net.Sockets.SocketException (10048): Normalmente é permitida apenas uma utilização de cada endereço de soquete (protocolo/endereço de rede/porta).
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.DefaultAddressStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-11-06 23:39:38.972 -03:00 [INF] 🚀 API iniciada com sucesso!
+2025-11-06 23:39:39.010 -03:00 [INF] 📊 Ambiente: Production
+2025-11-06 23:39:39.010 -03:00 [INF] 🌐 Swagger disponível em: http://localhost:5000
+2025-11-06 23:39:39.026 -03:00 [INF] User profile is available. Using 'C:\Users\Lucas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-06 23:39:39.089 -03:00 [INF] Now listening on: http://localhost:5000
+2025-11-06 23:39:39.091 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-06 23:39:39.091 -03:00 [INF] Hosting environment: Production
+2025-11-06 23:39:39.092 -03:00 [INF] Content root path: C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+2025-11-06 23:39:53.061 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2025-11-06 23:39:53.107 -03:00 [WRN] Failed to determine the https port for redirect.
+2025-11-06 23:39:53.125 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 404 0 null 64.9872ms
+2025-11-06 23:39:53.133 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-11-06 23:39:56.476 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2025-11-06 23:39:56.482 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 404 0 null 6.0574ms
+2025-11-06 23:39:56.486 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-11-06 23:39:56.997 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/ - null null
+2025-11-06 23:39:57.002 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/ - 404 0 null 4.4027ms
+2025-11-06 23:39:57.004 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/, Response status code: 404
+2025-11-06 23:41:06.644 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/api/auth/login - null null
+2025-11-06 23:41:06.652 -03:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-11-06 23:41:06.653 -03:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-11-06 23:41:06.655 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/api/auth/login - 405 0 null 11.2161ms
+2025-11-06 23:44:23.082 -03:00 [INF] Application is shutting down...
+2025-11-06 23:45:29.288 -03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-11-06 23:45:29.337 -03:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-11-06 23:45:29.351 -03:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2025-11-06 23:45:29.415 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2025-11-06 23:45:29.425 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-11-06 23:45:29.429 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-11-06 23:45:29.440 -03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-11-06 23:45:29.455 -03:00 [INF] Applying migration '20251107024505_Inicial'.
+2025-11-06 23:45:29.481 -03:00 [ERR] Failed executing DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Usuarios] (
+    [Id] int NOT NULL IDENTITY,
+    [Nome] nvarchar(max) NOT NULL,
+    [Email] nvarchar(450) NOT NULL,
+    [Senha] nvarchar(max) NOT NULL,
+    [Tipo] nvarchar(max) NOT NULL,
+    [DataCadastro] datetime2 NOT NULL,
+    CONSTRAINT [PK_Usuarios] PRIMARY KEY ([Id])
+);
+2025-11-06 23:45:53.479 -03:00 [INF] 🚀 API iniciada com sucesso!
+2025-11-06 23:45:53.517 -03:00 [INF] 📊 Ambiente: Production
+2025-11-06 23:45:53.518 -03:00 [INF] 🌐 Swagger disponível em: http://localhost:5000
+2025-11-06 23:45:53.535 -03:00 [INF] User profile is available. Using 'C:\Users\Lucas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-06 23:45:53.617 -03:00 [INF] Now listening on: http://localhost:5000
+2025-11-06 23:45:53.619 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-06 23:45:53.620 -03:00 [INF] Hosting environment: Production
+2025-11-06 23:45:53.621 -03:00 [INF] Content root path: C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+2025-11-06 23:46:29.809 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger - null null
+2025-11-06 23:46:29.863 -03:00 [WRN] Failed to determine the https port for redirect.
+2025-11-06 23:46:29.884 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger - 404 0 null 75.9879ms
+2025-11-06 23:46:29.893 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/swagger, Response status code: 404
+2025-11-06 23:46:31.473 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger - null null
+2025-11-06 23:46:31.478 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger - 404 0 null 4.9472ms
+2025-11-06 23:46:31.481 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/swagger, Response status code: 404
+2025-11-06 23:46:46.248 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger//api/auth/login - null null
+2025-11-06 23:46:46.253 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger//api/auth/login - 404 0 null 5.3877ms
+2025-11-06 23:46:46.257 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/swagger//api/auth/login, Response status code: 404
+2025-11-06 23:47:23.239 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger - null null
+2025-11-06 23:47:23.242 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger - 404 0 null 2.7928ms
+2025-11-06 23:47:23.245 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5000/swagger, Response status code: 404
+2025-11-06 23:48:43.765 -03:00 [INF] 🚀 API iniciada com sucesso!
+2025-11-06 23:48:43.802 -03:00 [INF] 📊 Ambiente: Production
+2025-11-06 23:48:43.804 -03:00 [INF] 🌐 Swagger disponível em: http://localhost:5000
+2025-11-06 23:48:43.821 -03:00 [INF] User profile is available. Using 'C:\Users\Lucas\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-06 23:48:43.898 -03:00 [INF] Now listening on: http://localhost:5000
+2025-11-06 23:48:43.901 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-06 23:48:43.902 -03:00 [INF] Hosting environment: Production
+2025-11-06 23:48:43.903 -03:00 [INF] Content root path: C:\wamp64\www\GestaoChamadosAI\GestaoChamadosAI_API
+2025-11-06 23:48:51.043 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger - null null
+2025-11-06 23:48:51.080 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger - 301 0 null 38.6738ms
+2025-11-06 23:48:51.093 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html - null null
+2025-11-06 23:48:51.127 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/index.html - 200 null text/html;charset=utf-8 33.9749ms
+2025-11-06 23:48:51.144 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css - null null
+2025-11-06 23:48:51.147 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.css - null null
+2025-11-06 23:48:51.161 -03:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-11-06 23:48:51.162 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/index.css - 200 202 text/css 15.1403ms
+2025-11-06 23:48:51.164 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.js - null null
+2025-11-06 23:48:51.164 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js - null null
+2025-11-06 23:48:51.166 -03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-11-06 23:48:51.175 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/index.js - 200 null application/javascript;charset=utf-8 10.4847ms
+2025-11-06 23:48:51.178 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css - 200 152034 text/css 33.7861ms
+2025-11-06 23:48:51.180 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js - null null
+2025-11-06 23:48:51.182 -03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-11-06 23:48:51.191 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js - 200 230293 text/javascript 26.1768ms
+2025-11-06 23:48:51.218 -03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-11-06 23:48:51.220 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js - 200 1452753 text/javascript 40.0002ms
+2025-11-06 23:48:51.318 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - null null
+2025-11-06 23:48:51.345 -03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/favicon-32x32.png - null null
+2025-11-06 23:48:51.347 -03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-11-06 23:48:51.348 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/favicon-32x32.png - 200 628 image/png 3.4922ms
+2025-11-06 23:48:51.443 -03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 124.4949ms
+2025-11-06 23:51:34.320 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/Auth/login - application/json 56
+2025-11-06 23:51:34.354 -03:00 [WRN] Failed to determine the https port for redirect.
+2025-11-06 23:51:34.357 -03:00 [INF] CORS policy execution successful.
+2025-11-06 23:51:34.374 -03:00 [INF] Executing endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:51:34.400 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[GestaoChamadosAI_API.Helpers.ApiResponse`1[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto]]] Login(GestaoChamadosAI_API.DTOs.Auth.LoginRequestDto) on controller GestaoChamadosAI_API.Controllers.AuthController (GestaoChamadosAI_API).
+2025-11-06 23:51:35.258 -03:00 [INF] Executed DbCommand (28ms) [Parameters=[@__loginDto_Email_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DataCadastro], [u].[Email], [u].[Nome], [u].[Senha], [u].[Tipo]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__loginDto_Email_0
+2025-11-06 23:51:35.362 -03:00 [WRN] Tentativa de login com senha incorreta para: cliente@gmail.com
+2025-11-06 23:51:35.366 -03:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'GestaoChamadosAI_API.Helpers.ApiResponse`1[[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto, GestaoChamadosAI_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-06 23:51:35.378 -03:00 [INF] Executed action GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API) in 973.6219ms
+2025-11-06 23:51:35.379 -03:00 [INF] Executed endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:51:35.385 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/Auth/login - 401 null application/json; charset=utf-8 1065.239ms
+2025-11-06 23:51:49.475 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/Auth/login - application/json 56
+2025-11-06 23:51:49.480 -03:00 [INF] CORS policy execution successful.
+2025-11-06 23:51:49.482 -03:00 [INF] Executing endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:51:49.484 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[GestaoChamadosAI_API.Helpers.ApiResponse`1[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto]]] Login(GestaoChamadosAI_API.DTOs.Auth.LoginRequestDto) on controller GestaoChamadosAI_API.Controllers.AuthController (GestaoChamadosAI_API).
+2025-11-06 23:51:49.509 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__loginDto_Email_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DataCadastro], [u].[Email], [u].[Nome], [u].[Senha], [u].[Tipo]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__loginDto_Email_0
+2025-11-06 23:51:49.512 -03:00 [WRN] Tentativa de login com senha incorreta para: cliente@gmail.com
+2025-11-06 23:51:49.519 -03:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'GestaoChamadosAI_API.Helpers.ApiResponse`1[[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto, GestaoChamadosAI_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-06 23:51:49.520 -03:00 [INF] Executed action GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API) in 34.8692ms
+2025-11-06 23:51:49.522 -03:00 [INF] Executed endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:51:49.523 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/Auth/login - 401 null application/json; charset=utf-8 47.9066ms
+2025-11-06 23:51:53.552 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/Auth/login - application/json 56
+2025-11-06 23:51:53.555 -03:00 [INF] CORS policy execution successful.
+2025-11-06 23:51:53.561 -03:00 [INF] Executing endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:51:53.562 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[GestaoChamadosAI_API.Helpers.ApiResponse`1[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto]]] Login(GestaoChamadosAI_API.DTOs.Auth.LoginRequestDto) on controller GestaoChamadosAI_API.Controllers.AuthController (GestaoChamadosAI_API).
+2025-11-06 23:51:53.609 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__loginDto_Email_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DataCadastro], [u].[Email], [u].[Nome], [u].[Senha], [u].[Tipo]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__loginDto_Email_0
+2025-11-06 23:51:53.611 -03:00 [WRN] Tentativa de login com senha incorreta para: cliente@gmail.com
+2025-11-06 23:51:53.612 -03:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'GestaoChamadosAI_API.Helpers.ApiResponse`1[[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto, GestaoChamadosAI_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-06 23:51:53.613 -03:00 [INF] Executed action GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API) in 48.353ms
+2025-11-06 23:51:53.614 -03:00 [INF] Executed endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:51:53.615 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/Auth/login - 401 null application/json; charset=utf-8 62.9881ms
+2025-11-06 23:51:55.443 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/Auth/login - application/json 56
+2025-11-06 23:51:55.446 -03:00 [INF] CORS policy execution successful.
+2025-11-06 23:51:55.447 -03:00 [INF] Executing endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:51:55.448 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[GestaoChamadosAI_API.Helpers.ApiResponse`1[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto]]] Login(GestaoChamadosAI_API.DTOs.Auth.LoginRequestDto) on controller GestaoChamadosAI_API.Controllers.AuthController (GestaoChamadosAI_API).
+2025-11-06 23:51:55.451 -03:00 [INF] Executed DbCommand (0ms) [Parameters=[@__loginDto_Email_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DataCadastro], [u].[Email], [u].[Nome], [u].[Senha], [u].[Tipo]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__loginDto_Email_0
+2025-11-06 23:51:55.453 -03:00 [WRN] Tentativa de login com senha incorreta para: cliente@gmail.com
+2025-11-06 23:51:55.460 -03:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'GestaoChamadosAI_API.Helpers.ApiResponse`1[[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto, GestaoChamadosAI_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-06 23:51:55.461 -03:00 [INF] Executed action GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API) in 11.5146ms
+2025-11-06 23:51:55.463 -03:00 [INF] Executed endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:51:55.463 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/Auth/login - 401 null application/json; charset=utf-8 20.5454ms
+2025-11-06 23:52:31.652 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/Auth/login - application/json 65
+2025-11-06 23:52:31.655 -03:00 [INF] CORS policy execution successful.
+2025-11-06 23:52:31.657 -03:00 [INF] Executing endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:52:31.658 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[GestaoChamadosAI_API.Helpers.ApiResponse`1[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto]]] Login(GestaoChamadosAI_API.DTOs.Auth.LoginRequestDto) on controller GestaoChamadosAI_API.Controllers.AuthController (GestaoChamadosAI_API).
+2025-11-06 23:52:31.662 -03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__loginDto_Email_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DataCadastro], [u].[Email], [u].[Nome], [u].[Senha], [u].[Tipo]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__loginDto_Email_0
+2025-11-06 23:52:31.664 -03:00 [WRN] Tentativa de login com senha incorreta para: lucaszanettigil2017@gmail.com
+2025-11-06 23:52:31.665 -03:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'GestaoChamadosAI_API.Helpers.ApiResponse`1[[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto, GestaoChamadosAI_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-06 23:52:31.666 -03:00 [INF] Executed action GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API) in 6.7955ms
+2025-11-06 23:52:31.667 -03:00 [INF] Executed endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:52:31.668 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/Auth/login - 401 null application/json; charset=utf-8 16.4168ms
+2025-11-06 23:52:33.326 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/Auth/login - application/json 65
+2025-11-06 23:52:33.329 -03:00 [INF] Request post:/api/auth/login from IP ::1 has been blocked, quota 5/1m exceeded by 1. Blocked by rule */api/auth/login, TraceIdentifier 0HNGTL0NCUGNB:00000006. MonitorMode: False
+2025-11-06 23:52:33.332 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/Auth/login - 429 null text/plain 5.7053ms
+2025-11-06 23:52:42.099 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/Auth/login - application/json 65
+2025-11-06 23:52:42.101 -03:00 [INF] CORS policy execution successful.
+2025-11-06 23:52:42.102 -03:00 [INF] Executing endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:52:42.103 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[GestaoChamadosAI_API.Helpers.ApiResponse`1[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto]]] Login(GestaoChamadosAI_API.DTOs.Auth.LoginRequestDto) on controller GestaoChamadosAI_API.Controllers.AuthController (GestaoChamadosAI_API).
+2025-11-06 23:52:42.106 -03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__loginDto_Email_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DataCadastro], [u].[Email], [u].[Nome], [u].[Senha], [u].[Tipo]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__loginDto_Email_0
+2025-11-06 23:52:42.108 -03:00 [WRN] Tentativa de login com senha incorreta para: lucaszanettigil2017@gmail.com
+2025-11-06 23:52:42.109 -03:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'GestaoChamadosAI_API.Helpers.ApiResponse`1[[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto, GestaoChamadosAI_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-06 23:52:42.110 -03:00 [INF] Executed action GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API) in 5.6125ms
+2025-11-06 23:52:42.111 -03:00 [INF] Executed endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:52:42.112 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/Auth/login - 401 null application/json; charset=utf-8 13.7679ms
+2025-11-06 23:56:20.341 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 39
+2025-11-06 23:56:20.345 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 4.0662ms
+2025-11-06 23:56:20.347 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-06 23:56:21.458 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 39
+2025-11-06 23:56:21.462 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 3.8089ms
+2025-11-06 23:56:21.464 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-06 23:56:21.834 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 39
+2025-11-06 23:56:21.838 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 3.6568ms
+2025-11-06 23:56:21.840 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-06 23:56:22.029 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 39
+2025-11-06 23:56:22.033 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 3.9866ms
+2025-11-06 23:56:22.036 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-06 23:56:22.202 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 39
+2025-11-06 23:56:22.206 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 4.048ms
+2025-11-06 23:56:22.208 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-06 23:56:22.393 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 39
+2025-11-06 23:56:22.395 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 2.6139ms
+2025-11-06 23:56:22.397 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-06 23:56:22.564 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 39
+2025-11-06 23:56:22.571 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 7.5214ms
+2025-11-06 23:56:22.594 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-06 23:56:22.737 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/auth/login - application/json; charset=utf-8 39
+2025-11-06 23:56:22.739 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/auth/login - 404 0 null 2.1609ms
+2025-11-06 23:56:22.741 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: POST http://localhost:5000/auth/login, Response status code: 404
+2025-11-06 23:56:45.834 -03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/Auth/login - application/json 48
+2025-11-06 23:56:45.837 -03:00 [INF] CORS policy execution successful.
+2025-11-06 23:56:45.838 -03:00 [INF] Executing endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:56:45.839 -03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[GestaoChamadosAI_API.Helpers.ApiResponse`1[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto]]] Login(GestaoChamadosAI_API.DTOs.Auth.LoginRequestDto) on controller GestaoChamadosAI_API.Controllers.AuthController (GestaoChamadosAI_API).
+2025-11-06 23:56:45.857 -03:00 [INF] Executed DbCommand (16ms) [Parameters=[@__loginDto_Email_0='?' (Size = 450)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[DataCadastro], [u].[Email], [u].[Nome], [u].[Senha], [u].[Tipo]
+FROM [Usuarios] AS [u]
+WHERE [u].[Email] = @__loginDto_Email_0
+2025-11-06 23:56:45.866 -03:00 [WRN] Tentativa de login com senha incorreta para: adm@gmail.com
+2025-11-06 23:56:45.866 -03:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'GestaoChamadosAI_API.Helpers.ApiResponse`1[[GestaoChamadosAI_API.DTOs.Auth.LoginResponseDto, GestaoChamadosAI_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-06 23:56:45.867 -03:00 [INF] Executed action GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API) in 27.357ms
+2025-11-06 23:56:45.869 -03:00 [INF] Executed endpoint 'GestaoChamadosAI_API.Controllers.AuthController.Login (GestaoChamadosAI_API)'
+2025-11-06 23:56:45.869 -03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/Auth/login - 401 null application/json; charset=utf-8 35.3085ms

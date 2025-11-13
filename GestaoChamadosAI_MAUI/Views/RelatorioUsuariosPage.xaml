@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GestaoChamadosAI_MAUI.ViewModels"
+             xmlns:models="clr-namespace:GestaoChamadosAI_MAUI.Models"
+             xmlns:behaviors="clr-namespace:GestaoChamadosAI_MAUI.Behaviors"
+             x:Class="GestaoChamadosAI_MAUI.Views.RelatorioUsuariosPage"
+             x:DataType="vm:RelatorioUsuariosViewModel"
+             Title="Relatório de Usuários"
+             BackgroundColor="White"
+             Shell.BackButtonBehavior="{BackButtonBehavior IsVisible=False}">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+        
+        <!-- Logo + Barra de Ações -->
+        <Grid Grid.Row="0" BackgroundColor="{StaticResource Primary}" Padding="15" ColumnDefinitions="Auto,*,Auto,Auto">
+            <Image Grid.Column="0" Source="logo.png" WidthRequest="35" HeightRequest="35" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Button Grid.Column="2"
+                    Text="← Voltar"
+                    Command="{Binding VoltarCommand}"
+                    HeightRequest="45"
+                    WidthRequest="120"
+                    FontSize="16"
+                    BackgroundColor="{StaticResource Gray700}"
+                    TextColor="White"
+                    CornerRadius="8"
+                    Padding="10,0"
+                    Margin="0,0,10,0"/>
+            <Button Grid.Column="3"
+                    Text="📄 PDF"
+                    Command="{Binding ImprimirPDFCommand}"
+                    HeightRequest="45"
+                    FontSize="16"
+                    BackgroundColor="#dc3545"
+                    TextColor="White"
+                    WidthRequest="90"
+                    CornerRadius="8"
+                    Padding="10,0"/>
+        </Grid>
+
+        <ScrollView Grid.Row="2" IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
+            <VerticalStackLayout Padding="20" Spacing="20">
+                
+                <!-- Cabeçalho -->
+                <VerticalStackLayout Spacing="5" Margin="0,0,0,10">
+                    <Label Text="👥 Relatório de Usuários Cadastrados"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#212529"/>
+                    <Label Text="Lista completa de usuários do sistema"
+                           FontSize="14"
+                           TextColor="#6c757d"/>
+                </VerticalStackLayout>
+
+                <!-- Cards de Resumo em Grid 2x2 - RESPONSIVO -->
+                <Grid ColumnDefinitions="*,*" 
+                      RowDefinitions="Auto,Auto" 
+                      ColumnSpacing="10" 
+                      RowSpacing="10">
+                    <Grid.Behaviors>
+                        <behaviors:ResponsiveGridBehavior Columns="2"/>
+                    </Grid.Behaviors>
+                    
+                    <!-- Total de Usuários -->
+                    <Frame Grid.Column="0" 
+                           Grid.Row="0" 
+                           Padding="15" 
+                           CornerRadius="10" 
+                           BackgroundColor="{StaticResource Primary}"
+                           BorderColor="Transparent">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding TotalUsuarios}" 
+                                   FontSize="32" 
+                                   FontAttributes="Bold" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Total de Usuários" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                    
+                    <!-- Clientes -->
+                    <Frame Grid.Column="1" 
+                           Grid.Row="0" 
+                           Padding="15" 
+                           CornerRadius="10" 
+                           BackgroundColor="#0dcaf0"
+                           BorderColor="Transparent">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Clientes}" 
+                                   FontSize="32" 
+                                   FontAttributes="Bold" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Clientes" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                    
+                    <!-- Suportes -->
+                    <Frame Grid.Column="0" 
+                           Grid.Row="1" 
+                           Padding="15" 
+                           CornerRadius="10" 
+                           BackgroundColor="#ffc107"
+                           BorderColor="Transparent">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Suportes}" 
+                                   FontSize="32" 
+                                   FontAttributes="Bold" 
+                                   TextColor="#212529" 
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Suportes" 
+                                   FontSize="12" 
+                                   TextColor="#212529" 
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                    
+                    <!-- Administradores -->
+                    <Frame Grid.Column="1" 
+                           Grid.Row="1" 
+                           Padding="15" 
+                           CornerRadius="10" 
+                           BackgroundColor="#dc3545"
+                           BorderColor="Transparent">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Administradores}" 
+                                   FontSize="32" 
+                                   FontAttributes="Bold" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Center"/>
+                            <Label Text="Administradores" 
+                                   FontSize="12" 
+                                   TextColor="White" 
+                                   HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </Grid>
+
+                <!-- Título da Lista -->
+                <Label Text="📋 Lista Detalhada"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#212529"
+                       Margin="0,10,0,0"/>
+
+                <!-- Lista de Usuários -->
+                <CollectionView ItemsSource="{Binding Usuarios}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:UsuarioDetalhado">
+                            <Frame Padding="15" 
+                                   Margin="0,5" 
+                                   CornerRadius="8" 
+                                   HasShadow="True"
+                                   BorderColor="Transparent"
+                                   BackgroundColor="White">
+                                <Grid ColumnDefinitions="*,Auto" 
+                                      RowDefinitions="Auto,Auto,Auto,Auto"
+                                      ColumnSpacing="10"
+                                      RowSpacing="8">
+                                    
+                                    <!-- Nome -->
+                                    <Label Grid.Row="0" 
+                                           Grid.Column="0" 
+                                           Text="{Binding Nome}" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold"
+                                           TextColor="#212529"/>
+                                    
+                                    <!-- Badge do Tipo -->
+                                    <Frame Grid.Row="0" 
+                                           Grid.Column="1"
+                                           Padding="8,4"
+                                           CornerRadius="4"
+                                           HasShadow="False"
+                                           BorderColor="Transparent"
+                                           VerticalOptions="Center">
+                                        <Frame.Triggers>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding Tipo}" Value="Cliente">
+                                                <Setter Property="BackgroundColor" Value="#0dcaf0"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding Tipo}" Value="Suporte">
+                                                <Setter Property="BackgroundColor" Value="#ffc107"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding Tipo}" Value="Administrador">
+                                                <Setter Property="BackgroundColor" Value="#dc3545"/>
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+                                        <Label Text="{Binding Tipo}" 
+                                               FontSize="12"
+                                               TextColor="White"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding Tipo}" Value="Suporte">
+                                                    <Setter Property="TextColor" Value="#212529"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </Frame>
+                                    
+                                    <!-- Email -->
+                                    <Label Grid.Row="1" 
+                                           Grid.Column="0" 
+                                           Grid.ColumnSpan="2">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="✉ " FontAttributes="Bold" TextColor="#6c757d"/>
+                                                <Span Text="{Binding Email}" TextColor="#6c757d"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    
+                                    <!-- Separador -->
+                                    <BoxView Grid.Row="2"
+                                             Grid.Column="0"
+                                             Grid.ColumnSpan="2"
+                                             HeightRequest="1"
+                                             BackgroundColor="#e9ecef"
+                                             Margin="0,5"/>
+                                    
+                                    <!-- Estatísticas em Grid -->
+                                    <Grid Grid.Row="3" 
+                                          Grid.Column="0"
+                                          Grid.ColumnSpan="2"
+                                          ColumnDefinitions="*,*,*"
+                                          ColumnSpacing="10">
+                                        
+                                        <!-- Total de Chamados -->
+                                        <VerticalStackLayout Grid.Column="0" Spacing="2">
+                                            <Label Text="Total" 
+                                                   FontSize="10" 
+                                                   TextColor="#6c757d"
+                                                   HorizontalOptions="Center"/>
+                                            <Frame Padding="8,4"
+                                                   CornerRadius="6"
+                                                   BackgroundColor="#6c757d"
+                                                   BorderColor="Transparent"
+                                                   HasShadow="False"
+                                                   HorizontalOptions="Center">
+                                                <Label Text="{Binding TotalChamados}"
+                                                       FontSize="14"
+                                                       TextColor="White"
+                                                       FontAttributes="Bold"
+                                                       HorizontalOptions="Center"/>
+                                            </Frame>
+                                        </VerticalStackLayout>
+                                        
+                                        <!-- Abertos -->
+                                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                            <Label Text="Abertos" 
+                                                   FontSize="10" 
+                                                   TextColor="#6c757d"
+                                                   HorizontalOptions="Center"/>
+                                            <Frame Padding="8,4"
+                                                   CornerRadius="6"
+                                                   BackgroundColor="#198754"
+                                                   BorderColor="Transparent"
+                                                   HasShadow="False"
+                                                   HorizontalOptions="Center">
+                                                <Label Text="{Binding ChamadosAbertos}"
+                                                       FontSize="14"
+                                                       TextColor="White"
+                                                       FontAttributes="Bold"
+                                                       HorizontalOptions="Center"/>
+                                            </Frame>
+                                        </VerticalStackLayout>
+                                        
+                                        <!-- Atendidos -->
+                                        <VerticalStackLayout Grid.Column="2" Spacing="2">
+                                            <Label Text="Atendidos" 
+                                                   FontSize="10" 
+                                                   TextColor="#6c757d"
+                                                   HorizontalOptions="Center"/>
+                                            <Frame Padding="8,4"
+                                                   CornerRadius="6"
+                                                   BackgroundColor="#0dcaf0"
+                                                   BorderColor="Transparent"
+                                                   HasShadow="False"
+                                                   HorizontalOptions="Center">
+                                                <Label Text="{Binding ChamadosAtendidos}"
+                                                       FontSize="14"
+                                                       TextColor="White"
+                                                       FontAttributes="Bold"
+                                                       HorizontalOptions="Center"/>
+                                            </Frame>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Loading Indicator (sem overlay) -->
+        <ActivityIndicator Grid.Row="1" 
+                          IsRunning="{Binding IsLoading}" 
+                          IsVisible="{Binding IsLoading}"
+                          Color="{StaticResource Primary}"
+                          VerticalOptions="Center"
+                          HorizontalOptions="Center"
+                          HeightRequest="50"
+                          WidthRequest="50"/>
+
+    </Grid>
+
+</ContentPage>

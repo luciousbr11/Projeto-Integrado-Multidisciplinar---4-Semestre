@@ -1,0 +1,179 @@
+@model GestaoChamadosAI_Web.Models.Chamado
+
+@{
+    ViewData["Title"] = "Editar Chamado";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">
+                        <i class="bi bi-pencil-fill"></i> Editar Chamado #@Model.Id
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="DataAbertura" />
+                        <input type="hidden" asp-for="Status" />
+                        
+                        <!-- Usuário -->
+                        <div class="mb-3">
+                            <label asp-for="UsuarioId" class="form-label">
+                                <i class="bi bi-person"></i> Usuá¡rio
+                            </label>
+                            <select asp-for="UsuarioId" class="form-select" asp-items="ViewBag.Usuarios">
+                                <option value="">Selecione o usuá¡rio...</option>
+                            </select>
+                            <span asp-validation-for="UsuarioId" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Tá­tulo -->
+                        <div class="mb-3">
+                            <label asp-for="Titulo" class="form-label">
+                                <i class="bi bi-ticket-detailed"></i> Tá­tulo do Problema
+                            </label>
+                            <input asp-for="Titulo" class="form-control" />
+                            <span asp-validation-for="Titulo" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Descrição Detalhada -->
+                        <div class="mb-3">
+                            <label asp-for="Descricao" class="form-label">
+                                <i class="bi bi-file-text"></i> Descrição Detalhada
+                            </label>
+                            <textarea asp-for="Descricao" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="Descricao" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Data de Abertura (apenas exibição) -->
+                        <div class="mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-calendar-event"></i> Data de Abertura
+                            </label>
+                            <input type="text" class="form-control" value="@Model.DataAbertura.ToString("dd/MM/yyyy HH:mm")" readonly />
+                            <div class="form-text">A data de abertura náo pode ser alterada.</div>
+                        </div>
+
+                        <!-- Botáµes -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Cancelar
+                            </a>
+                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-info">
+                                <i class="bi bi-eye-fill"></i> Ver Detalhes
+                            </a>
+                            <button type="submit" class="btn btn-warning">
+                                <i class="bi bi-save"></i> Salvar Alteraá§áµes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Painel lateral com sugestáo da IA -->
+        <div class="col-lg-4">
+            @if (ViewBag.SugestaoIA != null)
+            {
+                <div class="card shadow">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">
+                            <i class="bi bi-robot"></i> Aná¡lise da IA
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Prioridade -->
+                        <div class="mb-3">
+                            <strong>Prioridade:</strong>
+                            <div class="mt-2">
+                                @if (ViewBag.Prioridade == "Alta")
+                                {
+                                    <span class="badge bg-danger fs-6">
+                                        <i class="bi bi-exclamation-triangle-fill"></i> Alta
+                                    </span>
+                                }
+                                else if (ViewBag.Prioridade == "Má©dia")
+                                {
+                                    <span class="badge bg-warning text-dark fs-6">
+                                        <i class="bi bi-exclamation-circle"></i> Má©dia
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success fs-6">
+                                        <i class="bi bi-check-circle"></i> Baixa
+                                    </span>
+                                }
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <!-- Sugestáo -->
+                        <div>
+                            <strong>Sugestáo de Soluá§áo:</strong>
+                            <div class="mt-2 p-3 bg-light border rounded">
+                                @ViewBag.SugestaoIA
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-3 mb-0">
+                            <small>
+                                <i class="bi bi-lightbulb"></i> 
+                                Esta aná¡lise á© atualizada com base nas informaá§áµes atuais do chamado.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Card com histá³rico -->
+            <div class="card shadow mt-3">
+                <div class="card-header bg-secondary text-white">
+                    <h6 class="mb-0">
+                        <i class="bi bi-clock-history"></i> Informaá§áµes
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <p class="small mb-2">
+                        <strong>Aberto em:</strong><br />
+                        @Model.DataAbertura.ToString("dd/MM/yyyy á s HH:mm")
+                    </p>
+                    <p class="small mb-0">
+                        <strong>Status Atual:</strong><br />
+                        @if (Model.Status == "Aberto")
+                        {
+                            <span class="badge bg-danger">@Model.Status</span>
+                        }
+                        else if (Model.Status == "Em Andamento")
+                        {
+                            <span class="badge bg-warning text-dark">@Model.Status</span>
+                        }
+                        else if (Model.Status == "Concluído")
+                        {
+                            <span class="badge bg-success">@Model.Status</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@Model.Status</span>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Validaá§áo do lado do cliente -->
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

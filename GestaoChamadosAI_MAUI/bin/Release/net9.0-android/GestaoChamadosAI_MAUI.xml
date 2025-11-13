@@ -1,0 +1,1819 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GestaoChamadosAI_MAUI</name>
+    </assembly>
+    <members>
+        <member name="T:GestaoChamadosAI_MAUI.Behaviors.ResponsiveGridBehavior">
+            <summary>
+            Comportamento que torna um Grid responsivo, alternando entre layout de colunas (desktop) 
+            e layout de linha única (mobile) baseado na largura da tela.
+            </summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.Behaviors.ResponsiveGridBehavior.Columns">
+            <summary>
+            Número de colunas no modo desktop (padrão: 2)
+            </summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.Id">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.id"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.Chamado">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.chamado"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.ErrorMessage">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.errorMessage"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.CurrentUser">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.currentUser"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.CanAssume">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.canAssume"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.CanFinalize">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.canFinalize"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.CanTransfer">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.canTransfer"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.CanGenerateIA">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.canGenerateIA"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.CanOpenChat">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.canOpenChat"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.DiasDesdeAbertura">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.diasDesdeAbertura"/>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.OnIdChanged(System.Int32)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.Id"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.Id"/> is changed.</remarks>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.loadChamadoCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.LoadChamadoCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.LoadChamadoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.LoadChamadoAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.voltarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.VoltarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.VoltarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.VoltarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.assumirCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.AssumirCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.AssumirCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.AssumirAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.finalizarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.FinalizarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.FinalizarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.FinalizarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.transferirCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.TransferirCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.TransferirCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.TransferirAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.gerarIACommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.GerarIACommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.GerarIACommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.GerarIAAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.abrirChatCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.AbrirChatCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.AbrirChatCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadoDetalheViewModel.AbrirChatAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.Chamados">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.chamados"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.IsRefreshing">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.isRefreshing"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.SelectedStatus">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.selectedStatus"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.SelectedPrioridade">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.selectedPrioridade"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.SelectedSuporte">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.selectedSuporte"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.Suportes">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.suportes"/>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.OnSelectedStatusChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.SelectedStatus"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.SelectedStatus"/> is changed.</remarks>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.OnSelectedPrioridadeChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.SelectedPrioridade"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.SelectedPrioridade"/> is changed.</remarks>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.OnSelectedSuporteChanged(GestaoChamadosAI_MAUI.Models.Usuario)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.SelectedSuporte"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.SelectedSuporte"/> is changed.</remarks>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.loadChamadosCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.LoadChamadosCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.LoadChamadosCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.LoadChamadosAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.refreshCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.RefreshCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.RefreshCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.RefreshAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.loadMoreCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.LoadMoreCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.LoadMoreCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.LoadMoreAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.filterByStatusCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.FilterByStatusCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.FilterByStatusCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.FilterByStatusAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.clearFiltersCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.ClearFiltersCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.ClearFiltersCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.ClearFiltersAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.navigateToDetalhesCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.NavigateToDetalhesCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.NavigateToDetalhesCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.NavigateToDetalhesAsync(GestaoChamadosAI_MAUI.Models.ChamadoListItem)"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.navigateToNovoChamadoCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.NavigateToNovoChamadoCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.NavigateToNovoChamadoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.NavigateToNovoChamadoAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.voltarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.VoltarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.VoltarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChamadosListViewModel.VoltarAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.ChamadoId">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.chamadoId"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.Chamado">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.chamado"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.Mensagens">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.mensagens"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.NovaMensagem">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.novaMensagem"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.CurrentUserId">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.currentUserId"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.CurrentUserTipo">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.currentUserTipo"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.TituloChamado">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.tituloChamado"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.DescricaoStatus">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.descricaoStatus"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.UltimaAtualizacao">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.ultimaAtualizacao"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.Status">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.status"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.CorStatus">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.corStatus"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.ChamadoFechado">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.chamadoFechado"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.AnexosSelecionados">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.anexosSelecionados"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.TemAnexos">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.temAnexos"/>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.OnChamadoIdChanged(System.Int32)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.ChamadoId"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.ChamadoId"/> is changed.</remarks>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.OnNovaMensagemChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.NovaMensagem"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.NovaMensagem"/> is changed.</remarks>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.loadChamadoCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.LoadChamadoCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.LoadChamadoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.LoadChamadoAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.enviarMensagemCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.EnviarMensagemCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.EnviarMensagemCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.EnviarMensagemAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.selecionarArquivoCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.SelecionarArquivoCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.SelecionarArquivoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.SelecionarArquivoAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.tirarFotoCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.TirarFotoCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.TirarFotoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.TirarFotoAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.selecionarFotoGaleriaCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.SelecionarFotoGaleriaCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.SelecionarFotoGaleriaCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.SelecionarFotoGaleriaAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.removerAnexoCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.RemoverAnexoCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.RemoverAnexoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.RemoverAnexo(Microsoft.Maui.Storage.FileResult)"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.assumirCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.AssumirCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.AssumirCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.AssumirAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.finalizarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.FinalizarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.FinalizarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.FinalizarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.transferirCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.TransferirCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.TransferirCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.TransferirAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.voltarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.VoltarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.VoltarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.VoltarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.abrirAnexoCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.AbrirAnexoCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.AbrirAnexoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ChatViewModel.AbrirAnexoAsync(GestaoChamadosAI_MAUI.Models.AnexoMensagem)"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.ApiUrl">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.apiUrl"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.UserName">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.userName"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.UserEmail">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.userEmail"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.UserTipo">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.userTipo"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.loadDataCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.LoadDataCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.LoadDataCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.LoadDataAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.saveApiUrlCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.SaveApiUrlCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.SaveApiUrlCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.SaveApiUrlAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.logoutCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.LogoutCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.LogoutCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.ConfiguracoesViewModel.LogoutAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.Nome">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.nome"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.Email">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.email"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.Senha">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.senha"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.ConfirmarSenha">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.confirmarSenha"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.Tipo">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.tipo"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.isLoading"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.salvarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.SalvarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.SalvarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.SalvarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.cancelarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.CancelarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.CancelarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.CriarUsuarioViewModel.CancelarAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.CurrentUser">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.currentUser"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.Estatisticas">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.estatisticas"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.WelcomeMessage">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.welcomeMessage"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.IsAdministrador">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.isAdministrador"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.IsNotCliente">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.isNotCliente"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.IsCliente">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.isCliente"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.IsSuporte">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.isSuporte"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.ChamadosAtivos">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.chamadosAtivos"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.ChamadosRecentes">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.chamadosRecentes"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.ChamadosRecentesAdmin">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.chamadosRecentesAdmin"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.MeusChamadosAtivos">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.meusChamadosAtivos"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.ChamadosAbertos">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.chamadosAbertos"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.HasChamadosAtivos">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.hasChamadosAtivos"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.HasChamadosRecentes">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.hasChamadosRecentes"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.TotalChamados">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.totalChamados"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.ChamadosAbertosCount">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.chamadosAbertosCount"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.ChamadosEmAndamentoCount">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.chamadosEmAndamentoCount"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.ChamadosConcluidosCount">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.chamadosConcluidosCount"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.ChamadosPendentesCount">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.chamadosPendentesCount"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.ChamadosEmAtendimentoCount">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.chamadosEmAtendimentoCount"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.ChamadosConcluidosHojeCount">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.chamadosConcluidosHojeCount"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.HasMeusChamadosAtivos">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.hasMeusChamadosAtivos"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.HasChamadosAbertos">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.hasChamadosAbertos"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.HasNoChamadosAtivos">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.hasNoChamadosAtivos"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.loadDataCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.LoadDataCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.LoadDataCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.LoadDataAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.navigateToChamadoDetalheCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadoDetalheCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadoDetalheCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadoDetalheAsync(GestaoChamadosAI_MAUI.Models.ChamadoListItem)"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.navigateToChamadosCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadosCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadosCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadosAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.navigateToChamadosPendentesCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadosPendentesCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadosPendentesCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadosPendentesAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.navigateToChamadosEmAtendimentoCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadosEmAtendimentoCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadosEmAtendimentoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToChamadosEmAtendimentoAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.navigateToUsuariosCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToUsuariosCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToUsuariosCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToUsuariosAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.navigateToNovoChamadoCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToNovoChamadoCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToNovoChamadoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToNovoChamadoAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.navigateToConfiguracoesCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToConfiguracoesCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToConfiguracoesCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToConfiguracoesAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.navigateToRelatoriosCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToRelatoriosCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToRelatoriosCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.NavigateToRelatoriosAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.logoutCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.LogoutCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.LogoutCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.DashboardViewModel.LogoutAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoId">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.chamadoId"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoTituloOriginal">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.chamadoTituloOriginal"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoDescricaoOriginal">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.chamadoDescricaoOriginal"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoStatusOriginal">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.chamadoStatusOriginal"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoPrioridadeOriginal">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.chamadoPrioridadeOriginal"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.Titulo">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.titulo"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.Descricao">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.descricao"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.StatusSelecionado">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.statusSelecionado"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.PrioridadeSelecionada">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.prioridadeSelecionada"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.isLoading"/>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.OnChamadoTituloOriginalChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoTituloOriginal"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoTituloOriginal"/> is changed.</remarks>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.OnChamadoDescricaoOriginalChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoDescricaoOriginal"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoDescricaoOriginal"/> is changed.</remarks>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.OnChamadoStatusOriginalChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoStatusOriginal"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoStatusOriginal"/> is changed.</remarks>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.OnChamadoPrioridadeOriginalChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoPrioridadeOriginal"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.ChamadoPrioridadeOriginal"/> is changed.</remarks>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.salvarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.SalvarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.SalvarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.SalvarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.cancelarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.CancelarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.CancelarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.EditarChamadoViewModel.CancelarAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.UsuarioId">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.usuarioId"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.Nome">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.nome"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.Email">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.email"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.Senha">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.senha"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.ConfirmarSenha">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.confirmarSenha"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.Tipo">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.tipo"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.AlterarSenha">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.alterarSenha"/>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.OnUsuarioIdChanged(System.Int32)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.UsuarioId"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.UsuarioId"/> is changed.</remarks>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.salvarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.SalvarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.SalvarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.SalvarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.cancelarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.CancelarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.CancelarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.EditarUsuarioViewModel.CancelarAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.ChamadoId">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.chamadoId"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.Titulo">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.titulo"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.Descricao">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.descricao"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.RespostaIA">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.respostaIA"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.isLoading"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.resolveuCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.ResolveuCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.ResolveuCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.ResolveuAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.naoResolveuCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.NaoResolveuCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.NaoResolveuCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.FeedbackIAViewModel.NaoResolveuAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.Email">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.email"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.Senha">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.senha"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.ErrorMessage">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.errorMessage"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.loginCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.LoginCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.LoginCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.LoginViewModel.LoginAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.Titulo">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.titulo"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.Descricao">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.descricao"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.ErrorMessage">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.errorMessage"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.createChamadoCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.CreateChamadoCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.CreateChamadoCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.CreateChamadoAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.cancelCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.CancelCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.CancelCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.NovoChamadoViewModel.CancelAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.Categorias">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.categorias"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.TotalCategorias">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.totalCategorias"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.TotalChamados">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.totalChamados"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.loadDataCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.LoadDataCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.LoadDataCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.LoadDataAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.imprimirPDFCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.ImprimirPDFCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.ImprimirPDFCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.ImprimirPDFAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.voltarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.VoltarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.VoltarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioCategoriasViewModel.VoltarAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.DataInicio">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.dataInicio"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.DataFim">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.dataFim"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.Total">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.total"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.Abertos">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.abertos"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.EmAtendimento">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.emAtendimento"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.AguardandoCliente">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.aguardandoCliente"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.Fechados">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.fechados"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.PorPrioridade">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.porPrioridade"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.PorCategoria">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.porCategoria"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.Chamados">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.chamados"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.loadDataCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.LoadDataCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.LoadDataCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.LoadDataAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.filtrarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.FiltrarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.FiltrarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.FiltrarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.voltarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.VoltarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.VoltarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.VoltarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.imprimirPDFCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.ImprimirPDFCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.ImprimirPDFCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioChamadosPeriodoViewModel.ImprimirPDFAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.TotalSuportes">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.totalSuportes"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.Suportes">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.suportes"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.loadDataCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.LoadDataCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.LoadDataCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.LoadDataAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.voltarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.VoltarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.VoltarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.VoltarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.imprimirPDFCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.ImprimirPDFCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.ImprimirPDFCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioSuportesViewModel.ImprimirPDFAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.isLoading"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.abrirRelatorioUsuariosCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioUsuariosCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioUsuariosCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioUsuariosAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.abrirRelatorioChamadosCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioChamadosCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioChamadosCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioChamadosAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.abrirRelatorioSuportesCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioSuportesCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioSuportesCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioSuportesAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.abrirRelatorioCategoriasCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioCategoriasCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioCategoriasCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.AbrirRelatorioCategoriasAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.voltarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.VoltarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.VoltarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatoriosViewModel.VoltarAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.TotalUsuarios">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.totalUsuarios"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.Clientes">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.clientes"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.Suportes">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.suportes"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.Administradores">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.administradores"/>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.loadRelatorioCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.LoadRelatorioCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.LoadRelatorioCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.LoadRelatorioAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.voltarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.VoltarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.VoltarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.VoltarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.imprimirPDFCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.ImprimirPDFCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.ImprimirPDFCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.RelatorioUsuariosViewModel.ImprimirPDFAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.ChamadoId">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.chamadoId"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.ChamadoTitulo">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.chamadoTitulo"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.Suportes">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.suportes"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.SuporteSelecionado">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.suporteSelecionado"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.isLoading"/>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.OnChamadoIdChanged(System.Int32)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.ChamadoId"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.ChamadoId"/> is changed.</remarks>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.transferirCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.TransferirCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.TransferirCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.TransferirAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.cancelarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.CancelarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.CancelarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.CancelarAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.voltarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.VoltarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.VoltarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.TransferirChamadoViewModel.VoltarAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.Usuarios">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.usuarios"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.UsuariosFiltrados">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.usuariosFiltrados"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.IsLoading">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.isLoading"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.SearchText">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.searchText"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.TipoFiltro">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.tipoFiltro"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.TotalUsuarios">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.totalUsuarios"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.TotalAdministradores">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.totalAdministradores"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.TotalSuportes">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.totalSuportes"/>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.TotalClientes">
+            <inheritdoc cref="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.totalClientes"/>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.OnSearchTextChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.SearchText"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.SearchText"/> is changed.</remarks>
+        </member>
+        <member name="M:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.OnTipoFiltroChanged(System.String)">
+            <summary>Executes the logic for when <see cref="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.TipoFiltro"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.TipoFiltro"/> is changed.</remarks>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.loadDataCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.LoadDataCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.LoadDataCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.LoadDataAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.navigateToNovoUsuarioCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.NavigateToNovoUsuarioCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.NavigateToNovoUsuarioCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.NavigateToNovoUsuarioAsync"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.editarUsuarioCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.EditarUsuarioCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.EditarUsuarioCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.EditarUsuarioAsync(GestaoChamadosAI_MAUI.Models.Usuario)"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.excluirUsuarioCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.ExcluirUsuarioCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.ExcluirUsuarioCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.ExcluirUsuarioAsync(GestaoChamadosAI_MAUI.Models.Usuario)"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.limparFiltrosCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.LimparFiltrosCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.LimparFiltrosCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.LimparFiltros"/>.</summary>
+        </member>
+        <member name="F:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.voltarCommand">
+            <summary>The backing field for <see cref="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.VoltarCommand"/>.</summary>
+        </member>
+        <member name="P:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.VoltarCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:GestaoChamadosAI_MAUI.ViewModels.UsuariosListViewModel.VoltarAsync"/>.</summary>
+        </member>
+        <member name="T:GestaoChamadosAI_MAUI.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Button.TextColorTo(Microsoft.Maui.Controls.Button,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_DatePicker.TextColorTo(Microsoft.Maui.Controls.DatePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Editor.TextColorTo(Microsoft.Maui.Controls.Editor,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Entry.TextColorTo(Microsoft.Maui.Controls.Entry,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_InputView.TextColorTo(Microsoft.Maui.Controls.InputView,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Label.TextColorTo(Microsoft.Maui.Controls.Label,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_Picker.TextColorTo(Microsoft.Maui.Controls.Picker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_RadioButton.TextColorTo(Microsoft.Maui.Controls.RadioButton,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_SearchBar.TextColorTo(Microsoft.Maui.Controls.SearchBar,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.ColorAnimationExtensions_TimePicker.TextColorTo(Microsoft.Maui.Controls.TimePicker,Microsoft.Maui.Graphics.Color,System.UInt32,System.UInt32,Microsoft.Maui.Easing,System.Threading.CancellationToken)">
+            <summary>
+            Animates the TextColor of an <see cref = "T:Microsoft.Maui.ITextStyle"/> to the given color
+            </summary>
+            <param name = "element"></param>
+            <param name = "color">The target color to animate the <see cref = "P:Microsoft.Maui.ITextStyle.TextColor"/> to</param>
+            <param name = "rate">The time, in milliseconds, between the frames of the animation</param>
+            <param name = "length">The duration, in milliseconds, of the animation</param>
+            <param name = "easing">The easing function to be used in the animation</param>
+            <param name = "token"><see cref = "T:System.Threading.CancellationToken"/></param>
+            <returns>Value indicating if the animation completed successfully or not</returns>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Id">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Id" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Chamado">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Chamado" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsLoading">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsLoading" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ErrorMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ErrorMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentUser">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentUser" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CanAssume">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CanAssume" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CanFinalize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CanFinalize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CanTransfer">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CanTransfer" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CanGenerateIA">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CanGenerateIA" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CanOpenChat">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CanOpenChat" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DiasDesdeAbertura">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DiasDesdeAbertura" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Chamados">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Chamados" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedStatus" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedPrioridade">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedPrioridade" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedSuporte">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedSuporte" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Suportes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Suportes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadoId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadoId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Mensagens">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Mensagens" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NovaMensagem">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NovaMensagem" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PodeEnviar">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PodeEnviar" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PodeEnviarComAnexos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PodeEnviarComAnexos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentUserId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentUserId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentUserTipo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentUserTipo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TituloChamado">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TituloChamado" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DescricaoStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DescricaoStatus" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UltimaAtualizacao">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UltimaAtualizacao" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Status">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Status" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CorStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CorStatus" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadoFechado">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadoFechado" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AnexosSelecionados">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AnexosSelecionados" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TemAnexos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TemAnexos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ApiUrl">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ApiUrl" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserEmail">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserEmail" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UserTipo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UserTipo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Nome">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Nome" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Email">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Email" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Senha">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Senha" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ConfirmarSenha">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ConfirmarSenha" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Tipo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Tipo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Estatisticas">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Estatisticas" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.WelcomeMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "WelcomeMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsAdministrador">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsAdministrador" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsNotCliente">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsNotCliente" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsCliente">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsCliente" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsSuporte">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsSuporte" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadosAtivos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadosAtivos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadosRecentes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadosRecentes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadosRecentesAdmin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadosRecentesAdmin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MeusChamadosAtivos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MeusChamadosAtivos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadosAbertos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadosAbertos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasChamadosAtivos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasChamadosAtivos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasChamadosRecentes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasChamadosRecentes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalChamados">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalChamados" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadosAbertosCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadosAbertosCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadosEmAndamentoCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadosEmAndamentoCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadosConcluidosCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadosConcluidosCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadosPendentesCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadosPendentesCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadosEmAtendimentoCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadosEmAtendimentoCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadosConcluidosHojeCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadosConcluidosHojeCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasMeusChamadosAtivos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasMeusChamadosAtivos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasChamadosAbertos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasChamadosAbertos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.HasNoChamadosAtivos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "HasNoChamadosAtivos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadoTituloOriginal">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadoTituloOriginal" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadoDescricaoOriginal">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadoDescricaoOriginal" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadoStatusOriginal">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadoStatusOriginal" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadoPrioridadeOriginal">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadoPrioridadeOriginal" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Titulo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Titulo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Descricao">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Descricao" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StatusSelecionado">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StatusSelecionado" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PrioridadeSelecionada">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PrioridadeSelecionada" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UsuarioId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UsuarioId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AlterarSenha">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AlterarSenha" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RespostaIA">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RespostaIA" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Categorias">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Categorias" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalCategorias">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalCategorias" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DataInicio">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DataInicio" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DataFim">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DataFim" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Total">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Total" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Abertos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Abertos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EmAtendimento">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EmAtendimento" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AguardandoCliente">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AguardandoCliente" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Fechados">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Fechados" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PorPrioridade">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PorPrioridade" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PorCategoria">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PorCategoria" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalSuportes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalSuportes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalUsuarios">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalUsuarios" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Clientes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Clientes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Administradores">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Administradores" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ChamadoTitulo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ChamadoTitulo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SuporteSelecionado">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SuporteSelecionado" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Usuarios">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Usuarios" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.UsuariosFiltrados">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "UsuariosFiltrados" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SearchText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SearchText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TipoFiltro">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TipoFiltro" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalAdministradores">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalAdministradores" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalClientes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalClientes" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Id">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Id" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Chamado">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Chamado" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsLoading">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsLoading" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ErrorMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ErrorMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentUser">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentUser" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CanAssume">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CanAssume" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CanFinalize">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CanFinalize" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CanTransfer">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CanTransfer" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CanGenerateIA">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CanGenerateIA" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CanOpenChat">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CanOpenChat" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DiasDesdeAbertura">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DiasDesdeAbertura" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Chamados">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Chamados" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsRefreshing">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsRefreshing" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedStatus" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedPrioridade">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedPrioridade" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedSuporte">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedSuporte" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Suportes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Suportes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadoId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadoId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Mensagens">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Mensagens" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NovaMensagem">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NovaMensagem" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PodeEnviar">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PodeEnviar" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PodeEnviarComAnexos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PodeEnviarComAnexos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentUserId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentUserId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentUserTipo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentUserTipo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TituloChamado">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TituloChamado" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DescricaoStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DescricaoStatus" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UltimaAtualizacao">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UltimaAtualizacao" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Status">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Status" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CorStatus">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CorStatus" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadoFechado">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadoFechado" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AnexosSelecionados">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AnexosSelecionados" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TemAnexos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TemAnexos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ApiUrl">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ApiUrl" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserEmail">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserEmail" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UserTipo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UserTipo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Nome">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Nome" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Email">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Email" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Senha">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Senha" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ConfirmarSenha">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ConfirmarSenha" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Tipo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Tipo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Estatisticas">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Estatisticas" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.WelcomeMessage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "WelcomeMessage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsAdministrador">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsAdministrador" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsNotCliente">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsNotCliente" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsCliente">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsCliente" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsSuporte">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsSuporte" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadosAtivos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadosAtivos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadosRecentes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadosRecentes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadosRecentesAdmin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadosRecentesAdmin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MeusChamadosAtivos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MeusChamadosAtivos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadosAbertos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadosAbertos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasChamadosAtivos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasChamadosAtivos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasChamadosRecentes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasChamadosRecentes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalChamados">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalChamados" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadosAbertosCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadosAbertosCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadosEmAndamentoCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadosEmAndamentoCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadosConcluidosCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadosConcluidosCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadosPendentesCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadosPendentesCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadosEmAtendimentoCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadosEmAtendimentoCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadosConcluidosHojeCount">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadosConcluidosHojeCount" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasMeusChamadosAtivos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasMeusChamadosAtivos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasChamadosAbertos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasChamadosAbertos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.HasNoChamadosAtivos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "HasNoChamadosAtivos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadoTituloOriginal">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadoTituloOriginal" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadoDescricaoOriginal">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadoDescricaoOriginal" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadoStatusOriginal">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadoStatusOriginal" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadoPrioridadeOriginal">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadoPrioridadeOriginal" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Titulo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Titulo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Descricao">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Descricao" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StatusSelecionado">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StatusSelecionado" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PrioridadeSelecionada">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PrioridadeSelecionada" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UsuarioId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UsuarioId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AlterarSenha">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AlterarSenha" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RespostaIA">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RespostaIA" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Categorias">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Categorias" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalCategorias">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalCategorias" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DataInicio">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DataInicio" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DataFim">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DataFim" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Total">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Total" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Abertos">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Abertos" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EmAtendimento">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EmAtendimento" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AguardandoCliente">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AguardandoCliente" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Fechados">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Fechados" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PorPrioridade">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PorPrioridade" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PorCategoria">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PorCategoria" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalSuportes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalSuportes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalUsuarios">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalUsuarios" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Clientes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Clientes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Administradores">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Administradores" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ChamadoTitulo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ChamadoTitulo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SuporteSelecionado">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SuporteSelecionado" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Usuarios">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Usuarios" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.UsuariosFiltrados">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "UsuariosFiltrados" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SearchText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SearchText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TipoFiltro">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TipoFiltro" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalAdministradores">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalAdministradores" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalClientes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalClientes" generated properties.</summary>
+        </member>
+    </members>
+</doc>

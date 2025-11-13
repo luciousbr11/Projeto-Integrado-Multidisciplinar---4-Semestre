@@ -1,0 +1,171 @@
+@{
+    ViewData["Title"] = "Início";
+}
+
+<!-- Hero Section -->
+<div class="jumbotron bg-primary text-white rounded-3 p-5 mb-4 shadow">
+    <div class="container text-center">
+        <div class="mb-4">
+            <img src="~/images/Logo-sistema.png" alt="Atendix" style="height: 80px; filter: brightness(0) invert(1);" />
+        </div>
+        <h1 class="display-3 fw-bold">
+            Atendix
+        </h1>
+        <p class="lead mt-3">
+            Sistema inteligente de gerenciamento de chamados com sugestões automáticas de soluções
+        </p>
+        <hr class="my-4 bg-white" />
+        <p class="mb-4">
+            Utilize nossa inteligência artificial para obter soluções rápidas e eficientes para seus problemas técnicos
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a class="btn btn-light btn-lg px-4" asp-controller="Chamados" asp-action="Create" role="button">
+                <i class="bi bi-plus-circle-fill"></i> Abrir Novo Chamado
+            </a>
+            <a class="btn btn-outline-light btn-lg px-4" asp-controller="Chamados" asp-action="Index" role="button">
+                <i class="bi bi-list-ul"></i> Ver Chamados
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Cards de Recursos -->
+<div class="row mb-4">
+    <div class="col-12 col-md-4 mb-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="bi bi-robot text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title fw-bold">Inteligência Artificial</h5>
+                <p class="card-text">
+                    Nossa IA analisa seu problema e sugere soluções automáticas baseadas em uma extensa base de conhecimento.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-md-4 mb-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="bi bi-speedometer2 text-success" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title fw-bold">Respostas Rápidas</h5>
+                <p class="card-text">
+                    Receba sugestões de soluçáo imediatamente após abrir seu chamado, sem precisar esperar por um técnico.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-md-4 mb-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="bi bi-shield-check text-info" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title fw-bold">Classificaçáo Automática</h5>
+                <p class="card-text">
+                    O sistema classifica automaticamente a prioridade do seu chamado para garantir atendimento adequado.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Estatísticas e Links Rápidos -->
+<div class="row mb-4">
+    <div class="col-12 col-md-6 mb-3">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-speedometer"></i> Acesso Rápido
+                </h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a asp-controller="Chamados" asp-action="Create" class="list-group-item list-group-item-action">
+                    <i class="bi bi-plus-circle-fill text-primary"></i> Abrir Novo Chamado
+                    <i class="bi bi-chevron-right float-end"></i>
+                </a>
+                <a asp-controller="Chamados" asp-action="Index" class="list-group-item list-group-item-action">
+                    <i class="bi bi-ticket-perforated-fill text-success"></i> Ver Todos os Chamados
+                    <i class="bi bi-chevron-right float-end"></i>
+                </a>
+                <a asp-controller="Chamados" asp-action="FiltrarPorStatus" asp-route-status="Aberto" 
+                   class="list-group-item list-group-item-action">
+                    <i class="bi bi-exclamation-circle-fill text-danger"></i> Chamados Abertos
+                    <i class="bi bi-chevron-right float-end"></i>
+                </a>
+                <a asp-controller="Usuarios" asp-action="Index" class="list-group-item list-group-item-action">
+                    <i class="bi bi-people-fill text-info"></i> Gerenciar Usuários
+                    <i class="bi bi-chevron-right float-end"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-md-6 mb-3">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-lightbulb-fill"></i> Como Funciona
+                </h5>
+            </div>
+            <div class="card-body">
+                <ol class="mb-0">
+                    <li class="mb-3">
+                        <strong>Abra um Chamado</strong>
+                        <p class="mb-0 text-muted">Descreva seu problema com o máximo de detalhes possível</p>
+                    </li>
+                    <li class="mb-3">
+                        <strong>IA Analisa</strong>
+                        <p class="mb-0 text-muted">Nossa inteligência artificial processa sua solicitaçáo instantaneamente</p>
+                    </li>
+                    <li class="mb-3">
+                        <strong>Receba Sugestões</strong>
+                        <p class="mb-0 text-muted">Obtenha uma sugestáo de soluçáo e classificaçáo de prioridade</p>
+                    </li>
+                    <li class="mb-0">
+                        <strong>Acompanhamento</strong>
+                        <p class="mb-0 text-muted">Se necessário, um técnico entrará em contato para suporte adicional</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Informações do Sistema -->
+<div class="row">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">
+                    <i class="bi bi-info-circle-fill"></i> Sobre o Sistema
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="mb-2">
+                    <strong>Atendix</strong> é um sistema desenvolvido para facilitar o gerenciamento 
+                    de solicitações de suporte técnico, utilizando inteligência artificial para fornecer soluções 
+                    automáticas e agilizar o atendimento.
+                </p>
+                <p class="mb-0">
+                    <i class="bi bi-check-circle-fill text-success"></i> Sugestões automáticas de soluçáo
+                    <span class="mx-2">|</span>
+                    <i class="bi bi-check-circle-fill text-success"></i> Classificaçáo de prioridade
+                    <span class="mx-2">|</span>
+                    <i class="bi bi-check-circle-fill text-success"></i> Interface intuitiva
+                    <span class="mx-2">|</span>
+                    <i class="bi bi-check-circle-fill text-success"></i> Gerenciamento completo
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Bootstrap Icons já incluídos no layout -->
+}
+

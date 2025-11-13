@@ -1,0 +1,36 @@
+<!-- Shared sidebar and header partials (for copy-paste reference) -->
+<!-- Sidebar -->
+<nav class="sidebar d-flex flex-column">
+  <div class="brand">
+    <button class="btn btn-sm btn-light d-lg-none me-2" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+  <img src="../../Logotipo-sem-fundo.png" alt="" onerror="this.style.display='none'">
+    <span class="brand-name">PIM</span>
+  </div>
+  <ul class="nav nav-pills flex-column gap-1">
+    <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="bi bi-speedometer2"></i><span>Dashboard</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="chamados.html"><i class="bi bi-ticket-detailed"></i><span>Chamados</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="clientes.html"><i class="bi bi-people"></i><span>Clientes</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="equipe.html"><i class="bi bi-person-workspace"></i><span>Equipe</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="relatorios.html"><i class="bi bi-graph-up"></i><span>Relatórios</span></a></li>
+    <li class="nav-item"><a class="nav-link" href="configuracoes.html"><i class="bi bi-gear"></i><span>Configurações</span></a></li>
+  </ul>
+</nav>
+
+<!-- Header -->
+<nav class="app-header navbar navbar-light bg-white px-3">
+  <div class="d-flex align-items-center gap-2">
+    <button class="btn btn-outline-secondary d-none d-lg-inline" title="Recolher" data-toggle="collapse-sidebar"><i class="bi bi-layout-sidebar-inset"></i></button>
+    <button class="btn btn-outline-secondary d-lg-none" data-toggle="sidebar"><i class="bi bi-list"></i></button>
+  </div>
+  <div class="ms-auto d-flex align-items-center gap-3">
+    <span class="header-chip d-none d-md-inline">SLA: 4h resposta</span>
+    <a class="nav-link position-relative" href="#" title="Notificações"><i class="bi bi-bell"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span></a>
+    <div class="dropdown">
+      <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-1"></i> Você</a>
+      <div class="dropdown-menu dropdown-menu-end">
+        <a class="dropdown-item" href="#">Perfil</a>
+        <a class="dropdown-item" href="#" id="logout">Sair</a>
+      </div>
+    </div>
+  </div>
+</nav>

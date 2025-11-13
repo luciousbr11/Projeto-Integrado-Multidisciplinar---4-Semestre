@@ -1,0 +1,80 @@
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using GestaoChamadosAI_MAUI.Services;
+using GestaoChamadosAI_MAUI.Views;
+
+namespace GestaoChamadosAI_MAUI.ViewModels
+{
+    public partial class LoginViewModel : ObservableObject
+    {
+        private readonly IAuthService _authService;
+
+        [ObservableProperty]
+        private string email = string.Empty;
+
+        [ObservableProperty]
+        private string senha = string.Empty;
+
+        [ObservableProperty]
+        private bool isLoading;
+
+        [ObservableProperty]
+        private string errorMessage = string.Empty;
+
+        public LoginViewModel(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
+        [RelayCommand]
+        private async Task LoginAsync()
+        {
+            // Validação básica
+            if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Senha))
+            {
+                ErrorMessage = "Por favor, preencha todos os campos";
+                return;
+            }
+
+            // Validação de email
+            if (!Email.Contains("@"))
+            {
+                ErrorMessage = "Por favor, insira um e-mail válido";
+                return;
+            }
+
+            IsLoading = true;
+            ErrorMessage = string.Empty;
+
+            try
+            {
+                var (success, message, usuario) = await _authService.LoginAsync(Email, Senha);
+
+                if (success && usuario != null)
+                {
+                    // Navegar para o Dashboard
+                    await Shell.Current.GoToAsync($"///{nameof(DashboardPage)}");
+                }
+                else
+                {
+                    // Exibir mensagem de erro da API
+                    ErrorMessage = message ?? "Não foi possível fazer login. Verifique suas credenciais.";
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                // Erro de conexão
+                ErrorMessage = $"Erro de conexão\n\nNão foi possível conectar à API.\nVerifique se a API está rodando.\n\n{ex.Message}";
+            }
+            catch (Exception ex)
+            {
+                // Outros erros
+                ErrorMessage = $"Erro ao fazer login\n\n{ex.Message}";
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+    }
+}
