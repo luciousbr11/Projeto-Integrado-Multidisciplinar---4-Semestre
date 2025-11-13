@@ -283,5 +283,3 @@ Para dúvidas sobre o projeto, consulte a documentação individual de cada mód
 - [Aplicativo MAUI](./GestaoChamadosAI_MAUI/README.md)
 
 ---
-
-**Desenvolvido com ❤️ para o TCC do 4º Semestre**
