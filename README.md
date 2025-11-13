@@ -1,6 +1,6 @@
 # 🎯 Sistema de Gestão de Chamados com IA
 
-> Sistema completo de gerenciamento de chamados de suporte técnico com integração de Inteligência Artificial (Google Gemini), desenvolvido para o TCC do 4º Semestre.
+> Sistema completo de gerenciamento de chamados de suporte técnico com integração de Inteligência Artificial (Google Gemini), desenvolvido para o PIM do 4º Semestre.
 
 ## 📋 Sobre o Projeto
 
