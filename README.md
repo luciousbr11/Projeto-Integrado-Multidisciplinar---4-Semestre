@@ -258,7 +258,7 @@ GET    /api/relatorios/pdf/{id}     # Gerar relatório PDF
 
 ## 🤝 Contribuindo
 
-Este projeto foi desenvolvido como Trabalho de Conclusão de Curso (TCC) do 4º Semestre.
+Este projeto foi desenvolvido como Projeto Integrado Multidisciplinar referente ao 4º Semestre.
 
 ## 📝 Licença
 
@@ -266,11 +266,17 @@ Este projeto é de propriedade acadêmica e foi desenvolvido para fins educacion
 
 ## 👨‍💻 Autores
 
-Desenvolvido como projeto integrado multidisciplinar do 4º Semestre.
+Desenvolvido como Projeto Integrado Multidisciplinar referente ao 4º Semestre.
+Ari Modesto Neto
+Lucas zanetti gil
+Lúcio Guerra da Silva
+Luis André Ozeas Azarias
+Pedro Vinicius Tinti Poli
+Rodrigo Augusto Soares Lopes
 
 ## 🎓 Instituição
 
-Projeto desenvolvido como Trabalho de Conclusão de Curso.
+Projeto desenvolvido como Projeto Integrado Multidisciplinar referente ao 4º Semestre na Instituição UNIP.
 
 ---
 
